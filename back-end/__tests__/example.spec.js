@@ -1,4 +1,4 @@
-import {example} from '../example';
+const example = require('../example')
 
 test('Example Test', () =>{
 	expect(example(2)).toBe('1 2 ');

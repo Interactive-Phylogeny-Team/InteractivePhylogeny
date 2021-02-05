@@ -1,4 +1,4 @@
-export function example(n: number): string {
+function example(n) {
 	let output = "";
 	for (let i = 1; i <= n; i++) {
 		if (i % 5 && i % 3) {
@@ -13,3 +13,5 @@ export function example(n: number): string {
 	}
 	return output;
 }
+
+module.exports = example
