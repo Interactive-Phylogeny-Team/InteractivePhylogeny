@@ -15,6 +15,6 @@ Runs the back end server and the server starts listening for requests. Requests 
 Runs the unit tests for the back end app.
 
 # PostgreSQL MAC installation
-* `brew install postgresql` (This should automatically start postgresql as a service)
+* `brew install postgresql@13` (This should automatically start postgresql as a service)
 * `psql -d postgres -c "CREATE USER appuser"`
 * `psql -d postgres -c "CREATE DATABASE appdb WITH OWNER=appuser"`
