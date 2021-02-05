@@ -1,13 +1,13 @@
 import './App.css';
-import BackendBtn from "./components/backend_btn.component";
 import React from 'react'
+import D3PlaygroundComponent from "./components/D3Playground.component";
+
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        Hey Guys!
-        <BackendBtn/>
+        <D3PlaygroundComponent/>
       </header>
     </div>
   );
