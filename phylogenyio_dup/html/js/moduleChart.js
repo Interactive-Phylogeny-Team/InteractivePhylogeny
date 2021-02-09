@@ -426,6 +426,7 @@ define([], function () {
             })
         }
 
+        /*TODO: Here is where we can edit the clicked nodes */
         /**
         * Handle node selection event
         */
@@ -1524,7 +1525,8 @@ define([], function () {
                     .style('fill', nodeBorderColor)
                     .style('display', function(d) {
                         if(layout == 'tree' || layout == 'radial-tree') {
-                            var showhide = settings.menu['node-bars'].showhide;
+                            var showhide = "hide";
+                            // var showhide = settings.menu['node-bars'].showhide;
                         } else {
                             var showhide = "hide";
                         }
