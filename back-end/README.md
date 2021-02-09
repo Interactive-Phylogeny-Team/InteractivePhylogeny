@@ -18,3 +18,14 @@ Runs the unit tests for the back end app.
 * `brew install postgresql@13` (This should automatically start postgresql as a service)
 * `psql -d postgres -c "CREATE USER appuser"`
 * `psql -d postgres -c "CREATE DATABASE appdb WITH OWNER=appuser"`
+
+# PostegreSQL Windows installation
+* Go to https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+* Download Windows installer version 13.1
+* During installation uncheck Stack Builder and pgAdmin4
+* When prompted for a password enter `password` 
+* Use default settings for everything else during setup
+* In your command prompt type:
+  * `C:/"Program Files"/PostgreSQL/13/bin/psql -U postgres -c "CREATE USER appuser"`
+  * `C:/"Program Files"/PostgreSQL/13/bin/psql -U postgres -c "CREATE DATABASE appdb WITH OWNER=appuser`
+  * Enter your password as needed.
