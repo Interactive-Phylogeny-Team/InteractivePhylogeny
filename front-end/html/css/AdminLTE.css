@@ -137,7 +137,7 @@ body {
 
 .fixed .content-wrapper,
 .fixed .right-side {
-    padding-top: 50px;
+    padding-top: 0px;
 }
 
 @media (max-width: 767px) {
@@ -1667,9 +1667,9 @@ a:focus {
 }
 
 .box-footer {
-    border-radius: 0 0 3px 3px;
+    border-radius: 0 0 26px 26px;
     border-top: 1px solid #f4f4f4;
-    padding: 10px;
+    padding: 24px;
     background-color: #ffffff;
 }
 
