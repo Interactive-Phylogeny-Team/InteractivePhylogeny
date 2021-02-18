@@ -1646,8 +1646,15 @@ define([], function () {
                 },
 
                 nodeInfoSave: function(info, url) {
+                //TODO: Add Name, Image, Coordinates, and DNA
+                    const name = '<em>NAME HERE</em>';
+                    const speciesName = '';
+                    const commonName = '';
+                    const scientificName = '';
+                    const coord = '<em>COORDINATES HERE</em>';
+                    const dna = "ttacgccttaactgttaccgacagaattaactaaa";
                     if(info !== '') {
-                        var text = info.replace(/(?:\r\n|\r|\n)/g, '<br />');
+                        var text = info.replace(/(?:\r\n|\r|\n)/g, '<br/>');
                     } else {
                         var text = '<em>Additional info is not available</em>';
                     }
@@ -1657,8 +1664,11 @@ define([], function () {
                         var image = '<em>Image is not available</em>';
                     }
                     var content = '';
+                    content += '<div><strong>NAME:</strong><br>' + name + '</div>';
+                    content += '<div><strong>Image:</strong><br>'+image+'</div>';
+                    content += '<div><strong>Map:</strong><br>'+coord+'</div>';
+                    content += '<div><strong>DNA:</strong><br>'+dna+'</div>';
                     content += '<div><strong>Additional info:</strong><br>'+ text +'</div>';
-                    content += '<div class="margin-top: 15px"><strong>Image:</strong><br>'+image+'</div>';
                     $nodeInfo.find('.info-content').html(content);
                 },
 
