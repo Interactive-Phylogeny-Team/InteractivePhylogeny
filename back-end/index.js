@@ -27,7 +27,7 @@ app.listen(port, () => {
 })
 
 async function initDatabase() {
-	const sequelize = new Sequelize(database='appdb', username='appuser', password=null, options={
+	const sequelize = new Sequelize(database='appdb', username='appuser', password='b', options={
 		host: 'localhost',
 		port: '5432',
 		dialect: 'postgres'
