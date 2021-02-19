@@ -14,6 +14,10 @@ Runs the back end server and the server starts listening for requests. Requests 
 
 Runs the unit tests for the back end app.
 
+### `sequelize-cli db:migrate --env development`
+
+Runs the migrations
+
 # PostgreSQL MAC installation
 * `brew install postgresql@13` (This should automatically start postgresql as a service)
 * `psql -d postgres -c "CREATE USER appuser WITH PASSWORD 'b'"`
