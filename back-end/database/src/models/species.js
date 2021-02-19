@@ -15,6 +15,11 @@ const Species = sequelize.define(modelName='Species', attributes={
 		type: DataTypes.FLOAT,
 		allowNull: false
 	},
+	imageUrl: {
+		type: DataTypes.STRING,
+		allowNull: false,
+		unique: true
+	},
 	dnaSequence: {
 		type: DataTypes.STRING,
 		allowNull: false,
