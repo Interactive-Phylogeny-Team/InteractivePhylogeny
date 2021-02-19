@@ -1,6 +1,6 @@
 const express = require('express')
 const cors = require('cors')
-const {checkDatabaseConnection} = require('./models/init-database')
+const {checkDatabaseConnection} = require('./database/src')
 
 checkDatabaseConnection()
 
