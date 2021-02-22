@@ -1,7 +1,15 @@
 define([], function () {
 
     var chart = (function(){
-
+        /*TODO: Default node size 25*/
+        /*TODO: Default branch size 40*/
+        /*TODO: Move Save to JSON into Settings*/
+        /*TODO: Remove Annotations Settings*/
+        /*TODO: Apply colors randomly to branches*/
+        /*TODO: Move Drag and Drop to Separate Page*/
+        /*TODO: Move Drag and Drop to Separate Page*/
+        /*TODO: Only Doc page should be accessible from tree page*/
+        /*TODO: Back Arrow Goes Back To Tree Selection page*/
         /* DOM Selector Vars */
         var $phylogeneticTree = $("#phylogeneticTree");
         var $treeScale = $("#treeScale");
