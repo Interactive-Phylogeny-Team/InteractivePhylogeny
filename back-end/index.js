@@ -1,8 +1,8 @@
 const express = require('express')
 const cors = require('cors')
-const Sequelize = require('sequelize')
+const {checkDatabaseConnection} = require('./database/src')
 
-initDatabase()
+checkDatabaseConnection()
 
 const app = express()
 const port = 4000
@@ -25,19 +25,3 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
 	console.log(`Backend server listening at ${port}`)
 })
-
-async function initDatabase() {
-	const sequelize = new Sequelize(database='appdb', username='appuser', password='b', options={
-		host: 'localhost',
-		port: '5432',
-		dialect: 'postgres'
-	});
-
-	try {
-		await sequelize.authenticate();
-		console.log('Connection to database has successfully been authenticated');
-	} catch (error) {
-		console.error('FAILED TO AUTHENTICATE DATABASE:');
-		throw error
-	}
-}
