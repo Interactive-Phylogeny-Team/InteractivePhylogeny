@@ -275,7 +275,7 @@ textarea#urlShareInput {
 }
 .node rect.selected,
 .node rect.taxa {
-    fill: orange !important;
+    fill: #06ba00 !important;
     stroke: #111;
 }
 .node rect.nodeBar {
