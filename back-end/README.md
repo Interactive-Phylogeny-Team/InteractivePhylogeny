@@ -14,9 +14,11 @@ Runs the back end server and the server starts listening for requests. Requests 
 
 Runs the unit tests for the back end app.
 
-### `cd database`
-### `npx sequelize-cli db:migrate --env development`
-### `cd ..`
+```
+cd database
+npx sequelize-cli db:migrate --env development
+cd ..
+```
 
 Runs the migrations
 
