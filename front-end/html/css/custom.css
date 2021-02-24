@@ -16,7 +16,7 @@ hr {
     margin: 0px;
 }
 .main-header {
-    background-color: #004003;
+    background-color: #679436;
 }
 .main-header .logo {
     padding: 12px 30px;
@@ -30,7 +30,7 @@ hr {
     color: #fff;
 }
 .treeview-menu label {
-    color: #000000;
+    color: #fcfcfc;
 }
 .treeview-menu input[type=text],
 .treeview-menu select {
@@ -47,7 +47,7 @@ hr {
     line-height: 1em;
 }
 .sidebar-menu .treeview-menu > li label {
-    color: #000000;
+    color: #fcfafa;
     font-size: 14px;
     /*display: block;*/
     /*padding: 5px 5px 5px 15px;*/
@@ -275,7 +275,7 @@ textarea#urlShareInput {
 }
 .node rect.selected,
 .node rect.taxa {
-    fill: #06ba00 !important;
+    fill: #0c0c0d !important;
     stroke: #111;
 }
 .node rect.nodeBar {
