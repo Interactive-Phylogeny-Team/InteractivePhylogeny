@@ -5,7 +5,7 @@
     color: red;
 }
 hr {
-    border-color: #8aa4af;
+    border-color: #92af8a;
 }
 .share .content-wrapper {
     margin: 0px;
@@ -16,7 +16,7 @@ hr {
     margin: 0px;
 }
 .main-header {
-    background-color: #3c8dbc;
+    background-color: #004003;
 }
 .main-header .logo {
     padding: 12px 30px;
@@ -30,7 +30,7 @@ hr {
     color: #fff;
 }
 .treeview-menu label {
-    color: #B8C7CE;
+    color: #000000;
 }
 .treeview-menu input[type=text],
 .treeview-menu select {
@@ -47,7 +47,7 @@ hr {
     line-height: 1em;
 }
 .sidebar-menu .treeview-menu > li label {
-    color: #8aa4af;
+    color: #000000;
     font-size: 14px;
     /*display: block;*/
     /*padding: 5px 5px 5px 15px;*/
@@ -348,3 +348,5 @@ a > i.fa {
     text-align: left;
     vertical-align: middle;
 }
+
+

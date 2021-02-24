@@ -1,7 +1,15 @@
 define([], function () {
 
     var chart = (function(){
-
+        /*TODO: Default node size 25*/
+        /*TODO: Default branch size 40*/
+        /*TODO: Move Save to JSON into Settings*/
+        /*TODO: Remove Annotations Settings*/
+        /*TODO: Apply colors randomly to branches*/
+        /*TODO: Move Drag and Drop to Separate Page*/
+        /*TODO: Move Drag and Drop to Separate Page*/
+        /*TODO: Only Doc page should be accessible from tree page*/
+        /*TODO: Back Arrow Goes Back To Tree Selection page*/
         /* DOM Selector Vars */
         var $phylogeneticTree = $("#phylogeneticTree");
         var $treeScale = $("#treeScale");
@@ -16,9 +24,9 @@ define([], function () {
             activeTransform: 'linear',
             chartTitle: 'Phylogram',
             zoomScale: 0.3,
-            nodeRadius: 4,
+            nodeRadius: 25,
             nodeRadiusFactor: 3,
-            branchWidth: 3,
+            branchWidth: 45,
             linkLengthX: 2000,
             linkLengthXMax: 5000,
             linkLengthY: 100,
@@ -38,7 +46,7 @@ define([], function () {
                     colorby: 'none',
                     colorstart: '#fff',
                     colorend: 'blue',
-                    fontsize: '12',
+                    fontsize: '24',
                     fontfamily: 'Arial, Helvetica, sans-serif',
                     format: 'decimal',
                     sigdigits: '4',
@@ -49,11 +57,12 @@ define([], function () {
                     colorby: 'none',
                     colorstart: '#fff',
                     colorend: 'blue',
-                    fontsize: '12',
+                    fontsize: '24',
                     fontfamily: 'Arial, Helvetica, sans-serif',
                     format: 'decimal',
                     sigdigits: '4',
                 },
+                /* Node bars is currently set to hidden*/
                 'node-bars' : {
                     showhide: 'hide',
                     display: 'none',
@@ -64,8 +73,8 @@ define([], function () {
                     annotation: 'hide',
                     shape: 'circle',
                     sizeby: 'none',
-                    minsize: '5',
-                    maxsize: '20',
+                    minsize: '15',
+                    maxsize: '30',
                     colorby: 'none',
                     colorstart: '#fff',
                     colorend: 'blue',
@@ -646,6 +655,7 @@ define([], function () {
             } else {
                 var nodeSize = settings.nodeRadius;
             }
+            var nodeSize = settings.nodeRadius;
             return nodeSize;
         }
 
@@ -1285,7 +1295,7 @@ define([], function () {
                 })
                 .style("fill", function(d) {
                     var fill = nodeLabelColor;
-                    if(settings.nexusAttrMinMax[settings.menu['node-labels'].colorby] != undefined) {
+                    if(settings.nexusAttrMinMax[settings.menu['node-labels'].colorby] !== undefined) {
                         var colorbyVal = settings.menu['node-labels'].colorby;
                         var minVal = settings.nexusAttrMinMax[colorbyVal].min;
                         var maxVal = settings.nexusAttrMinMax[colorbyVal].max;
@@ -1306,10 +1316,11 @@ define([], function () {
                 .attr("x", function(d) { return getTextOffset(d); })
                 .text(function(d) { return formatLabels(d, 'tip-labels'); })
                 .style('display', function(d) {
-                    return settings.menu['tip-labels'].showhide == 'show' ? 'block' : 'none';
+                    return settings.menu['tip-labels'].showhide === 'show' ? 'block' : 'none';
                 })
                 .style('font-size', function(d) {
-                    return settings.menu['tip-labels'].fontsize+'px';
+                    return '92px';
+                    // return settings.menu['tip-labels'].fontsize+'px';
                 })
                 .style('font-family', function(d) {
                     return settings.menu['tip-labels'].fontfamily;
@@ -1646,8 +1657,15 @@ define([], function () {
                 },
 
                 nodeInfoSave: function(info, url) {
+                //TODO: Add Name, Image, Coordinates, and DNA
+                    const name = '<em>NAME HERE</em>';
+                    const speciesName = '';
+                    const commonName = '';
+                    const scientificName = '';
+                    const coord = '<em>COORDINATES HERE</em>';
+                    const dna = "ttacgccttaactgttaccgacagaattaactaaa";
                     if(info !== '') {
-                        var text = info.replace(/(?:\r\n|\r|\n)/g, '<br />');
+                        var text = info.replace(/(?:\r\n|\r|\n)/g, '<br/>');
                     } else {
                         var text = '<em>Additional info is not available</em>';
                     }
@@ -1657,8 +1675,11 @@ define([], function () {
                         var image = '<em>Image is not available</em>';
                     }
                     var content = '';
+                    content += '<div><strong>NAME:</strong><br>' + name + '</div>';
+                    content += '<div><strong>Image:</strong><br>'+image+'</div>';
+                    content += '<div><strong>Map:</strong><br>'+coord+'</div>';
+                    content += '<div><strong>DNA:</strong><br>'+dna+'</div>';
                     content += '<div><strong>Additional info:</strong><br>'+ text +'</div>';
-                    content += '<div class="margin-top: 15px"><strong>Image:</strong><br>'+image+'</div>';
                     $nodeInfo.find('.info-content').html(content);
                 },
 
