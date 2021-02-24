@@ -111,7 +111,7 @@ body {
 .content-wrapper,
 .right-side {
     min-height: 100%;
-    background-color: #e7fce7;
+    background-color: #eaeaea;
     z-index: 800;
 }
 

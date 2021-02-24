@@ -26,7 +26,7 @@ define([], function () {
             zoomScale: 0.3,
             nodeRadius: 25,
             nodeRadiusFactor: 3,
-            branchWidth: 45,
+            branchWidth: 40,
             linkLengthX: 2000,
             linkLengthXMax: 5000,
             linkLengthY: 100,
@@ -369,7 +369,7 @@ define([], function () {
 
                 case 'branch':
                 visit(settings.treeObject, function(d) {
-                    if(d.id == obj.target.id) {
+                    if(d.id === obj.target.id) {
                         if(d.meta.selection.branch) {
                             // Branch already selected - deselect it
                             d.meta.selection.branch = false;
