@@ -114,54 +114,8 @@
                 <!-- END of DATA LOADER -->
 
                 <li class="header">TOOLBAR</li>
-                <!-- MENU: Layout -->
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-connectdevelop"></i>
-                        <span>Layout</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu" data-menu="layout">
-<!--                        <li><a href="#" data-item="tree"><i class="fa fa-circle-o"></i>&nbsp;Phylogram</a></li>-->
-<!--                        <li><a href="#" data-item="cluster"><i class="fa fa-circle-o"></i>&nbsp;Cladogram</a></li>-->
-                        <!--                            <li><a href="#" data-item="radial-tree"><i class="fa fa-circle-o"></i>&nbsp;Circular Phylogram</a></li>-->
-                        <!--                            <li><a href="#" data-item="radial-cluster"><i class="fa fa-circle-o"></i>&nbsp;Circular Cladogram</a></li>-->
-<!--                        <hr/>-->
-                         <li class="subheader">SIZING</li>
-                        <!-- Node and Link size -->
-                        <li class="nb-slider"><label>Node Radius (relative)</label></li>
-                        <li>
-                            <input id="sliderN" class="slider " data-slider-id='sliderNode' type="text" data-slider-min="0" data-slider-max="40" data-slider-step="1" data-slider-value="25" data-slider-orientation="horizontal" />
-                        </li>
-                        <li class="nb-slider"><label>Branch Width (px)</label></li>
-                        <li>
-                            <input id="sliderB" class="slider " data-slider-id='sliderBranch' type="text" data-slider-min="0" data-slider-max="60" data-slider-step="1" data-slider-value="40" data-slider-orientation="horizontal" />
-                        </li>
-                    </ul>
-                </li>
-                <!-- END of MENU: Layout -->
 
-                <!-- MENU: Branch Projection -->
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-random"></i><span>Branch Projection</span><i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu" data-menu="branch-projection">
-                        <form class="form-horizontal branch-projection">
-                            <div class="form-group">
-                                <label class="col-sm-5">Projection:</label>
-                                <div class="col-sm-7">
-                                    <select class="form-control input-sm" data-action="projection">
-                                        <option value="elbow" selected="selected">Elbow</option>
-                                        <option value="diagonal">Diagonal</option>
-                                        <option value="direct">Direct</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </form>
-                    </ul>
-                </li>
-                <!-- MENU: Misc. -->
+                <!-- MENU: Settings. -->
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-cog fa-2x"></i><span style="font-size: 32px; padding-left: 15px;">Settings</span><i class="fa fa-angle-left pull-right"></i>
@@ -177,6 +131,33 @@
                         <li><a href="#" class="single" data-item="sort" data-sort="down"><i class="fa fa-arrow-down"></i>&nbsp;Sort</a></li>
                         <li><a href="#" class="single" data-item="annotate"><i class="fa fa-sticky-note-o"></i>&nbsp;Annotate</a></li>
                     </ul>
+                    <ul class="treeview-menu" data-menu="branch-projection">
+                        <form class="form-horizontal branch-projection">
+                            <div class="form-group">
+                                <label class="col-sm-5">Projection:</label>
+                                <div class="col-sm-7">
+                                    <select class="form-control input-sm" data-action="projection">
+                                        <option value="elbow" selected="selected">Elbow</option>
+                                        <option value="diagonal">Diagonal</option>
+                                        <option value="direct">Direct</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </ul>
+                    <ul class="treeview-menu" data-menu="layout">
+                        <li class="subheader">SIZING</li>
+                        <!-- Node and Link size -->
+                        <li class="nb-slider"><label>Node Radius (relative)</label></li>
+                        <li>
+                            <input id="sliderN" class="slider " data-slider-id='sliderNode' type="text" data-slider-min="0" data-slider-max="40" data-slider-step="1" data-slider-value="25" data-slider-orientation="horizontal" />
+                        </li>
+                        <li class="nb-slider"><label>Branch Width (px)</label></li>
+                        <li>
+                            <input id="sliderB" class="slider " data-slider-id='sliderBranch' type="text" data-slider-min="0" data-slider-max="60" data-slider-step="1" data-slider-value="40" data-slider-orientation="horizontal" />
+                        </li>
+                    </ul>
+
                 </li>
                 <!-- END of MENU: Misc. -->
                 <!-- PAGES -->
