@@ -14,7 +14,26 @@ Runs the back end server and the server starts listening for requests. Requests 
 
 Runs the unit tests for the back end app.
 
+```
+cd database
+npx sequelize-cli db:migrate --env development
+cd ..
+```
+
+Runs the migrations
+
 # PostgreSQL MAC installation
 * `brew install postgresql@13` (This should automatically start postgresql as a service)
-* `psql -d postgres -c "CREATE USER appuser"`
+* `psql -d postgres -c "CREATE USER appuser WITH PASSWORD 'b'"`
 * `psql -d postgres -c "CREATE DATABASE appdb WITH OWNER=appuser"`
+
+# PostegreSQL Windows installation
+* Go to https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+* Download Windows installer version 13.1
+* During installation uncheck Stack Builder and pgAdmin4
+* When prompted for a superuser password enter `password`
+* Use default settings for everything else during setup
+* In your command prompt type:
+  * `C:/"Program Files"/PostgreSQL/13/bin/psql -U postgres -c "CREATE USER appuser WITH PASSWORD 'b'"`
+  * `C:/"Program Files"/PostgreSQL/13/bin/psql -U postgres -c "CREATE DATABASE appdb WITH OWNER=appuser"`
+  * Enter your superuser password as needed, remember that it is `password`.
