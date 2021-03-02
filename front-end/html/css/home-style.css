@@ -48,7 +48,7 @@ body {
 }
 
 
-.btn, .btn:hover, .btn:visited, .btn-outline, .btn:focus{
+.btn, .btn:hover, .btn:active, .btn:visited, .btn-outline, .btn:focus{
     background-color: #679436;
     color: #fff;
     border-radius: 35px;
@@ -58,7 +58,47 @@ body {
     box-shadow: none;
 }
 
+.dropdown-menu{
+    margin-left: 7.5%;
+    width: 45%
+}
+
 .btn:hover, .btn:active{
     background-color: #9bc04f;
 }
+
+.dropdown{
+    align-content: center;
+    align-items: center;
+}
+
+.dropdown-item:active{
+    background-color:  #9bc04f;
+}
+
+.custom{
+    color: #679436;
+}
+
+@media only screen and (min-width: 601px) and (max-width: 960px) {
+
+}
+
+@media only screen and (max-width: 767px) {
+    .tree{
+        width: 0;
+    }
+    .dropdown-menu{
+        margin-left: 5.9%;
+        width: auto;
+    }
+}
+
+
+@media (min-width: 48em) {
+    .eol{
+        padding: 0;
+    }
+}
+
 
