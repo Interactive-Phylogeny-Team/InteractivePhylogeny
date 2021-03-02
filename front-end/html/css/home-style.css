@@ -59,7 +59,8 @@ body {
 }
 
 .dropdown-menu{
-    margin-left: 10.5%;
+    margin-left: 7.5%;
+    width: 45%
 }
 
 .btn:hover, .btn:active{
