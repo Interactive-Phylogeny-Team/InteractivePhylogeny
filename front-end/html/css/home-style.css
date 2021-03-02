@@ -58,12 +58,17 @@ body {
     box-shadow: none;
 }
 
+.dropdown-menu{
+    margin-left: 10.5%;
+}
+
 .btn:hover, .btn:active{
     background-color: #9bc04f;
 }
 
 .dropdown{
     align-content: center;
+    align-items: center;
 }
 
 .dropdown-item:active{
