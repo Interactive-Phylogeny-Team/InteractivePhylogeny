@@ -3,11 +3,9 @@ body {
     padding: 0;
     box-sizing: border-box;
     overflow-x: hidden;
-    border-top: solid 50px #848484;
-    font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";;
-
+    border-top: solid 50px #333;
+    font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
-
 
 .col {
     width: 50%;
@@ -18,11 +16,11 @@ body {
 }
 .soon{
     margin-top: 10%;
-    font-size: 45px;
+    font-size: 50px;
     font-weight: bold;
 }
 h2{
-    font-size: 45px;
+    font-size: 50px;
     font-weight: bold;
 }
 .tree {
@@ -36,7 +34,6 @@ h2{
     display: inline-block;
     font-size: 2000%;
     width: inherit;
-
     color: #679436;
 }
 .feat-tree i {
@@ -48,7 +45,7 @@ h2{
     margin-top:5%;
     font-size:30px;
 }
-.btn-primary, .btn-primary:hover {
+.btn-primary, .btn-primary:hover, .btn-primary:active {
     margin-top: -80px;
     margin-left: 15px;
     background-color: transparent;
