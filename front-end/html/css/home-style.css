@@ -88,6 +88,10 @@ body {
     .tree{
         width: 0;
     }
+    .dropdown-menu{
+        margin-left: 5.9%;
+        width: auto;
+    }
 }
 
 
