@@ -2,10 +2,13 @@ const {DataTypes} = require('sequelize')
 const {sequelize} = require('../index')
 
 const Species = sequelize.define(modelName='Species', attributes={
-	name: {
+	scientificName: {
 		type: DataTypes.STRING,
 		unique: true,
 		allowNull: false
+	},
+	commonName: {
+		type: DataTypes.STRING
 	},
 	longitude: {
 		type: DataTypes.FLOAT,
