@@ -37,3 +37,10 @@ Runs the migrations
   * `C:/"Program Files"/PostgreSQL/13/bin/psql -U postgres -c "CREATE USER appuser WITH PASSWORD 'b'"`
   * `C:/"Program Files"/PostgreSQL/13/bin/psql -U postgres -c "CREATE DATABASE appdb WITH OWNER=appuser"`
   * Enter your superuser password as needed, remember that it is `password`.
+  
+# API
+### GET /tree
+#### Request Data - treeName: string
+
+### GET /species
+#### Request Data - scientificSpeciesName: string

@@ -1,6 +1,8 @@
 const express = require('express')
 const cors = require('cors')
 const {checkDatabaseConnection} = require('./database/src')
+const router = require('./api/router')
+const bodyParser = require('body-parser')
 
 checkDatabaseConnection()
 
@@ -14,6 +16,7 @@ const corsOptions = {
 }
 
 app.use(cors(corsOptions))
+
 app.get('/', (req, res) => {
 	res.setHeader("Access-Control-Allow-Origin", "*");
 	res.setHeader("Access-Control-Allow-Credentials", "true");
@@ -22,6 +25,12 @@ app.get('/', (req, res) => {
 	res.send('This is the backend')
 })
 
+app.use('/', router)
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
 app.listen(port, () => {
 	console.log(`Backend server listening at ${port}`)
 })
+
+module.exports = app
