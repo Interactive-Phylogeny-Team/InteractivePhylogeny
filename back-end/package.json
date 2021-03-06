@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest --coverage --forceExit --detectOpenHandles",
     "start": "node index.js"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
       "./node_modules/",
       "./coverage/",
-      "./database/migrations/"
+      "./database/migrations/",
+      "./index.js"
     ],
     "collectCoverageFrom": [
       "./**/*.js"
