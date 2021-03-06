@@ -1,10 +1,15 @@
 const request = require('supertest')
-const app = require('../index.js')
+const app = require('../api/app')
 
 test('Test Endpoints', async () => {
-	const speciesName = 'crocadile'
+	const data = {
+		speciesName: 'bonobo'
+	}
+
 	const res = await request(app)
 		.get('/species')
-		.send(speciesName)
-	expect(res.body).toBe(`Species has name ${speciesName}`)
+		.send(data)
+
+	const response = res.body.response
+	expect(response).toBe(`Species has name ${data.speciesName}`)
 })

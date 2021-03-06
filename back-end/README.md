@@ -40,7 +40,9 @@ Runs the migrations
   
 # API
 ### GET /tree
-#### Request Data - treeName: string
+#### Request Data - { treeName: string }
+#### Example - { treeName: 'Great Apes' }
 
 ### GET /species
-#### Request Data - scientificSpeciesName: string
+#### Request Data - { scientificName: string }
+#### Example - { scientificName: 'Gorilla Gorilla' }
