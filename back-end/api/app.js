@@ -2,11 +2,12 @@ const express = require('express')
 const cors = require('cors')
 const router = require('./router')
 const bodyParser = require('body-parser')
+require('dotenv').config()
 
 const app = express()
 
 const corsOptions = {
-	origin: 'http://localhost:3000',
+	origin: `http://localhost:${process.env.FRONT_END_PORT}`,
 	credentials: true,
 	optionSuccessStatus: 200
 }

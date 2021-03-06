@@ -1,7 +1,8 @@
 const app = require('./api/app')
 const sequelize = require('./database/src/index')
+require('dotenv').config()
 
-const port = 4000
+const port = process.env.BACK_END_PORT
 
 app.listen(port, async () => {
 	try {
