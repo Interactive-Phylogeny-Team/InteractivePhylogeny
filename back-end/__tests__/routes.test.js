@@ -1,15 +1,28 @@
 const request = require('supertest')
 const app = require('../api/app')
+const Species = require('../database/src/models/species')
 
 test('Test Endpoints', async () => {
-	const data = {
-		speciesName: 'bonobo'
+	const primaryKey =  'Pan paniscus'
+
+	let species = await Species.create({
+		scientificName: primaryKey,
+		commonName: 'bonobo',
+		longitude: 11.5,
+		latitude: 16.5,
+		imageUrl: 'http:://anywhere.html',
+		dnaSequence: 'ACGGTACA'
+	})
+
+	reqBody = {
+		scientificName: primaryKey
 	}
 
 	const res = await request(app)
 		.get('/species')
-		.send(data)
+		.send(reqBody)
 
-	const response = res.body.response
-	expect(response).toBe(`Species has name ${data.speciesName}`)
+	species = JSON.stringify(species)
+	const resBody = JSON.stringify(res.body)
+	expect(resBody).toBe(species)
 })
