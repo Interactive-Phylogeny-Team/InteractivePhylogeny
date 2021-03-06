@@ -5,7 +5,8 @@ const Species = sequelize.define(modelName='Species', attributes={
 	scientificName: {
 		type: DataTypes.STRING,
 		unique: true,
-		allowNull: false
+		allowNull: false,
+		primaryKey: true
 	},
 	commonName: {
 		type: DataTypes.STRING
@@ -28,6 +29,8 @@ const Species = sequelize.define(modelName='Species', attributes={
 		allowNull: false,
 		unique: true
 	}
+}, {
+	timestamps: false
 })
 
 module.exports = Species

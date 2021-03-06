@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage --forceExit --detectOpenHandles",
-    "start": "node index.js"
+    "test": "npm run migrate-reset && jest --coverage --forceExit --detectOpenHandles",
+    "start": "node index.js",
+    "undo-migrate": "sequelize-cli db:migrate:undo:all --env env",
+    "migrate": "sequelize-cli db:migrate --env env",
+    "migrate-reset": "npm run undo-migrate && npm run migrate"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
