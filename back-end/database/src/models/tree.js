@@ -1,5 +1,5 @@
 const {DataTypes} = require('sequelize')
-const {sequelize} = require('../index')
+const sequelize = require('../index.js')
 
 const Tree = sequelize.define(modelName='Tree', attributes={
 	name: {

@@ -1,5 +1,5 @@
 const {DataTypes} = require('sequelize')
-const {sequelize} = require('../index')
+const sequelize = require('../index.js')
 
 const Species = sequelize.define(modelName='Species', attributes={
 	scientificName: {
