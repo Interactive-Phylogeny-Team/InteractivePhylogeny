@@ -4,17 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npm run migrate-reset && jest --coverage --forceExit --detectOpenHandles",
+    "test": "npm run reset-test-db && jest --coverage --forceExit --detectOpenHandles",
+    "reset-test-db": "NODE_ENV=test sequelize-cli db:migrate:undo:all && NODE_ENV=test npm run migrate",
     "start": "node index.js",
-    "undo-migrate": "sequelize-cli db:migrate:undo:all --env env",
-    "migrate": "sequelize-cli db:migrate --env env",
-    "migrate-reset": "npm run undo-migrate && npm run migrate"
+    "migrate": "sequelize-cli db:migrate"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
       "./node_modules/",
       "./coverage/",
       "./database/migrations/",
+      "./database/config.js",
       "./index.js"
     ],
     "collectCoverageFrom": [

@@ -1,7 +1,7 @@
 const Species = require('../database/src/models/species')
 
 test('Test Species Model', async () => {
-	const primaryKey =  'gorrila gorilla'
+	const primaryKey =  'gorilla gorilla'
 
 	let species1 = await Species.create({
 		scientificName: primaryKey,
