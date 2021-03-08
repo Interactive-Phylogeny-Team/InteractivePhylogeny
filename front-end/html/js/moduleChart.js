@@ -1769,9 +1769,11 @@ define([], function () {
                 //TODO: Add Name, Image, Coordinates, and DNA
                 // Query the backend for the species data
                 let res = axios.post(`http://localhost:3000/species?speciesName=${nodeName}`)
-                    .then(response => response.status)
+                    .then(response => {
+                        response.status;
+                        console.log(response)
+                    })
                     .catch(err => console.warn(err));
-                console.log(res)
 
                 const name = '<em>' + nodeName + '</em>';
                 const commonName = 'res';
