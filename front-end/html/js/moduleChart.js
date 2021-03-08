@@ -1765,40 +1765,43 @@ define([], function () {
                 return settings;
             },
 
-            nodeInfoSave: function (nodeName, info, url) {
+            nodeInfoSave: async function (nodeName, info, url) {
                 //TODO: Add Name, Image, Coordinates, and DNA
-                // Query the backend for the species data
-                let res = axios.post(`http://localhost:3000/species?speciesName=${nodeName}`)
-                    .then(response => {
-                        response.status;
-                        console.log(response)
-                    })
-                    .catch(err => console.warn(err));
+                let scientificName = '';
+                let commonName = '';
+                let mapLink = '';
+                let dna = '';
+                let imageLink = '';
 
-                const name = '<em>' + nodeName + '</em>';
-                const commonName = 'res';
-                const mapLink = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d386733.09012575535!2d-112.20066948817527!3d40.77626912917434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87523d9488d131ed%3A0x5b53b7a0484d31ca!2sSalt%20Lake%20City%2C%20UT!5e0!3m2!1sen!2sus!4v1615182610250!5m2!1sen!2sus';
-                const scientificName = '';
-                const coord = '<em>COORDINATES HERE</em>';
-                const dna = "ttacgccttaactgttaccgacagaattaactaaa";
-                if (info !== '') {
-                    var text = info.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-                } else {
-                    var text = '<em>Additional info is not available</em>';
-                }
-                if (url !== '') {
-                    var image = '<a href="' + url + '" target="_blank"><img src="' + url + '"></a>';
+                // Query the backend for the species data
+                let resData = await this.getSpeciesData(nodeName)
+                console.log(resData)
+                scientificName = resData.ScientificName;
+                commonName = resData.CommonName;
+                mapLink = resData.MapLink;
+                imageLink = resData.ImageLink;
+                dna = resData.DNA;
+
+
+                if (imageLink !== '') {
+                    var image = '<a href="' + imageLink + '" target="_blank"><img src="' + imageLink + '"></a>';
                 } else {
                     var image = '<em>Image is not available</em>';
                 }
                 var content = '';
-                content += '<div><strong>COMMON NAME:</strong><br>' + commonName + '</div>';
-                content += '<div><strong>Scientific Name:</strong><br>' + name + '</div>';
+                content += '<div><strong>'+ commonName +'</strong></div>';
+                content += '<div><strong>Scientific Name:</strong><br>' + scientificName + '</div>';
                 content += '<div><strong>Image:</strong><br>' + image + '</div>';
                 content += '<div><strong>Map:</strong><br><iframe src="' + mapLink + '" width="270" height="200" style="border:0;" allowFullScreen="" aria-hidden="false" tabIndex="0"></iframe>\n</div>';
                 content += '<div><strong>DNA:</strong><br>' + dna + '</div>';
-                content += '<div><strong>Additional info:</strong><br>' + text + '</div>';
                 $nodeInfo.find('.info-content').html(content);
+            },
+
+            getSpeciesData: async function (speciesName) {
+                return await axios.post(`http://localhost:3000/species?speciesName=${speciesName}`)
+                    .then(response => {
+                        return response.data;
+                    });
             },
 
             nodeInfoDisplay: function (display) {
