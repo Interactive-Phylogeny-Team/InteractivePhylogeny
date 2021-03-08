@@ -743,7 +743,7 @@ define(['moduleChart', 'nexus'], function (moduleChart, nexus) {
                     var info = $('#annotateNodeForm').find('textarea[name=node_info]').val();
                     var url = $('#annotateNodeForm').find('input[name=node_url]').val();
                     moduleChart.saveAnnotation(info, url);
-                    moduleChart.nodeInfoSave(info, url);
+                    moduleChart.nodeInfoSave(" ", info, url);
                     $annotateNodeModal.find('textarea, input').attr('readonly', true);
                     $annotateNodeModal.modal('hide');
                 });
