@@ -1771,21 +1771,21 @@ define([], function () {
                 let scientificName = '';
                 let commonName = '';
                 let mapLink = '';
-                let dna = '';
-                let imageLink = '';
+                let dnaSequence = '';
+                let imageUrl = '';
 
                 // Query the backend for the species data
                 let resData = await this.getSpeciesData(nodeName)
                 console.log(resData)
-                scientificName = resData.ScientificName;
-                commonName = resData.CommonName;
-                mapLink = resData.MapLink;
-                imageLink = resData.ImageLink;
-                dna = resData.DNA;
+                scientificName = resData.scientificName;
+                commonName = resData.commonName;
+                mapLink = resData.mapLink;
+                imageUrl = resData.imageUrl;
+                dnaSequence = resData.dnaSequence;
 
 
-                if (imageLink !== '') {
-                    var image = '<a href="' + imageLink + '" target="_blank"><img src="' + imageLink + '"></a>';
+                if (imageUrl !== '') {
+                    var image = '<a href="' + imageUrl + '" target="_blank"><img src="' + imageUrl + '"></a>';
                 } else {
                     var image = '<em>Image is not available</em>';
                 }
