@@ -1383,7 +1383,8 @@ define([], function () {
                     .duration(duration)
                     .attr("text-anchor", "start")
                     .attr("x", function (d) {
-                        return getTextOffset(d);
+                        // return getTextOffset(d);
+                        return 100;
                     })
                     .text(function (d) {
                         return formatLabels(d, 'tip-labels');
