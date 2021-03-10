@@ -119,8 +119,8 @@ define([], function () {
         var panBoundary = 20; // Within 20px from edges will pan when dragging.
         var i = 0;
         var duration = 800;
-        var nodeBorderColor = 'steelblue';
-        var nodeBorderWidth = 1;
+        var nodeBorderColor = '#631e35';
+        var nodeBorderWidth = 8;
         var nodeColorOpened = '#fff';
         var nodeColorClosed = 'lightsteelblue';
         var nodeLabelColor = '#000';
@@ -609,6 +609,7 @@ define([], function () {
          */
         function getNodeAttr(attr, d) {
             if (d.nexus != undefined && d.nexus[settings.menu['node-shapes'].sizeby] != undefined) {
+                // var nodeSize = getNodeSize(d.nexus[settings.menu['node-shapes'].sizeby]) * settings.nodeRadiusFactor;
                 var nodeSize = getNodeSize(d.nexus[settings.menu['node-shapes'].sizeby]) * settings.nodeRadiusFactor;
             } else {
                 var nodeSize = settings.nodeRadius * settings.nodeRadiusFactor;
@@ -668,7 +669,7 @@ define([], function () {
             if (d.nexus != undefined && d.nexus[settings.menu['node-shapes'].sizeby] != undefined) {
                 var nodeSize = getNodeSize(d.nexus[settings.menu['node-shapes'].sizeby]) * settings.nodeRadiusFactor;
             } else {
-                var nodeSize = settings.nodeRadius * settings.nodeRadiusFactor;
+                var nodeSize = settings.nodeRadius * 30;
             }
 
             return nodeSize;
@@ -1468,7 +1469,7 @@ define([], function () {
                         }
                         return stroke;
                     })
-                    .style("stroke-width", settings.branchWidth + "px")
+                    .style("stroke-width", "40px")
                     .style("stroke-opacity", 1);
 
                 // Exiting Branches
@@ -1733,8 +1734,8 @@ define([], function () {
                 settings.nexusAttrArray = [];
                 settings.nexusAttrMinMax = {};
                 settings.altAttr = ['id', 'depth', 'name', 'length'];
-                settings.nodeRadius = 4;
-                branchWidth = 3,
+                settings.nodeRadius = 30;
+                branchWidth = 40,
                     totalNodes = 0;
                 maxLabelLength = 0;
                 minNodeLength = 0;
@@ -1789,11 +1790,12 @@ define([], function () {
                     var image = '<em>Image is not available</em>';
                 }
                 var content = '';
-                content += '<div><strong>'+ commonName +'</strong></div>';
-                content += '<div><strong>Scientific Name:</strong><br>' + scientificName + '</div>';
-                content += '<div><strong>Image:</strong><br>' + image + '</div>';
-                content += '<div><strong>Map:</strong><br><iframe src="' + mapLink + '" width="270" height="200" style="border:0;" allowFullScreen="" aria-hidden="false" tabIndex="0"></iframe>\n</div>';
-                content += '<div><strong>DNA:</strong><br>' + dna + '</div>';
+                content += '<div style="text-align: center; font-size: 24px; font-style: italic; font-family: Arial, Helvetica, sans-serif;"><strong>'+ commonName +'</strong></div>';
+                content += '<hr/>'
+                content += '<div style="padding-bottom: 12px; font-family: Arial, Helvetica, sans-serif;">Scientific Name:<br><p style="font-size: 24px;">' + scientificName + '<p/></div>';
+                content += '<div>' + image + '</div>';
+                content += '<div><br><iframe src="' + mapLink + '" width="270" height="200" style="border:0;" allowFullScreen="" aria-hidden="false" tabIndex="0"></iframe>\n</div>';
+                // content += '<div><strong>DNA:</strong><br>' + dna + '</div>';
                 $nodeInfo.find('.info-content').html(content);
             },
 

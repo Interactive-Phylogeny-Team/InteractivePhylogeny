@@ -275,8 +275,8 @@ textarea#urlShareInput {
 }
 .node rect.selected,
 .node rect.taxa {
-    fill: #0c0c0d !important;
-    stroke: #111;
+    fill: #A53157 !important;
+    stroke: #631e35;
 }
 .node rect.nodeBar {
     cursor: default;
@@ -293,7 +293,7 @@ textarea#urlShareInput {
 }
 .link.selected {
     fill: none;
-    stroke: orange !important;
+    stroke: #9bc04f !important;
     stroke-width: 7px;
 }
 text.linkText {
