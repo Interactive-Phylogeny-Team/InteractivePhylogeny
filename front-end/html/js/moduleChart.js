@@ -1793,9 +1793,9 @@ define([], function () {
                 var content = '';
                 content += '<div style="text-align: center; font-size: 24px; font-style: italic; font-family: Arial, Helvetica, sans-serif;"><strong>'+ commonName +'</strong></div>';
                 content += '<hr/>'
-                content += '<div style="padding-bottom: 12px; font-family: Arial, Helvetica, sans-serif;">Scientific Name:<br><p style="font-size: 24px;">' + scientificName + '<p/></div>';
-                content += '<div>' + image + '</div>';
-                content += '<div><br><iframe src="' + mapLink + '" width="270" height="200" style="border:0;" allowFullScreen="" aria-hidden="false" tabIndex="0"></iframe>\n</div>';
+                content += '<div style="text-align: center; padding-bottom: 12px; font-family: Arial, Helvetica, sans-serif;">Scientific Name:<br><p style="font-size: 24px;">' + scientificName + '<p/></div>';
+                content += '<div style="padding-left: 70px">' + image + '</div>';
+                content += '<div style="padding-left: 70px"><br><iframe src="' + mapLink + '" width="325" height="300" style="border:0;" allowFullScreen="" aria-hidden="false" tabIndex="0"></iframe>\n</div>';
                 // content += '<div><strong>DNA:</strong><br>' + dna + '</div>';
                 $nodeInfo.find('.info-content').html(content);
             },
@@ -1809,11 +1809,11 @@ define([], function () {
 
             nodeInfoDisplay: function (display) {
                 // Display annotation only if checked
-                if (settings.menu['node-shapes'].annotation == 'show') {
-                    if (display == 'show') {
+                if (settings.menu['node-shapes'].annotation === 'show') {
+                    if (display === 'show') {
                         $nodeInfo.animate({'right': '0px'}, 400);
                     } else {
-                        $nodeInfo.animate({'right': '-300px'}, 400);
+                        $nodeInfo.animate({'right': '-500px'}, 400);
                     }
                 }
                 return;
