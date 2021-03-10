@@ -5,7 +5,8 @@ define(['moduleChart', 'nexus'], function (moduleChart, nexus) {
         var treeData = null;
         var treeObject = null;
         var rangeSliderX, rangeSliderY;
-        var bottomMargin = 290;
+        // TODO: Change here to modify the NodeInfo height (it subtracts this)
+        var bottomMargin = 150;
         /* DOM Selector Vars */
         var $fileSelect = $('#fileSelect');
         var $fileDrag = $('#filedrag');
@@ -633,7 +634,7 @@ define(['moduleChart', 'nexus'], function (moduleChart, nexus) {
                 });
 
                 $nodeInfoClose.on('click', function(e) {
-                    $('#nodeInfo').animate({'right': '-300px'}, 400);
+                    $('#nodeInfo').animate({'right': '-500px'}, 400);
                 })
 
                 /* Initialize range sliders */
