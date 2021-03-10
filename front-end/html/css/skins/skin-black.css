@@ -52,16 +52,15 @@
   border-right-width: 0;
 }
 .skin-black .main-header > .logo {
-  background-color: #ffffff;
+  background-color: #679436;
   color: #333333;
   border-bottom: 0px solid transparent;
-  border-right: 1px solid #eee;
 }
 .skin-black .main-header > .logo > a {
   color: #333333;
 }
 .skin-black .main-header > .logo:hover {
-  background: #fcfcfc;
+  background: #9BC04F;
 }
 @media (max-width: 767px) {
   .skin-black .main-header > .logo {
