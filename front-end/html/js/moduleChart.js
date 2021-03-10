@@ -919,10 +919,10 @@ define([], function () {
             tooltip: function () {
                 tip = d3.tip().attr('class', 'd3-tip')
                     .html(function (d) {
-                        var content = '<div>Name: ' + d.name + '</div>';
-                        content += '<div>ID: ' + d.id + '</div>';
-                        content += '<div>Depth: ' + d.depth + '</div>';
-                        content += '<div>Length: ' + d.length + '</div>';
+                        var content = '<div>' + d.name + '</div>';
+                        // content += '<div>ID: ' + d.id + '</div>';
+                        // content += '<div>Depth: ' + d.depth + '</div>';
+                        // content += '<div>Length: ' + d.length + '</div>';
                         if (d.nexus) {
                             $.each(d.nexus, function (index, val) {
                                 content += '<div>' + index + ': ' + val + '</div>';
