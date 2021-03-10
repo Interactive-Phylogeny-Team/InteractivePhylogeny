@@ -349,4 +349,11 @@ a > i.fa {
     vertical-align: middle;
 }
 
+.slider-selection {
+    background-image: linear-gradient(to bottom, #9bc04f 0%, #679436 100%);
+}
+
+.slider-handle {
+    background-image: linear-gradient(to bottom, #679436 0%, #9bc04f 100%);
+}
 
