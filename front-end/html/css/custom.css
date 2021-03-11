@@ -183,6 +183,19 @@ ul[data-menu=layout] hr {
     cursor: default;
     margin-top: -5px;
 }
+
+#filedrag-black {
+    display: block;
+    font-weight: bold;
+    text-align: center;
+    padding: 1em 0;
+    margin: 1em;
+    color: #679436;
+    border: 2px dashed #679436;
+    border-radius: 7px;
+    cursor: default;
+    margin-top: -5px;
+}
 #filedrag.hover
 {
     color: #f00;
