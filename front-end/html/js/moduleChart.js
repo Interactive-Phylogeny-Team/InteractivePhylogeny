@@ -699,12 +699,12 @@ define([], function () {
             var textDisplay = d['name'];
             if (settings.menu[nodeType].display !== 'name') {
                 // Display empty string if display attribute is not available
-                if (d.nexus == undefined || d.nexus[settings.menu[nodeType].display] == undefined) {
+                if (d.nexus === undefined || d.nexus[settings.menu[nodeType].display] === undefined) {
                     textDisplay = '';
                 } else {
                     textDisplay = d.nexus[settings.menu[nodeType].display];
                     // Get the number of digits for formating
-                    var sigdigits = "4"; // default value
+                    let sigdigits = "4"; // default value
                     sigdigits = settings.menu[nodeType].sigdigits;
                     if (textDisplay.constructor === Array) {
                         var temp = [];
@@ -1332,6 +1332,7 @@ define([], function () {
 
                 /***************************/
                 /** ADD NODE & LEAF TEXT **/
+                //TODO: Figure out how to change from <text> tage to <textarea> tag for multiline
                 /*************************/
                 nodeEnter.append("text")
                     .attr("dy", ".35em")
@@ -1370,7 +1371,7 @@ define([], function () {
                             var maxVal = settings.nexusAttrMinMax[colorbyVal].max;
                             var color1 = settings.menu['node-labels'].colorstart;
                             var color2 = settings.menu['node-labels'].colorend;
-                            if (d.nexus != undefined && d.nexus[colorbyVal] != undefined) {
+                            if (d.nexus !== undefined && d.nexus[colorbyVal] !== undefined) {
                                 fill = chromaColor(color1, color2, minVal, maxVal, Number(d.nexus[colorbyVal]));
                             }
                         }
@@ -1402,13 +1403,13 @@ define([], function () {
                     .style('font-style', 'italic')
                     .style("fill", function (d) {
                         var fill = leafLabelColor;
-                        if (settings.nexusAttrMinMax[settings.menu['tip-labels'].colorby] != undefined) {
+                        if (settings.nexusAttrMinMax[settings.menu['tip-labels'].colorby] !== undefined) {
                             var colorbyVal = settings.menu['tip-labels'].colorby;
                             var minVal = settings.nexusAttrMinMax[colorbyVal].min;
                             var maxVal = settings.nexusAttrMinMax[colorbyVal].max;
                             var color1 = settings.menu['tip-labels'].colorstart;
                             var color2 = settings.menu['tip-labels'].colorend;
-                            if (d.nexus != undefined && d.nexus[colorbyVal] != undefined) {
+                            if (d.nexus !== undefined && d.nexus[colorbyVal] !== undefined) {
                                 fill = chromaColor(color1, color2, minVal, maxVal, Number(d.nexus[colorbyVal]));
                             }
                         }
@@ -1775,8 +1776,11 @@ define([], function () {
                 let dnaSequence = '';
                 let imageUrl = '';
 
+
+                scientificName = nodeName.split("\n")[1].replace(/[()]/g, '')
+
                 // Query the backend for the species data
-                let resData = await this.getSpeciesData(nodeName)
+                let resData = await this.getSpeciesData(scientificName)
                 console.log(resData)
                 scientificName = resData.scientificName;
                 commonName = resData.commonName;
