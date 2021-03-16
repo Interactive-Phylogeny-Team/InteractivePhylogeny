@@ -22,7 +22,9 @@ Runs the migrations
 * `brew install postgresql@13` (This should automatically start postgresql as a service)
 * `psql -d postgres -c "CREATE USER appuser WITH PASSWORD 'b'"`
 * `psql -d postgres -c "CREATE DATABASE appdb WITH OWNER=appuser"`
+* `psql -d appdb -c "CREATE EXTENSION IF NOT EXISTS citext"`
 * `psql -d postgres -c "CREATE DATABASE apptestdb WITH OWNER=appuser"`
+* `psql -d apptestdb -c "CREATE EXTENSION IF NOT EXISTS citext"`
 
 # PostegreSQL Windows installation
 * Go to https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
@@ -33,14 +35,34 @@ Runs the migrations
 * In your command prompt type:
   * `C:/"Program Files"/PostgreSQL/13/bin/psql -U postgres -c "CREATE USER appuser WITH PASSWORD 'b'"`
   * `C:/"Program Files"/PostgreSQL/13/bin/psql -U postgres -c "CREATE DATABASE appdb WITH OWNER=appuser"`
+  * `C:/"Program Files"/PostgreSQL/13/bin/psql -U postgres -d appdb -c "CREATE EXTENSION IF NOT EXISTS citext"`
   * `C:/"Program Files"/PostgreSQL/13/bin/psql -U postgres -c "CREATE DATABASE apptestdb WITH OWNER=appuser"`
+  * `C:/"Program Files"/PostgreSQL/13/bin/psql -U postgres -d apptestdb -c "CREATE EXTENSION IF NOT EXISTS citext"`
   * Enter your superuser password as needed, remember that it is `password`.
   
 # API
 ### GET /tree
 #### Request Data - { treeName: string }
 #### Example - { treeName: 'Great Apes' }
-
+#### Response Data:
+```
+{
+	name: string,
+	tree: object
+}
+```
 ### GET /species
 #### Request Data - { scientificName: string }
 #### Example - { scientificName: 'Gorilla Gorilla' }
+#### Response Data:
+```
+{
+	scientificName: string,
+	commonName: string,
+	longitude: float,
+	latitude: float,
+	imageUrl: string,
+	dnaSequence: string,
+	mapLink: string
+}
+```
