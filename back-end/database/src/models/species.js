@@ -25,7 +25,7 @@ const Species = sequelize.define(modelName='Species', attributes={
 		unique: true
 	},
 	dnaSequence: {
-		type: Sequelize.CITEXT,
+		type: DataTypes.CITEXT,
 		allowNull: false
 	},
 	mapLink: {
