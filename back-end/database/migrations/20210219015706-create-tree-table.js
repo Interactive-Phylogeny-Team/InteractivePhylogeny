@@ -9,13 +9,12 @@ module.exports = {
         unique: true
       },
       tree: {
-        type: Sequelize.BLOB,
-        allowNull: false,
-        unique: true
+        type: Sequelize.JSONB,
+        allowNull: false
       }
     })
   },
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface) => {
     await queryInterface.dropTable('Trees')
   }
 }

@@ -9,9 +9,8 @@ const Tree = sequelize.define(modelName='Tree', attributes={
 		primaryKey: true
 	},
 	tree: {
-		type: DataTypes.BLOB,
-		allowNull: false,
-		unique: true
+		type: DataTypes.JSON,
+		allowNull: false
 	}
 }, {
 	timestamps: false

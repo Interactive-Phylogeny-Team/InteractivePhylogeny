@@ -2,7 +2,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.addColumn('Species', 'mapLink', {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING(500),
       allowNull: false
     })
   },

@@ -22,13 +22,12 @@ module.exports = {
         unique: true
       },
       dnaSequence: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
+        type: Sequelize.CITEXT,
+        allowNull: false
       }
     })
   },
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface) => {
     await queryInterface.dropTable('Species')
   }
 }
