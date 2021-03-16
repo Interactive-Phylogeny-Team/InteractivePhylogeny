@@ -10,8 +10,9 @@ test('Test Endpoints', async () => {
 		commonName: 'bonobo',
 		longitude: 11.5,
 		latitude: 16.5,
-		imageUrl: 'http:://anywhere.html',
-		dnaSequence: 'ACGGTACA'
+		imageUrl: 'http:://routes/anywhere.html',
+		dnaSequence: 'ACGGTACA',
+		mapLink: 'http:://routes/map.link.com'
 	})
 
 	reqBody = {

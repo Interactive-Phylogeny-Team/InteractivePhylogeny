@@ -8,12 +8,13 @@ test('Test Species Model', async () => {
 		commonName: 'gorilla',
 		longitude: 14.4,
 		latitude: 15.6,
-		imageUrl: 'http:://somewhere.html',
-		dnaSequence: 'ACTGTTCA'
+		imageUrl: 'http:://species/somewhere.html',
+		dnaSequence: 'ACTGTTCA',
+		mapLink: 'http:://species/map.link.net'
 	})
 
 	let species2 = await Species.findByPk(primaryKey)
 	species1 = JSON.stringify(species1.toJSON())
 	species2 = JSON.stringify(species2.toJSON())
-	expect(species1.toString()).toBe(species2.toString())
+	expect(species1).toBe(species2)
 })
