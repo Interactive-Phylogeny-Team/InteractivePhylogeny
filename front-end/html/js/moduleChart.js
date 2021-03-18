@@ -14,6 +14,7 @@ define([], function () {
         var $phylogeneticTree = $("#phylogeneticTree");
         var $treeScale = $("#treeScale");
         var $nodeInfo = $('#nodeInfo');
+        var leafValues = [];
 
         /* Chart Settings Vars */
         var settings = {
@@ -452,6 +453,7 @@ define([], function () {
             } else {
                 // Add node annotation to floating div
                 if (d.meta) {
+                    // FIXME: The promise is being botched here somehow
                     chart.nodeInfoSave(d['name'], d);
                 }
                 // Deselect all other and select new node
@@ -1777,6 +1779,7 @@ define([], function () {
                 let commonName = '';
                 let mapLink = '';
                 let dnaSequence = '';
+                let dnaSequences = [];
                 let imageUrl = '';
                 scientificName = nodeName;
                 var content = '';
@@ -1787,6 +1790,17 @@ define([], function () {
 
                 if (nodeName === '' || nodeName.split(" ").length < 2) {
                     content += '<div><p>TODO: Get Leaf Node DNA Sequences for: </p></div>'
+                    // TODO: DFS; save only names
+                    let l = this.traverseDFS(node)
+                    l.forEach(async leafName => {
+                        content += '<li>' + leafName + '</li>';
+                        let names = leafName.split("\n");
+                        if (names.length > 1) {
+                            let resData = await this.getSpeciesData(leafName.split("\n")[1].replace(/[()]/g, ''));
+                            dnaSequences.push(resData.dnaSequence);
+                        }
+                        console.log(dnaSequences);
+                    });
 
                 } else {
                     // Query the backend for the species data
@@ -1834,6 +1848,26 @@ define([], function () {
                 }
                 return;
             },
+
+            traverseDFS: function (node) {
+                this.leafValues = [];
+                this.postOrderHelper(node);
+                return this.leafValues
+            },
+
+            // FIXME: Can't access "forEach", curNode.children is undefined
+            postOrderHelper: function (curNode) {
+                if (curNode.children !== undefined) {
+                    curNode.children.forEach(child => {
+                        this.postOrderHelper(child);
+                    });
+                }
+
+                if (curNode.name !== "") {
+                    this.leafValues.push(curNode.name)
+                }
+                return true;
+            }
         }
 
     })();

@@ -744,13 +744,13 @@ define(['moduleChart', 'nexus'], function (moduleChart, nexus) {
                     var info = $('#annotateNodeForm').find('textarea[name=node_info]').val();
                     var url = $('#annotateNodeForm').find('input[name=node_url]').val();
                     moduleChart.saveAnnotation(info, url);
-                    moduleChart.nodeInfoSave(" ", info, url);
+                    moduleChart.nodeInfoSave(" ", null);
                     $annotateNodeModal.find('textarea, input').attr('readonly', true);
                     $annotateNodeModal.modal('hide');
                 });
 
                 $urlLifetimeSelect.on('change', function(e) {
-                    if($(this).val() == 'indefinite') {
+                    if($(this).val() === 'indefinite') {
                         $('#indefiniteMsg').slideDown();
                     } else {
                         $('#indefiniteMsg').slideUp();
