@@ -1785,7 +1785,7 @@ define([], function () {
                     scientificName = nodeName.split("\n")[1].replace(/[()]/g, '')
                 }
 
-                if (nodeName === '' || nodeName.split(" ") < 2) {
+                if (nodeName === '' || nodeName.split(" ").length < 2) {
                     content += '<div><p>TODO: Get Leaf Node DNA Sequences for: </p></div>'
 
                 } else {
