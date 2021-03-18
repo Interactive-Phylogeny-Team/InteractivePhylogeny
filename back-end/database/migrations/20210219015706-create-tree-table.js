@@ -9,7 +9,7 @@ module.exports = {
         unique: true
       },
       tree: {
-        type: Sequelize.JSONB,
+        type: Sequelize.CITEXT,
         allowNull: false
       }
     })

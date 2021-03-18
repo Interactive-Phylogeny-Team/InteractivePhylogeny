@@ -9,7 +9,7 @@ const Tree = sequelize.define(modelName='Tree', attributes={
 		primaryKey: true
 	},
 	tree: {
-		type: DataTypes.JSON,
+		type: DataTypes.CITEXT,
 		allowNull: false
 	}
 }, {

@@ -2,8 +2,16 @@
 
 module.exports = {
   up: async (queryInterface) => {
-    const speciesData = require('../../data/species.json')
-    await queryInterface.bulkInsert('Species', speciesData)
+    const speciesDataFiles = [
+      '../../data/birdsData.json',
+      '../../data/butterfliesData.json',
+      '../../data/primatesData.json'
+    ]
+
+    for (const speciesDataFile of speciesDataFiles) {
+      const speciesData = require(speciesDataFile)
+      await queryInterface.bulkInsert('Species', speciesData)
+    }
   },
 
   down: async (queryInterface) => {

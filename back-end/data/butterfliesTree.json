@@ -1,1 +1,6 @@
-((Monarch Butterfly/n(Danaus Plexippus):0.03154949471,Plain Tiger/n(Danaus Chrysippus):0.03847531602):0.05093950406,(Common Yellow Swallowtail/n(Papilio Machaon):0.07038393617,Mountain Apollo/n(Parnassius Apollo):0.05937898159):0.01872387156,(Silver-Studded Blue/n(Plebejus Argus):0.06587620825,Small Copper/n(Lycaena Phlaeas):0.05359476805):0.0313722752);
+[
+  {
+    "name": "butterflies",
+    "tree": "((Monarch Butterfly/n(Danaus Plexippus):0.03154949471,Plain Tiger/n(Danaus Chrysippus):0.03847531602):0.05093950406,(Common Yellow Swallowtail/n(Papilio Machaon):0.07038393617,Mountain Apollo/n(Parnassius Apollo):0.05937898159):0.01872387156,(Silver-Studded Blue/n(Plebejus Argus):0.06587620825,Small Copper/n(Lycaena Phlaeas):0.05359476805):0.0313722752);"
+  }
+]
