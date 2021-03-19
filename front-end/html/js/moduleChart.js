@@ -1788,10 +1788,17 @@ define([], function () {
                 }
 
                 if (nodeName === '' || nodeName.split(" ").length < 2) {
+                    let nameArr = [];
                     content += '<div><p>TODO: Get Leaf Node DNA Sequences for: </p></div>'
-                    // TODO: DFS; save only names
                     let l = this.traverseDFS(node)
                     l.forEach(async leafName => {
+                        /*
+                        * Since we are expecting the leaf name to be common name\n(species name)
+                        * we'll need to split on the newline and then get rid of the parens so
+                        * that we can put to gether the query string for the comparison table. Make sure
+                        * it is case-insensitve (always lower case)
+                        * */
+                        nameArr.push(leafName.split("\n")[1].replace(/[()]/g, '').toLowerCase());
                         content += '<li>' + leafName + '</li>';
                         let names = leafName.split("\n");
                         if (names.length > 1) {
@@ -1800,6 +1807,20 @@ define([], function () {
                         }
                         console.log(dnaSequences);
                     });
+                    /*
+                    * Here we need to sort the leaf node names in alphabetical order (apparently), as per
+                    * the backend devs request
+                    *  */
+                    nameArr.sort((a, b) => a.localeCompare(b))
+                    /*
+                    * After we sort the names alphabetically, concatenate them into a long case-insensitive
+                    * snake_case string for the key to query on
+                    * */
+                    let compKey = nameArr.join('_').replaceAll(' ', '_')
+                    console.log(nameArr);
+                    console.log(compKey);
+                    let resData = await this.getSpeciesComparisons(compKey);
+                    console.log(resData);
 
                 } else {
                     // Query the backend for the species data
@@ -1829,8 +1850,17 @@ define([], function () {
                 $nodeInfo.find('.info-content').html(content);
             },
 
+            /* This is our HTTP request to the server to get data for the selected species */
             getSpeciesData: async function (speciesName) {
                 return await axios.post(`http://localhost:3000/species?speciesName=${speciesName}`)
+                    .then(response => {
+                        return response.data;
+                    });
+            },
+
+            /* The is our HTTP Request to the server to get the comparison asterisk strings */
+            getSpeciesComparisons: async function (compKey) {
+                return await axios.post(`http://localhost:3000/dnacomparisons?comp=${compKey}`)
                     .then(response => {
                         return response.data;
                     });
