@@ -14,6 +14,7 @@ define([], function () {
         var $phylogeneticTree = $("#phylogeneticTree");
         var $treeScale = $("#treeScale");
         var $nodeInfo = $('#nodeInfo');
+        var leafValues = [];
 
         /* Chart Settings Vars */
         var settings = {
@@ -452,7 +453,8 @@ define([], function () {
             } else {
                 // Add node annotation to floating div
                 if (d.meta) {
-                    chart.nodeInfoSave(d['name'], d.meta.annotation.info, d.meta.annotation.url);
+                    // FIXME: The promise is being botched here somehow
+                    chart.nodeInfoSave(d['name'], d);
                 }
                 // Deselect all other and select new node
                 svgGroup.selectAll("rect.selected").attr('class', 'nodeShape');
@@ -558,11 +560,11 @@ define([], function () {
          * Function to center node when clicked/dropped so node doesn't get lost when collapsing/moving with large amount of children
          */
         function centerNode(source, type) {
-            var isRoot = (source.parent == undefined) ? true : false;
+            var isRoot = (source.parent == undefined);
             var root = source;
             var scale = zoomListener.scale();
 
-            if (type == 'linear') {
+            if (type === 'linear') {
                 var selected = d3.selectAll('rect.nodeShape.selected');
                 if (selected[0].length > 0) {
                     var temp = selected.data();
@@ -666,7 +668,7 @@ define([], function () {
         }
 
         function getTextOffset(d) {
-            if (d.nexus != undefined && d.nexus[settings.menu['node-shapes'].sizeby] != undefined) {
+            if (d.nexus !== undefined && d.nexus[settings.menu['node-shapes'].sizeby] !== undefined) {
                 var nodeSize = getNodeSize(d.nexus[settings.menu['node-shapes'].sizeby]) * settings.nodeRadiusFactor;
             } else {
                 var nodeSize = settings.nodeRadius * 30;
@@ -699,12 +701,12 @@ define([], function () {
             var textDisplay = d['name'];
             if (settings.menu[nodeType].display !== 'name') {
                 // Display empty string if display attribute is not available
-                if (d.nexus == undefined || d.nexus[settings.menu[nodeType].display] == undefined) {
+                if (d.nexus === undefined || d.nexus[settings.menu[nodeType].display] === undefined) {
                     textDisplay = '';
                 } else {
                     textDisplay = d.nexus[settings.menu[nodeType].display];
                     // Get the number of digits for formating
-                    var sigdigits = "4"; // default value
+                    let sigdigits = "4"; // default value
                     sigdigits = settings.menu[nodeType].sigdigits;
                     if (textDisplay.constructor === Array) {
                         var temp = [];
@@ -760,7 +762,7 @@ define([], function () {
                 $.each(options, function (index, val) {
                     settings[index] = val;
 
-                    if (index == 'selectedNode' && val == null) {
+                    if (index === 'selectedNode' && val == null) {
                         settings.zoomScale = 0.3; // revert to defalt value
                     }
                 });
@@ -917,9 +919,11 @@ define([], function () {
             },
 
             tooltip: function () {
-                tip = d3.tip().attr('class', 'd3-tip')
+                // TODO: Uncomment below to enable tooltips again
+                // tip = d3.tip().attr('class', 'd3-tip')
+                tip = d3.tip()
                     .html(function (d) {
-                        var content = '<div>' + d.name + '</div>';
+                        // var content = '<div>' + d.name + '</div>';
                         // content += '<div>ID: ' + d.id + '</div>';
                         // content += '<div>Depth: ' + d.depth + '</div>';
                         // content += '<div>Length: ' + d.length + '</div>';
@@ -928,7 +932,7 @@ define([], function () {
                                 content += '<div>' + index + ': ' + val + '</div>';
                             });
                         }
-                        return content;
+                        return null;
                     })
                     .offset([-20, 0]);
             },
@@ -1158,10 +1162,10 @@ define([], function () {
                 /**********************/
                 /**  UPDATE SCALE   **/
                 /*********************/
-                if (settings.menu['scale-bar'].automatic == 'show') {
+                if (settings.menu['scale-bar'].automatic === 'show') {
                     // Automaticaly determine scale value, 10th of maximum branch length
                     scaleValue = Math.round(maxLength / 10);
-                    if (scaleValue == 0) {
+                    if (scaleValue === 0) {
                         scaleValue = (maxLength / 10).toFixed(2);
                     }
                     scaleWidth = (parseFloat(maxOffset) * scaleValue) / parseFloat(maxLength);
@@ -1174,9 +1178,9 @@ define([], function () {
                 var scaleSvgHeight = parseInt(settings.menu['scale-bar'].lineweight) + parseInt(settings.menu['scale-bar'].fontsize);
                 scaleSvg.attr("height", (scaleSvgHeight + scaleSvgHeight / 4).toString() + 'px')
                     .style('display', function (d) {
-                        if (layout == 'tree' || layout == 'radial-tree') {
+                        if (layout === 'tree' || layout === 'radial-tree') {
                             var showhide = settings.menu['scale-bar'].showhide;
-                            return showhide == 'show' ? 'block' : 'none';
+                            return showhide === 'show' ? 'block' : 'none';
                         }
                         return 'none';
                     });
@@ -1210,10 +1214,10 @@ define([], function () {
                 var nodeEnter = node.enter().append("g")
                     .classed('node', true)
                     .classed('leaf', function (d) {
-                        return d.children || d._children ? false : true;
+                        return !(d.children || d._children);
                     })
                     .attr("transform", function (d) {
-                        if (settings.activeTransform == 'linear') {
+                        if (settings.activeTransform === 'linear') {
                             return "translate(" + source.y0 + "," + source.x0 + ")";
                         } else {
                             return "rotate(" + (source.x0 - 90) + ")translate(" + source.y0 + ")";
@@ -1273,13 +1277,13 @@ define([], function () {
                     })
                     .style("fill", function (d) {
                         var fill = nodeColorOpened;
-                        if (settings.nexusAttrMinMax[settings.menu['node-shapes'].colorby] != undefined) {
+                        if (settings.nexusAttrMinMax[settings.menu['node-shapes'].colorby] !== undefined) {
                             var colorbyVal = settings.menu['node-shapes'].colorby;
                             var minVal = settings.nexusAttrMinMax[colorbyVal].min;
                             var maxVal = settings.nexusAttrMinMax[colorbyVal].max;
                             var color1 = settings.menu['node-shapes'].colorstart;
                             var color2 = settings.menu['node-shapes'].colorend;
-                            if (d.nexus != undefined && d.nexus[colorbyVal] != undefined) {
+                            if (d.nexus !== undefined && d.nexus[colorbyVal] !== undefined) {
                                 fill = chromaColor(color1, color2, minVal, maxVal, Number(d.nexus[colorbyVal]));
                             }
                         }
@@ -1303,7 +1307,7 @@ define([], function () {
                 node.transition()
                     .duration(duration)
                     .attr("transform", function (d) {
-                        if (settings.activeTransform == 'linear') {
+                        if (settings.activeTransform === 'linear') {
                             return "translate(" + d.y + "," + d.x + ")";
                         } else {
                             return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")";
@@ -1315,7 +1319,7 @@ define([], function () {
                     .transition()
                     .duration(duration)
                     .attr("transform", function (d) {
-                        if (settings.activeTransform == 'linear') {
+                        if (settings.activeTransform === 'linear') {
                             return "translate(" + source.y + "," + source.x + ")";
                         } else {
                             return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")";
@@ -1332,14 +1336,15 @@ define([], function () {
 
                 /***************************/
                 /** ADD NODE & LEAF TEXT **/
+                //TODO: Figure out how to change from <text> tage to <textarea> tag for multiline
                 /*************************/
                 nodeEnter.append("text")
                     .attr("dy", ".35em")
                     .classed('nodeText', function (d) {
-                        return d.children || d._children ? true : false;
+                        return !!(d.children || d._children);
                     })
                     .classed('leafText', function (d) {
-                        return d.children || d._children ? false : true;
+                        return !(d.children || d._children);
                     });
 
                 // Update the node text
@@ -1354,7 +1359,7 @@ define([], function () {
                         return formatLabels(d, 'node-labels');
                     })
                     .style('display', function (d) {
-                        return settings.menu['node-labels'].showhide == 'show' ? 'block' : 'none';
+                        return settings.menu['node-labels'].showhide === 'show' ? 'block' : 'none';
                     })
                     .style('font-size', function (d) {
                         return settings.menu['node-labels'].fontsize + 'px';
@@ -1370,7 +1375,7 @@ define([], function () {
                             var maxVal = settings.nexusAttrMinMax[colorbyVal].max;
                             var color1 = settings.menu['node-labels'].colorstart;
                             var color2 = settings.menu['node-labels'].colorend;
-                            if (d.nexus != undefined && d.nexus[colorbyVal] != undefined) {
+                            if (d.nexus !== undefined && d.nexus[colorbyVal] !== undefined) {
                                 fill = chromaColor(color1, color2, minVal, maxVal, Number(d.nexus[colorbyVal]));
                             }
                         }
@@ -1402,13 +1407,13 @@ define([], function () {
                     .style('font-style', 'italic')
                     .style("fill", function (d) {
                         var fill = leafLabelColor;
-                        if (settings.nexusAttrMinMax[settings.menu['tip-labels'].colorby] != undefined) {
+                        if (settings.nexusAttrMinMax[settings.menu['tip-labels'].colorby] !== undefined) {
                             var colorbyVal = settings.menu['tip-labels'].colorby;
                             var minVal = settings.nexusAttrMinMax[colorbyVal].min;
                             var maxVal = settings.nexusAttrMinMax[colorbyVal].max;
                             var color1 = settings.menu['tip-labels'].colorstart;
                             var color2 = settings.menu['tip-labels'].colorend;
-                            if (d.nexus != undefined && d.nexus[colorbyVal] != undefined) {
+                            if (d.nexus !== undefined && d.nexus[colorbyVal] !== undefined) {
                                 fill = chromaColor(color1, color2, minVal, maxVal, Number(d.nexus[colorbyVal]));
                             }
                         }
@@ -1434,7 +1439,7 @@ define([], function () {
                     .duration(duration)
                     .attr("d", function (d) {
                         var linkProjection = settings.menu['branch-projection'].projection;
-                        if (settings.activeTransform == 'linear') {
+                        if (settings.activeTransform === 'linear') {
                             switch (linkProjection) {
                                 case "elbow":
                                     return elbow(d);
@@ -1499,7 +1504,7 @@ define([], function () {
                     .duration(duration)
                     .attr("x", function (d) {
                         var linkProjection = settings.menu['branch-projection'].projection;
-                        if (settings.activeTransform == 'linear') {
+                        if (settings.activeTransform === 'linear') {
                             switch (linkProjection) {
                                 case "elbow":
                                     return (d.target.y + (d.source.y - d.target.y) / 2);
@@ -1528,7 +1533,7 @@ define([], function () {
                     })
                     .attr("y", function (d) {
                         var linkProjection = settings.menu['branch-projection'].projection;
-                        if (settings.activeTransform == 'linear') {
+                        if (settings.activeTransform === 'linear') {
                             switch (linkProjection) {
                                 case "elbow":
                                     return d.target.x;
@@ -1559,7 +1564,7 @@ define([], function () {
                         return formatLabels(d.target, 'branch-labels');
                     })
                     .style('display', function (d) {
-                        return settings.menu['branch-labels'].showhide == 'show' ? 'block' : 'none';
+                        return settings.menu['branch-labels'].showhide === 'show' ? 'block' : 'none';
                     })
                     .style('font-size', function () {
                         return settings.menu['branch-labels'].fontsize + 'px';
@@ -1569,13 +1574,13 @@ define([], function () {
                     })
                     .style('fill', function (d) {
                         var fill = branchLabelColor;
-                        if (settings.nexusAttrMinMax[settings.menu['branch-labels'].colorby] != undefined) {
+                        if (settings.nexusAttrMinMax[settings.menu['branch-labels'].colorby] !== undefined) {
                             var colorbyVal = settings.menu['branch-labels'].colorby;
                             var minVal = settings.nexusAttrMinMax[colorbyVal].min;
                             var maxVal = settings.nexusAttrMinMax[colorbyVal].max;
                             var color1 = settings.menu['branch-labels'].colorstart;
                             var color2 = settings.menu['branch-labels'].colorend;
-                            if (d.target.nexus != undefined && d.target.nexus[colorbyVal] != undefined) {
+                            if (d.target.nexus !== undefined && d.target.nexus[colorbyVal] !== undefined) {
                                 fill = chromaColor(color1, color2, minVal, maxVal, Number(d.target.nexus[colorbyVal]));
                             }
                         }
@@ -1607,9 +1612,9 @@ define([], function () {
                     .duration(duration)
                     .attr({
                         "width": function (d) {
-                            if (d.nexus != undefined) {
+                            if (d.nexus !== undefined) {
                                 var data = d.nexus[settings.menu['node-bars'].display];
-                                if (data != undefined) {
+                                if (data !== undefined) {
                                     var barLength = parseFloat(maxOffset) * parseFloat(data[1] - data[0]) / parseFloat(maxLength);
                                     return barLength.toString() + 'px';
                                 }
@@ -1619,8 +1624,8 @@ define([], function () {
                         "height": settings.menu['node-bars'].barwidth,
                     })
                     .attr("transform", function (d) {
-                        if (settings.activeTransform == 'linear') {
-                            if (d.nexus != undefined) {
+                        if (settings.activeTransform === 'linear') {
+                            if (d.nexus !== undefined) {
                                 var data = d.nexus[settings.menu['node-bars'].display];
                                 if (data != undefined) {
                                     var barLength = parseFloat(maxOffset) * parseFloat(data[1] - data[0]) / parseFloat(maxLength);
@@ -1631,9 +1636,9 @@ define([], function () {
                             }
                             return "translate(" + d.y + "," + d.x + ")";
                         } else {
-                            if (d.nexus != undefined) {
+                            if (d.nexus !== undefined) {
                                 var data = d.nexus[settings.menu['node-bars'].display];
-                                if (data != undefined) {
+                                if (data !== undefined) {
                                     var barLength = parseFloat(maxOffset) * parseFloat(data[1] - data[0]) / parseFloat(maxLength);
                                     var dy = d.y - (barLength / 2);
                                     var dz = (settings.menu['node-bars'].barwidth * 3 / 2) / 180 * Math.PI;
@@ -1646,13 +1651,13 @@ define([], function () {
                     .style("fill-opacity", 0.6)
                     .style('fill', nodeBorderColor)
                     .style('display', function (d) {
-                        if (layout == 'tree' || layout == 'radial-tree') {
+                        if (layout === 'tree' || layout === 'radial-tree') {
                             var showhide = "hide";
                             // var showhide = settings.menu['node-bars'].showhide;
                         } else {
                             var showhide = "hide";
                         }
-                        return showhide == 'show' ? 'block' : 'none';
+                        return showhide === 'show' ? 'block' : 'none';
                     });
 
                 // Exiting the node bars
@@ -1664,7 +1669,7 @@ define([], function () {
             },
 
             colorSelection: function () {
-                if (settings.activeLinkSelect == 'taxa') {
+                if (settings.activeLinkSelect === 'taxa') {
                     // Color the selected nodes
                     d3.selectAll('rect.taxa').style("fill", settings.selectionColor).classed('taxa', false);
                 } else {
@@ -1692,10 +1697,10 @@ define([], function () {
 
             sorting: function (direction) {
                 visit(settings.treeObject, function (d) {
-                    if (d.children && d.children.length == 2) {
+                    if (d.children && d.children.length === 2) {
                         var child1Depth = getMaxDepth(d.children[0]);
                         var child2Depth = getMaxDepth(d.children[1]);
-                        if (direction == 'down') {
+                        if (direction === 'down') {
                             if (child1Depth < child2Depth) {
                                 var temp = d.children[0];
                                 d.children[0] = d.children[1];
@@ -1767,39 +1772,108 @@ define([], function () {
                 return settings;
             },
 
-            nodeInfoSave: async function (nodeName, info, url) {
+            // TODO: If nodename is blank, get the dnaSequences of the leaf nodes
+            nodeInfoSave: async function (nodeName, node) {
                 //TODO: Add Name, Image, Coordinates, and DNA
                 let scientificName = '';
                 let commonName = '';
                 let mapLink = '';
-                let dnaSequence = '';
+                let dnaSequences = [];
                 let imageUrl = '';
-
-                // Query the backend for the species data
-                let resData = await this.getSpeciesData(nodeName)
-                console.log(resData)
-                scientificName = resData.scientificName;
-                commonName = resData.commonName;
-                mapLink = resData.mapLink;
-                imageUrl = resData.imageUrl;
-                dnaSequence = resData.dnaSequence;
-
-
-                if (imageUrl !== '') {
-                    var image = '<a href="' + imageUrl + '" target="_blank"><img src="' + imageUrl + '"></a>';
-                } else {
-                    var image = '<em>Image is not available</em>';
-                }
+                scientificName = nodeName;
                 var content = '';
-                content += '<div style="text-align: center; font-size: 24px; font-style: italic; font-family: Arial, Helvetica, sans-serif;"><strong>'+ commonName +'</strong></div>';
-                content += '<hr/>'
-                content += '<div style="text-align: center; padding-bottom: 12px; font-family: Arial, Helvetica, sans-serif;">Scientific Name:<br><p style="font-size: 24px;">' + scientificName + '<p/></div>';
-                content += '<div style="padding-left: 70px">' + image + '</div>';
-                content += '<div style="padding-left: 70px"><br><iframe src="' + mapLink + '" width="325" height="300" style="border:0;" allowFullScreen="" aria-hidden="false" tabIndex="0"></iframe>\n</div>';
-                // content += '<div><strong>DNA:</strong><br>' + dna + '</div>';
+
+                if (nodeName.includes('(')) {
+                    scientificName = nodeName.split("\n")[1].replace(/[()]/g, '')
+                }
+
+                if (nodeName === '' || nodeName.split(" ").length < 2) {
+                    let nameArr = [];
+                    content += '<div><p>TODO: Get Leaf Node DNA Sequences for: </p></div>'
+                    let l = this.traverseDFS(node)
+                    l.forEach(async leafName => {
+                        /*
+                        * Since we are expecting the leaf name to be common name\n(species name)
+                        * we'll need to split on the newline and then get rid of the parens so
+                        * that we can put to gether the query string for the comparison table. Make sure
+                        * it is case-insensitve (always lower case)
+                        * */
+                        nameArr.push(leafName.split("\n")[1].replace(/[()]/g, '').toLowerCase());
+                        content += '<li>' + leafName + '</li>';
+                        let names = leafName.split("\n");
+                        if (names.length > 1) {
+                            let resData = await this.getSpeciesData(leafName.split("\n")[1].replace(/[()]/g, ''));
+                            dnaSequences.push(resData.dnaSequences);
+                        }
+                    });
+                    /*
+                    * Here we need to sort the leaf node names in alphabetical order (apparently), as per
+                    * the backend devs request
+                    *  */
+                    nameArr.sort((a, b) => a.localeCompare(b))
+                    /*
+                    * After we sort the names alphabetically, concatenate them into a long case-insensitive
+                    * snake_case string for the key to query on
+                    * */
+                    let compKey = nameArr.join('_').replaceAll(' ', '_')
+                    console.log(nameArr);
+                    console.log(compKey);
+                    let resData = await this.getSpeciesComparisons(compKey);
+                    let asteriskString = resData.compStrings;
+                    console.log(asteriskString);
+                    console.log(dnaSequences);
+                    /* For each asterisk string, get the indexes of spaces */
+                    let edit_idxs = [];
+                    asteriskString.forEach(astString => {
+                        let indices = [];
+                        for (let i = 0; i < astString.length; i++) {
+                            if (astString[i] === " ") indices.push(i);
+                        }
+                        edit_idxs.push(indices);
+                    });
+                    console.log(edit_idxs);
+                    /* Then for each species sequences, edit the char at each space idx */
+                    // TODO: Need to split up the species into separate array... I'm too afraid to fall asleep, I don't want to forget all of this haha
+                    for (let speciesIdx = 0; speciesIdx < dnaSequences.length; speciesIdx++) {
+                        for (let sequenceIdx = 0; sequenceIdx < dnaSequences[speciesIdx].length; sequenceIdx++) {
+                            let spaceIdxArr = edit_idxs[sequenceIdx];
+                            content += '<div><text>';
+                            for (let charIdx = 0; charIdx < dnaSequences[speciesIdx][sequenceIdx].length; charIdx++) {
+                                if (spaceIdxArr.includes(charIdx)) content += '<text style="color: red"><strong>' + dnaSequences[speciesIdx][sequenceIdx][charIdx] + '</strong></text>';
+                                else content += dnaSequences[speciesIdx][sequenceIdx][charIdx];
+                            }
+                            content += '</text></div>';
+                        }
+                    }
+                } else {
+                    // Query the backend for the species data
+                    let resData = await this.getSpeciesData(scientificName)
+                    console.log(resData)
+                    scientificName = resData.scientificName;
+                    commonName = resData.commonName;
+                    mapLink = resData.mapLink;
+                    imageUrl = resData.imageUrl;
+                    dnaSequence = resData.dnaSequence;
+
+
+                    if (imageUrl !== '') {
+                        var image = '<a href="' + imageUrl + '" target="_blank"><img src="' + imageUrl + '"></a>';
+                    } else {
+                        var image = '<em>Image is not available</em>';
+                    }
+                    content += '<div style="text-align: center; font-size: 24px; font-style: italic; font-family: Arial, Helvetica, sans-serif;"><strong>' + commonName + '</strong></div>';
+                    content += '<hr/>'
+                    content += '<div style="text-align: center; padding-bottom: 12px; font-family: Arial, Helvetica, sans-serif;">Scientific Name:<br><p style="font-size: 24px;">' + scientificName + '<p/></div>';
+                    content += '<div style="padding-left: 70px">' + image + '</div>';
+                    content += '<div style="padding-left: 70px"><br><iframe src="' + mapLink + '" width="325" height="300" style="border:0;" allowFullScreen="" aria-hidden="false" tabIndex="0"></iframe>\n</div>';
+                    // content += '<div><strong>DNA:</strong><br>' + dna + '</div>';
+                }
+
+
                 $nodeInfo.find('.info-content').html(content);
             },
 
+            /* This is our HTTP request to the server to get data for the selected species */
             getSpeciesData: async function (speciesName) {
                 return await axios.post(`http://localhost:3000/species?speciesName=${speciesName}`)
                     .then(response => {
@@ -1807,6 +1881,15 @@ define([], function () {
                     });
             },
 
+            /* The is our HTTP Request to the server to get the comparison asterisk strings */
+            getSpeciesComparisons: async function (compKey) {
+                return await axios.post(`http://localhost:3000/dnacomparisons?comp=${compKey}`)
+                    .then(response => {
+                        return response.data;
+                    });
+            },
+
+            // FIXME: Sliver of display view showing at start of application on right side
             nodeInfoDisplay: function (display) {
                 // Display annotation only if checked
                 if (settings.menu['node-shapes'].annotation === 'show') {
@@ -1818,6 +1901,25 @@ define([], function () {
                 }
                 return;
             },
+
+            traverseDFS: function (node) {
+                this.leafValues = [];
+                this.postOrderHelper(node);
+                return this.leafValues
+            },
+
+            postOrderHelper: function (curNode) {
+                if (curNode.children !== undefined) {
+                    curNode.children.forEach(child => {
+                        this.postOrderHelper(child);
+                    });
+                }
+
+                if (curNode.name !== "") {
+                    this.leafValues.push(curNode.name)
+                }
+                return true;
+            }
         }
 
     })();
