@@ -471,6 +471,113 @@ app.post('/species', (req, res) => {
         return res.status(404).json({"error": speciesName + ' does not have a response. Please create one in /front-end/test/testServe.js'});
     }
 })
+app.post('/dnacomparions', (req, res) => {
+    const comparison = req.query.comp;
+    if (comparison === "gorilla_gorilla_homo_sapiens_hylobates_lar_lemur_catta_macaca_fascicularis_macaca_fuscata_macaca_mulatta_macaca_sylvanus_pan_troglodytes_pongo_pygmaeus_saimiri_sciureus_tarsius_syrichta") {
+        res.status(200).json({
+            "key": comparison,
+            "compStrings": [
+                " *  * *   *  * *   *    ** ** ** **  * *   *    ** ** *** * ",
+                " * **  * *  ***** ** ** ** ** **     * ** **    **  *  * ** ",
+                "**  * ** ** **  **** ** ** *  ***** **  *    **    ** **  * ",
+                "      ** **        * **     * **  *     *  * **  *   *****  "
+            ]
+        })
+    } else if (comparison === "hylobates_lar_lemur_catta_macaca_fascicularis_macaca_fuscata_macaca_mulatta_macaca_sylvanus_pongo_pygmaeus_saimiri_sciureus_tarsius_syrichta") {
+        res.status(200).json({
+            "key": comparison,
+            "compStrings": [
+                " *  * *   *  * *   *    ** ** ** **  * *   *    ** ** *** * ",
+                " * **  * *  ***** ** ** ** ** **     * ** **    **  *  * ** ",
+                "**  * ** ** **  **** ** ** *  ***** **  *    **    ** **  * ",
+                " *    ** **     *  * **     * **  *     *  * **  *   *****  "
+            ]
+        })
+    } else if (comparison === "hylobates_lar_lemur_catta_macaca_fascicularis_macaca_fuscata_macaca_mulatta_macaca_sylvanus_saimiri_sciureus_tarsius_syrichta") {
+        res.status(200).json({
+            "key": comparison,
+            "compStrings": [
+                " *  * **  *  * *   *    ** ** ** **  * *   *    ** ** *** * ",
+                " * **  * *  ***** ** ** ** ** **     * ** **    **  *  * ** ",
+                "**  * ** ** **  **** ** ** *  ***** **  *    **    ** **  * ",
+                " *    ** **     * ** **     * **  *     *  * **  *   *****  "
+            ]
+        })
+    } else if (comparison === "lemur_catta_macaca_fascicularis_macaca_fuscata_macaca_mulatta_macaca_sylvanus_saimiri_sciureus_tarsius_syrichta") {
+        res.status(200).json({
+            "key": comparison,
+            "compStrings": [
+                " *  ****  *  * *   *    ** ** ** **  * *** *    ** ** *** * ",
+                " * **  * ** ***** ** ** ** ** **     * ** **    **  *  * ***",
+                "**  * ** ** **  ******* ** *  ***** **  *    **    ** **  * ",
+                " *    ** **     * ** **    ** **  *     *  * **  *   *****  "
+            ]
+        })
+    } else if (comparison === "macaca_fascicularis_macaca_fuscata_macaca_mulatta_macaca_sylvanus") {
+        res.status(200).json({
+            "key": comparison,
+            "compStrings": [
+                "*** **** *** * ******** *********** *********** ** ****** **",
+                "** **  **** ************** *****  * ***** ***   ****** *****",
+                "** ***** ** **  ******* ***** ********* * ****** ******* ***",
+                "**   *** **  *  ******* ** *************** **** ************"
+            ]
+        })
+    } else if (comparison === "lemur_catta_saimiri_sciureus_tarsius_syrichta") {
+        res.status(200).json({
+            "key": comparison,
+            "compStrings": [
+                " * *****  **** *   *  * ** ** ** *** * *** *  * ***** *** * ",
+                " **** ** ******** ** ** ********     * ** **  * **  *  * ***",
+                "**  **** ** *********** ** *  ***** ** ** *  **    ** **  * ",
+                " *    ** **    ***** ** *  ** ** **  *  * ** **  *   *****  "
+            ]
+        })
+    } else if (comparison === "macaca_fascicularis_macaca_fuscata_macaca_mulatta") {
+        res.status(200).json({
+            "key": comparison,
+            "compStrings": [
+                "*********************** *********** *********** ********* **",
+                "****** **** ********************  * **********  ****** *****",
+                "** ***** ** ** ************************** ****** ***********",
+                "**** *** **  *  ******* ** *************** **** ************"
+            ]
+        })
+    } else if (comparison === "lemur_catta_tarsius_syrichta") {
+        res.status(200).json({
+            "key": comparison,
+            "compStrings": [
+                " * ***** ***** *** * ** ** ***** *** * ***** ** ***** *** * ",
+                " **** ** ******** ***** ********* *  * ** **  * *** *  *****",
+                "******** ** ************** ** ******** ** *  ** ** ** **  * ",
+                "**   *** **** ********* ** ** ****** ** * ** **  * * ****** "
+            ]
+        })
+    } else if (comparison === "macaca_fuscata_macaca_mulatta") {
+        res.status(200).json({
+            "key": comparison,
+            "compStrings": [
+                "*********************************** ********************* **",
+                "*********** *********************** *********** ****** *****",
+                "******** ******************************** ******************",
+                "**** ******  * *********** *********************************"
+            ]
+        })
+    } else if (comparison === "homo_sapiens_pan_troglodytes") {
+        res.status(200).json({
+            "key": comparison,
+            "compStrings": [
+                "***************** *********** ************** ** ************",
+                "******** ************************ ******************** **** ",
+                "***************************** ***** *** *******  **** ** ***",
+                "** ******************** ******** ******** ** **  ***********"
+            ]
+        })
+    } else {
+        return res.status(404).json({"error": comparison + ' does not have a response. Please create one in /front-end/test/testServe.js'});
+    }
+
+})
 
 app.listen(port, () => {
     console.log(`Test server listening at http://localhost:${port}`)
