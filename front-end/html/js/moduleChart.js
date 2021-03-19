@@ -1805,7 +1805,6 @@ define([], function () {
                             let resData = await this.getSpeciesData(leafName.split("\n")[1].replace(/[()]/g, ''));
                             dnaSequences.push(resData.dnaSequences);
                         }
-                        console.log(dnaSequences);
                     });
                     /*
                     * Here we need to sort the leaf node names in alphabetical order (apparently), as per
@@ -1820,8 +1819,32 @@ define([], function () {
                     console.log(nameArr);
                     console.log(compKey);
                     let resData = await this.getSpeciesComparisons(compKey);
-                    console.log(resData);
-
+                    let asteriskString = resData.compStrings;
+                    console.log(asteriskString);
+                    console.log(dnaSequences);
+                    /* For each asterisk string, get the indexes of spaces */
+                    let edit_idxs = [];
+                    asteriskString.forEach(astString => {
+                        let indices = [];
+                        for (let i = 0; i < astString.length; i++) {
+                            if (astString[i] === " ") indices.push(i);
+                        }
+                        edit_idxs.push(indices);
+                    });
+                    console.log(edit_idxs);
+                    /* Then for each species sequences, edit the char at each space idx */
+                    // TODO: Need to split up the species into separate array... I'm too afraid to fall asleep, I don't want to forget all of this haha
+                    for (let speciesIdx = 0; speciesIdx < dnaSequences.length; speciesIdx++) {
+                        for (let sequenceIdx = 0; sequenceIdx < dnaSequences[speciesIdx].length; sequenceIdx++) {
+                            let spaceIdxArr = edit_idxs[sequenceIdx];
+                            content += '<div><text>';
+                            for (let charIdx = 0; charIdx < dnaSequences[speciesIdx][sequenceIdx].length; charIdx++) {
+                                if (spaceIdxArr.includes(charIdx)) content += '<text style="color: red">' + dnaSequences[speciesIdx][sequenceIdx][charIdx] + '</text>';
+                                else content += dnaSequences[speciesIdx][sequenceIdx][charIdx];
+                            }
+                            content += '</text></div>';
+                        }
+                    }
                 } else {
                     // Query the backend for the species data
                     let resData = await this.getSpeciesData(scientificName)
