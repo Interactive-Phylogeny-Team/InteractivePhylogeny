@@ -1778,7 +1778,6 @@ define([], function () {
                 let scientificName = '';
                 let commonName = '';
                 let mapLink = '';
-                let dnaSequence = '';
                 let dnaSequences = [];
                 let imageUrl = '';
                 scientificName = nodeName;
@@ -1797,7 +1796,7 @@ define([], function () {
                         let names = leafName.split("\n");
                         if (names.length > 1) {
                             let resData = await this.getSpeciesData(leafName.split("\n")[1].replace(/[()]/g, ''));
-                            dnaSequences.push(resData.dnaSequence);
+                            dnaSequences.push(resData.dnaSequences);
                         }
                         console.log(dnaSequences);
                     });
@@ -1837,6 +1836,7 @@ define([], function () {
                     });
             },
 
+            // FIXME: Sliver of display view showing at start of application on right side
             nodeInfoDisplay: function (display) {
                 // Display annotation only if checked
                 if (settings.menu['node-shapes'].annotation === 'show') {
@@ -1855,7 +1855,6 @@ define([], function () {
                 return this.leafValues
             },
 
-            // FIXME: Can't access "forEach", curNode.children is undefined
             postOrderHelper: function (curNode) {
                 if (curNode.children !== undefined) {
                     curNode.children.forEach(child => {
