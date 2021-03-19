@@ -1839,7 +1839,7 @@ define([], function () {
                             let spaceIdxArr = edit_idxs[sequenceIdx];
                             content += '<div><text>';
                             for (let charIdx = 0; charIdx < dnaSequences[speciesIdx][sequenceIdx].length; charIdx++) {
-                                if (spaceIdxArr.includes(charIdx)) content += '<text style="color: red">' + dnaSequences[speciesIdx][sequenceIdx][charIdx] + '</text>';
+                                if (spaceIdxArr.includes(charIdx)) content += '<text style="color: red"><strong>' + dnaSequences[speciesIdx][sequenceIdx][charIdx] + '</strong></text>';
                                 else content += dnaSequences[speciesIdx][sequenceIdx][charIdx];
                             }
                             content += '</text></div>';
