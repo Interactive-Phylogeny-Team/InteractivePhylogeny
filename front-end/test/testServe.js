@@ -471,7 +471,7 @@ app.post('/species', (req, res) => {
         return res.status(404).json({"error": speciesName + ' does not have a response. Please create one in /front-end/test/testServe.js'});
     }
 })
-app.post('/dnacomparions', (req, res) => {
+app.post('/dnacomparisons', (req, res) => {
     const comparison = req.query.comp;
     if (comparison === "gorilla_gorilla_homo_sapiens_hylobates_lar_lemur_catta_macaca_fascicularis_macaca_fuscata_macaca_mulatta_macaca_sylvanus_pan_troglodytes_pongo_pygmaeus_saimiri_sciureus_tarsius_syrichta") {
         res.status(200).json({
