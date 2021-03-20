@@ -1838,6 +1838,7 @@ define([], function () {
                         for (let sequenceIdx = 0; sequenceIdx < dnaSequences[speciesIdx].length; sequenceIdx++) {
                             let spaceIdxArr = edit_idxs[sequenceIdx];
                             content += '<div><text>';
+                            // TODO: Here is where we can format the chars that are different
                             for (let charIdx = 0; charIdx < dnaSequences[speciesIdx][sequenceIdx].length; charIdx++) {
                                 if (spaceIdxArr.includes(charIdx)) content += '<text style="color: red"><strong>' + dnaSequences[speciesIdx][sequenceIdx][charIdx] + '</strong></text>';
                                 else content += dnaSequences[speciesIdx][sequenceIdx][charIdx];
