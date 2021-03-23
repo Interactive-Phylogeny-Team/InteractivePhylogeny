@@ -1832,20 +1832,35 @@ define([], function () {
                         edit_idxs.push(indices);
                     });
                     console.log(edit_idxs);
+                    html_dna_string = [];
                     /* Then for each species sequences, edit the char at each space idx */
-                    // TODO: Need to split up the species into separate array... I'm too afraid to fall asleep, I don't want to forget all of this haha
                     for (let speciesIdx = 0; speciesIdx < dnaSequences.length; speciesIdx++) {
                         for (let sequenceIdx = 0; sequenceIdx < dnaSequences[speciesIdx].length; sequenceIdx++) {
                             let spaceIdxArr = edit_idxs[sequenceIdx];
                             content += '<div><text>';
                             // TODO: Here is where we can format the chars that are different
+                            dna_string = ""
                             for (let charIdx = 0; charIdx < dnaSequences[speciesIdx][sequenceIdx].length; charIdx++) {
-                                if (spaceIdxArr.includes(charIdx)) content += '<text style="color: red"><strong>' + dnaSequences[speciesIdx][sequenceIdx][charIdx] + '</strong></text>';
-                                else content += dnaSequences[speciesIdx][sequenceIdx][charIdx];
+                                if (spaceIdxArr.includes(charIdx)) dna_string += '<text style="color: red"><strong>' + dnaSequences[speciesIdx][sequenceIdx][charIdx] + '</strong></text>';
+                                else dna_string += dnaSequences[speciesIdx][sequenceIdx][charIdx];
                             }
-                            content += '</text></div>';
+                            html_dna_string.push(dna_string);
                         }
                     }
+                    let num_species = html_dna_string.length / 4
+                    for (let s = 0; s <= num_species; s++) {
+                        let i = s;
+                        let idxs = [];
+                        while (i < html_dna_string.length) {
+                            idxs.push(i);
+                            i += 4;
+                        }
+                        idxs.forEach(idx => {
+                            content += html_dna_string[idx];
+                            content += '<br/>';
+                        });
+                    }
+                    content += '</text></div>';
                 } else {
                     // Query the backend for the species data
                     let resData = await this.getSpeciesData(scientificName)
