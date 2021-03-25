@@ -1,30 +1,31 @@
 const {DataTypes} = require('sequelize')
-const {sequelize} = require('../index')
+const sequelize = require('../index.js')
 
 const Species = sequelize.define(modelName='Species', attributes={
-	name: {
+	scientificName: {
 		type: DataTypes.STRING,
 		unique: true,
-		allowNull: false
+		allowNull: false,
+		primaryKey: true
 	},
-	longitude: {
-		type: DataTypes.FLOAT,
-		allowNull: false
-	},
-	latitude: {
-		type: DataTypes.FLOAT,
-		allowNull: false
+	commonName: {
+		type: DataTypes.STRING
 	},
 	imageUrl: {
 		type: DataTypes.STRING,
 		allowNull: false,
 		unique: true
 	},
-	dnaSequence: {
-		type: DataTypes.STRING,
-		allowNull: false,
-		unique: true
+	dnaSequences: {
+		type: DataTypes.ARRAY(DataTypes.CITEXT),
+		allowNull: false
+	},
+	mapLink: {
+		type: DataTypes.STRING(500),
+		allowNull: false
 	}
+}, {
+	timestamps: false
 })
 
 module.exports = Species

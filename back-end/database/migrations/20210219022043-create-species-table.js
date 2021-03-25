@@ -8,27 +8,18 @@ module.exports = {
         unique: true,
         allowNull: false
       },
-      longitude: {
-        type: Sequelize.FLOAT,
-        allowNull: false
-      },
-      latitude: {
-        type: Sequelize.FLOAT,
-        allowNull: false
-      },
       imageUrl : {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true
       },
-      dnaSequence: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
+      dnaSequences: {
+        type: Sequelize.ARRAY(Sequelize.CITEXT),
+        allowNull: false
       }
     })
   },
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface) => {
     await queryInterface.dropTable('Species')
   }
 }
