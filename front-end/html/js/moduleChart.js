@@ -1783,14 +1783,18 @@ define([], function () {
                 scientificName = nodeName;
                 var content = '';
 
+                console.log(nodeName);
                 if (nodeName.includes('(')) {
                     scientificName = nodeName.split("\n")[1].replace(/[()]/g, '')
                 }
+                console.log(scientificName);
 
-                if (nodeName === '' || nodeName.split(" ").length < 2) {
+                // if (nodeName === '' || nodeName.split(" ").length < 2) {
+                if (nodeName === '') {
                     let nameArr = [];
-                    content += '<div><p>TODO: Get Leaf Node DNA Sequences for: </p></div>'
+                    content += '<div style="text-align: center; font-size: 24px; font-style: italic; font-family: Arial, Helvetica, sans-serif;">DNA COMPARISON</div><hr>'
                     let l = this.traverseDFS(node)
+                    content += '<div style="margin-left: auto; margin-right: auto; display: table;"><ol style="text-align:left;">';
                     l.forEach(async leafName => {
                         /*
                         * Since we are expecting the leaf name to be common name\n(species name)
@@ -1798,11 +1802,18 @@ define([], function () {
                         * that we can put to gether the query string for the comparison table. Make sure
                         * it is case-insensitve (always lower case)
                         * */
-                        nameArr.push(leafName.split("\n")[1].replace(/[()]/g, '').toLowerCase());
-                        content += '<li>' + leafName + '</li>';
-                        let names = leafName.split("\n");
-                        if (names.length > 1) {
-                            let resData = await this.getSpeciesData(leafName.split("\n")[1].replace(/[()]/g, ''));
+                        if (leafName.includes('(')) nameArr.push(leafName.split("\n")[1].replace(/[()]/g, '').toLowerCase());
+                        else nameArr.push(leafName.toLowerCase());
+                        console.log(`LEAFNAME: ${leafName}`);
+                        content += '<div><li>' + leafName + '</li></div>';
+                        let names = null;
+                        if (leafName.includes('\n')) names = leafName.split("\n");
+                        else names = leafName;
+
+                        if (names.length > 0) {
+                            let resData = null;
+                            if (leafName.includes('(')) resData = await this.getSpeciesData(leafName.split("\n")[1].replace(/[()]/g, ''));
+                            else resData = await this.getSpeciesData(leafName);
                             dnaSequences.push(resData.dnaSequences);
                         }
                     });
@@ -1832,19 +1843,37 @@ define([], function () {
                         edit_idxs.push(indices);
                     });
                     console.log(edit_idxs);
+                    html_dna_string = [];
                     /* Then for each species sequences, edit the char at each space idx */
-                    // TODO: Need to split up the species into separate array... I'm too afraid to fall asleep, I don't want to forget all of this haha
                     for (let speciesIdx = 0; speciesIdx < dnaSequences.length; speciesIdx++) {
                         for (let sequenceIdx = 0; sequenceIdx < dnaSequences[speciesIdx].length; sequenceIdx++) {
                             let spaceIdxArr = edit_idxs[sequenceIdx];
-                            content += '<div><text>';
+                            content += '<div style="text-align: center; letter-spacing: 1px; font-size: 16px; font-family: Courier New;"><text>';
+                            // TODO: Here is where we can format the chars that are different
+                            if (speciesIdx > 999) dna_string = `${speciesIdx + 1}.`;
+                            else if (speciesIdx > 8) dna_string = `${speciesIdx + 1}..`;
+                            else dna_string = `${speciesIdx + 1}...`;
                             for (let charIdx = 0; charIdx < dnaSequences[speciesIdx][sequenceIdx].length; charIdx++) {
-                                if (spaceIdxArr.includes(charIdx)) content += '<text style="color: red"><strong>' + dnaSequences[speciesIdx][sequenceIdx][charIdx] + '</strong></text>';
-                                else content += dnaSequences[speciesIdx][sequenceIdx][charIdx];
+                                if (spaceIdxArr.includes(charIdx)) dna_string += '<text style="color: red"><strong>' + dnaSequences[speciesIdx][sequenceIdx][charIdx] + '</strong></text>';
+                                else dna_string += dnaSequences[speciesIdx][sequenceIdx][charIdx];
                             }
-                            content += '</text></div>';
+                            html_dna_string.push(dna_string);
                         }
                     }
+                    for (let s = 0; s < 4; s++) {
+                        let i = s;
+                        let idxs = [];
+                        while (i < html_dna_string.length) {
+                            idxs.push(i);
+                            i += 4;
+                        }
+                        idxs.forEach(idx => {
+                            content += html_dna_string[idx];
+                            content += '<br/>';
+                        });
+                        content += '<br />';
+                    }
+                    content += '</text></div>';
                 } else {
                     // Query the backend for the species data
                     let resData = await this.getSpeciesData(scientificName)
