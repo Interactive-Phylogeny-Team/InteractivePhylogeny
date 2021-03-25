@@ -43,7 +43,7 @@ Runs the migrations
 # API
 ### GET /tree
 #### Request Data - { treeName: string }
-#### Example - { treeName: 'Great Apes' }
+#### Example - { treeName: 'primates' }
 #### Response Data:
 ```
 {
@@ -53,16 +53,24 @@ Runs the migrations
 ```
 ### GET /species
 #### Request Data - { scientificName: string }
-#### Example - { scientificName: 'Gorilla Gorilla' }
+#### Example - { scientificName: 'Homo Sapiens' }
 #### Response Data:
 ```
 {
 	scientificName: string,
 	commonName: string,
-	longitude: float,
-	latitude: float,
 	imageUrl: string,
-	dnaSequence: string,
+	dnaSequences: array<string>,
 	mapLink: string
+}
+```
+### GET /comparison
+#### Request Data - { compKey: string }
+#### Example - { compKey: 'gorilla_gorilla_homo_sapiens' }
+#### Response Data:
+```
+{
+	key: string,
+	compStrings: array<string>
 }
 ```

@@ -11,21 +11,13 @@ const Species = sequelize.define(modelName='Species', attributes={
 	commonName: {
 		type: DataTypes.STRING
 	},
-	longitude: {
-		type: DataTypes.FLOAT,
-		allowNull: false
-	},
-	latitude: {
-		type: DataTypes.FLOAT,
-		allowNull: false
-	},
 	imageUrl: {
 		type: DataTypes.STRING,
 		allowNull: false,
 		unique: true
 	},
-	dnaSequence: {
-		type: DataTypes.CITEXT,
+	dnaSequences: {
+		type: DataTypes.ARRAY(DataTypes.CITEXT),
 		allowNull: false
 	},
 	mapLink: {

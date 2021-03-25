@@ -8,21 +8,13 @@ module.exports = {
         unique: true,
         allowNull: false
       },
-      longitude: {
-        type: Sequelize.FLOAT,
-        allowNull: false
-      },
-      latitude: {
-        type: Sequelize.FLOAT,
-        allowNull: false
-      },
       imageUrl : {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true
       },
-      dnaSequence: {
-        type: Sequelize.CITEXT,
+      dnaSequences: {
+        type: Sequelize.ARRAY(Sequelize.CITEXT),
         allowNull: false
       }
     })

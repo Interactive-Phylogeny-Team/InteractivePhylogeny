@@ -1,6 +1,6 @@
 [
   {
     "name": "birds",
-    "tree": "(((Peacock/n(Pavo Cristatus):0.06850905716,Domestic Chicken/n(Gallus Gallus):0.06576436758):0.003247145563,Wild Turkey/n(Meleagris Gallopavo):0.086291641):0.04275002889,(((White Stork/n(Ciconia Ciconia):0.07204152644,Greater Flamingo/n(Phoenicopterus Roseus):0.0646840483):0.01409214735,(Sun Parakeet/n(Aratinga Solstitialis):0.04835580662,Scarlet Macaw/n(Ara Macao):0.04988196865):0.07990894467):0.007299347781,(Tinamou/n(Eudromia Elegans):0.136633113,(Little Spotted Kiwi/n(Apteryx Owenii):0.09122961015,Common Ostrich/n(Struthio Camelus):0.09039711207):0.01030163467):0.0182749331):0.00499589555,(Mallard Duck/n(Anas Platyrhynchos):0.06188394502,Mute Swan/n(Cygnus Olor):0.06512089819):0.05082450993);"
+    "tree": "(((Peacock|(Pavo Cristatus):0.06850905716,Red Junglefowl|(Gallus Gallus):0.06576436758):0.003247145563,Wild Turkey|(Meleagris Gallopavo):0.086291641):0.04275002889,(((White Stork|(Ciconia Ciconia):0.07204152644,Greater Flamingo|(Phoenicopterus Roseus):0.0646840483):0.01409214735,(Sun Parakeet|(Aratinga Solstitialis):0.04835580662,Scarlet Macaw|(Ara Macao):0.04988196865):0.07990894467):0.007299347781,(Tinamou|(Eudromia Elegans):0.136633113,(Little Spotted Kiwi|(Apteryx Owenii):0.09122961015,Common Ostrich|(Struthio Camelus):0.09039711207):0.01030163467):0.0182749331):0.00499589555,(Mallard Duck|(Anas Platyrhynchos):0.06188394502,Mute Swan|(Cygnus Olor):0.06512089819):0.05082450993);"
   }
 ]
