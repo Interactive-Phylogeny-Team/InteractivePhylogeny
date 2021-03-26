@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How to Upload Your Own Data | QuickTree</title>
+    <link href="../css/text_page.css" rel="stylesheet" type="text/css" />
+    <script src="https://kit.fontawesome.com/9533923917.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <a href="tree_drop.html" class="button">
+        <button type="button" class="btn btn-primary"> <i class="fas fa-arrow-left"></i> Back </button>
+    </a>
+    <div>
+
+        <h1><a href="../index.html">QuickTree</a></h1>
+        <hr />
+        <h1>How to Upload Your Own Data</h1>
+        <hr />
+        <p>
+            These step-by-step instructions will make sure you know EXACTLY what to do if you want
+            to use your own data. What are you waiting for? Let's make a tree!
+        </p>
+
+        <ol type="1">
+
+            <li STYLE="font-weight: bold">
+                Create the necessary files:
+                <ol type="a">
+                    <li STYLE="font-weight: normal">
+                        Create a FASTA file to hold the DNA sequences.
+                        <ul>
+                            <li>
+                                Name the file "speciesFASTA.txt" (replace "species" with the type of
+                                species that will be displayed in the tree, such as "birds", "flowers", or
+                                "mammals").
+                            </li>
+                            <li>This file will be used to generate the phylogenetic tree.</li>
+                        </ul>
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        Create a JSON file to hold the phylogenetic tree.
+                        <ul>
+                            <li>Name the file "speciesTree.json"</li>
+                        </ul>
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        Create a JSON file to hold the species data.
+                        <ul>
+                            <li>Name the file "speciesData.json"</li>
+                            <li>This file will be used for the species information view.</li>
+                        </ul>
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        Create a JSON file to hold the DNA comparisons.
+                        <ul>
+                            <li>Name the file "speciesComparisons.json"</li>
+                            <li>This file will be used for the DNA comparison view.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+
+            <li STYLE="font-weight: bold">
+                Collect the DNA sequences:
+                <ol type="a">
+                    <li STYLE="font-weight: normal">
+                        If you're not sure where to start, pick a kingdom, phylum, class, order, or
+                        family and browse the hierarchy in Wikipedia to get a feel for what species are
+                        out there. (Not every species has been sequenced, but there are many that have been.)
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        For each desired species...
+                        <ul>
+                            <li>
+                                Search GenBank for "[scientific name of species] mitochondrion". (This will work as long as
+                                the organisms in the tree are eukaryotes.)
+                            </li>
+                            <li>
+                                If there is a sequence for the complete mitochondrial genome of your species, select the "FASTA"
+                                button of that search result. (Some species have many options to choose from, while others have none.)
+                            </li>
+                            <li>Copy and paste the the lines of text into "speciesFASTA.txt".</li>
+                            <li>Replace the text on the first line with ">Common Name of Species|(Scientific Name of Species)".</li>
+                            <li>Leave an empty line between each DNA sequence.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </li>
+
+            <li STYLE="font-weight: bold">
+                Create the phylogenetic tree:
+                <ol type="a">
+                    <li STYLE="font-weight: normal">
+                        In R, install the library "ape".
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        Download the executable for MUSCLE and/or CLUSTAL sequence alignment. Make sure the
+                        directory containing the executable is added to your PATH environmental variable.
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        In R, type the following lines of code (replacing "species" where appropriate):
+                        <pre><code>
+library(ape)
+speciesFASTA = "path/to/fasta/file/speciesFASTA.txt"
+species = read.dna(speciesFASTA, format = "fasta")
+speciesMUSCLE = muscle(species)  # or speciesCLUSTAL = clustal(species)
+speciesTree = bionj(dist.dna(speciesMUSCLE))  # or speciesTree = bionj(dist.dna(speciesCLUSTAL))
+plot(speciesTree)  # Just to make sure it looks how you want
+write.nexus(speciesTree, file = "speciesNEXUS.txt", translate = FALSE)
+                        </code></pre>
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        If something doesn't look right, you can add or remove DNA sequences in
+                        "speciesFASTA.txt" and run the lines of code again.
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        Open "speciesTree.json" and paste the following:
+                        <pre><code>
+[
+  {
+    "name": "species",
+    "tree": ""
+  }
+]
+                        </code></pre>
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        Open "speciesNEXUS.txt" and copy the long string after "TREE * UNTITLED = [&U]"
+                        beginning with "(" and ending with ");". Paste the string inside the quotes after
+                        "tree" in "speciesTree.json".
+                    </li>
+                </ol>
+            </li>
+
+            <li STYLE="font-weight: bold">
+                Collect the species data:
+                <ol type="a">
+                    <li STYLE="font-weight: normal">
+                        Open "speciesData.json" and paste the following (with one JSON object for each
+                        species in your tree):
+                        <pre><code>
+[
+  {
+    "scientificName": "",
+    "commonName": "",
+    "mapLink": "",
+    "imageUrl": "",
+    "dnaSequences": [
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "scientificName": "",
+    "commonName": "",
+    "mapLink": "",
+    "imageUrl": "",
+    "dnaSequences": [
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "scientificName": "",
+    "commonName": "",
+    "mapLink": "",
+    "imageUrl": "",
+    "dnaSequences": [
+      "",
+      "",
+      "",
+      ""
+    ]
+  }
+]
+                    </code></pre>
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        You have already collected the scientific name and common name of each species,
+                        so add that data to the file.
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        MAP
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        IMAGE
+                    </li>
+                </ol>
+            </li>
+
+            <li STYLE="font-weight: bold">
+                Get the DNA comparisons:
+                <ol type="a">
+                    <li STYLE="font-weight: normal">
+                        MUSCLE
+                    </li>
+                </ol>
+            </li>
+
+            <li STYLE="font-weight: bold">
+                ALL DONE!
+                <ol type="a">
+                    <li STYLE="font-weight: normal">
+                        Drag and drop "speciesTree.json", "speciesData.json", and "speciesComparisons.json"
+                        into the appropriate spots on the "Upload Your Own" page of the QuickTree website.
+                    </li>
+                </ol>
+            </li>
+
+        </ol>
+    </div>
+</body>
+</html>
