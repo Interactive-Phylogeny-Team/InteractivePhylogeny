@@ -1790,34 +1790,21 @@ define([], function () {
                 console.log(scientificName);
 
                 // if (nodeName === '' || nodeName.split(" ").length < 2) {
+                let edit_idxs;
+                let nameArr;
                 if (nodeName === '') {
-                    let nameArr = [];
-                    content += '<div style="text-align: center; font-size: 24px; font-style: italic; font-family: Arial, Helvetica, sans-serif;"> <h1>DNA COMPARISON</h1><br>'
-                    content += '<h4>(Mitochondrial DNA)</h4></div><hr><br>'
-                    let l = this.traverseDFS(node)
-                    content += '<div style="margin-left: auto; margin-right: auto; display: table;"><ol style="text-align:left;">';
-                    l.forEach(async leafName => {
-                        /*
-                        * Since we are expecting the leaf name to be common name\n(species name)
-                        * we'll need to split on the newline and then get rid of the parens so
-                        * that we can put to gether the query string for the comparison table. Make sure
-                        * it is case-insensitve (always lower case)
-                        * */
-                        if (leafName.includes('(')) nameArr.push(leafName.split("\n")[1].replace(/[()]/g, '').toLowerCase());
-                        else nameArr.push(leafName.toLowerCase());
-                        console.log(`LEAFNAME: ${leafName}`);
-                        content += '<div style="font-size: 18px;"><li>' + leafName + '</li></div>';
-                        let names = null;
-                        if (leafName.includes('\n')) names = leafName.split("\n");
-                        else names = leafName;
+                    content += '<div style="text-align: center; font-size: 24px; font-style: italic; font-family: Arial, Helvetica, sans-serif;"> <h1>DNA COMPARISON</h1><br>' +
+                        '<h4>(Mitochondrial DNA)</h4></div><hr style="width: 100%;"><br>' +
+                        '<div style="margin-left: auto; margin-right: auto; display: table;"><ol style="text-align:left;">';
 
-                        if (names.length > 0) {
-                            let resData = null;
-                            if (leafName.includes('(')) resData = await this.getSpeciesData(leafName.split("\n")[1].replace(/[()]/g, ''));
-                            else resData = await this.getSpeciesData(leafName);
-                            dnaSequences.push(resData.dnaSequences);
-                        }
-                    });
+                    let leafNodes = this.traverseDFS(node)
+
+                    let [c, n, d] = await this.getHTMLListOfComparedSpeciesForView(content, leafNodes, dnaSequences);
+                    content = c;
+                    nameArr = n;
+                    dnaSequences = d;
+
+                    content += '</ol></div><hr>';
                     /*
                     * Here we need to sort the leaf node names in alphabetical order (apparently), as per
                     * the backend devs request
@@ -1832,48 +1819,14 @@ define([], function () {
                     console.log(compKey);
                     let resData = await this.getSpeciesComparisons(compKey);
                     let asteriskString = resData.compStrings;
-                    console.log(asteriskString);
-                    console.log(dnaSequences);
-                    /* For each asterisk string, get the indexes of spaces */
-                    let edit_idxs = [];
-                    asteriskString.forEach(astString => {
-                        let indices = [];
-                        for (let i = 0; i < astString.length; i++) {
-                            if (astString[i] === " ") indices.push(i);
-                        }
-                        edit_idxs.push(indices);
-                    });
-                    console.log(edit_idxs);
-                    html_dna_string = [];
-                    /* Then for each species sequences, edit the char at each space idx */
-                    for (let speciesIdx = 0; speciesIdx < dnaSequences.length; speciesIdx++) {
-                        // TODO: Here is where we can format the chars that are different
-                        if (speciesIdx > 999) dna_string = `${speciesIdx + 1}.`;
-                        else if (speciesIdx > 8) dna_string = `${speciesIdx + 1}..`;
-                        else dna_string = `${speciesIdx + 1}...`;
-                        for (let sequenceIdx = 0; sequenceIdx < dnaSequences[speciesIdx].length; sequenceIdx++) {
-                            let spaceIdxArr = edit_idxs[sequenceIdx];
-                            content += '<div style="text-align: center; letter-spacing: 1px; font-size: 18px; font-family: Courier New,serif;"><text>';
-                            for (let charIdx = 0; charIdx < dnaSequences[speciesIdx][sequenceIdx].length; charIdx++) {
-                                if (spaceIdxArr.includes(charIdx)) dna_string += '<text style="color: red"><strong>' + dnaSequences[speciesIdx][sequenceIdx][charIdx] + '</strong></text>';
-                                else dna_string += dnaSequences[speciesIdx][sequenceIdx][charIdx];
-                            }
-                        }
-                        html_dna_string.push(dna_string);
-                    }
-                    for (let s = 0; s < 4; s++) {
-                        let i = s;
-                        let idxs = [];
-                        while (i < html_dna_string.length) {
-                            idxs.push(i);
-                            i += 4;
-                        }
-                        idxs.forEach(idx => {
-                            content += html_dna_string[idx];
-                            content += '<br/>';
-                        });
-                        content += '<br />';
-                    }
+
+                    edit_idxs = this.getEditIndexes(asteriskString);
+
+                    let [con, html_dna_strings] = this.getMarkedDNAList(content,true, edit_idxs, dnaSequences);
+                    content = con;
+
+                    content = this.splitDNAForHTMLStrings(content, html_dna_strings, true);
+
                     content += '</text></div>';
                 } else {
                     // Query the backend for the species data
@@ -1917,6 +1870,117 @@ define([], function () {
                     .then(response => {
                         return response.data;
                     });
+            },
+
+            getMarkedDNAList: function (content, isSingleSeq, edit_idxs, dnaSequences) {
+                html_dna_string = [];
+                let spaceIdxArr;
+                let dnaString;
+                if (isSingleSeq) {
+                    /* Then for each species sequences, edit the char at each space idx */
+                    for (let speciesIdx = 0; speciesIdx < dnaSequences.length; speciesIdx++) {
+                        // TODO: Here is where we can format the chars that are different
+                        dnaString = this.getInitialDNAString(speciesIdx);
+                        for (let sequenceIdx = 0; sequenceIdx < dnaSequences[speciesIdx].length; sequenceIdx++) {
+                            spaceIdxArr = edit_idxs[sequenceIdx];
+                            content += '<div style="text-align: center; letter-spacing: 2px; font-size: 26px; font-family: Courier New,serif;"><text>';
+                            for (let charIdx = 0; charIdx < dnaSequences[speciesIdx][sequenceIdx].length; charIdx++) {
+                                if (spaceIdxArr.includes(charIdx)) dnaString += '<text style="color: #ff5c91;"><strong>' + dnaSequences[speciesIdx][sequenceIdx][charIdx] + '</strong></text>';
+                                else dnaString += dnaSequences[speciesIdx][sequenceIdx][charIdx];
+                            }
+                        }
+                        html_dna_string.push(dnaString);
+                    }
+                } else {
+                    /* Then for each species sequences, edit the char at each space idx */
+                    for (let speciesIdx = 0; speciesIdx < dnaSequences.length; speciesIdx++) {
+                        // TODO: Here is where we can format the chars that are different
+                        for (let sequenceIdx = 0; sequenceIdx < dnaSequences[speciesIdx].length; sequenceIdx++) {
+                            dnaString = this.getInitialDNAString(speciesIdx);
+                            spaceIdxArr = edit_idxs[sequenceIdx];
+                            content += '<div style="text-align: center; letter-spacing: 1px; font-size: 18px; font-family: Courier New,serif;"><text>';
+                            for (let charIdx = 0; charIdx < dnaSequences[speciesIdx][sequenceIdx].length; charIdx++) {
+                                if (spaceIdxArr.includes(charIdx)) dnaString += '<text style="color: #ff5c91;"><strong>' + dnaSequences[speciesIdx][sequenceIdx][charIdx] + '</strong></text>';
+                                else dnaString += dnaSequences[speciesIdx][sequenceIdx][charIdx];
+                            }
+                            html_dna_string.push(dnaString);
+                        }
+                    }
+                }
+
+                return [content, html_dna_string];
+            },
+
+            getHTMLListOfComparedSpeciesForView: async function (c, leafNodes) {
+                let n = [];
+                let d = [];
+                leafNodes.forEach(async leafName => {
+                    /*
+                    * Since we are expecting the leaf name to be common name\n(species name)
+                    * we'll need to split on the newline and then get rid of the parens so
+                    * that we can put to gether the query string for the comparison table. Make sure
+                    * it is case-insensitve (always lower case)
+                    * */
+                    if (leafName.includes('(')) n.push(leafName.split("\n")[1].replace(/[()]/g, '').toLowerCase());
+                    else n.push(leafName.toLowerCase());
+                    console.log(`LEAFNAME: ${leafName}`);
+                    c += '<div style="font-size: 18px;"><li>' + leafName + '</li></div>';
+                    let names = null;
+                    if (leafName.includes('\n')) names = leafName.split("\n");
+                    else names = leafName;
+
+                    if (names.length > 0) {
+                        let resData = null;
+                        if (leafName.includes('(')) resData = await this.getSpeciesData(leafName.split("\n")[1].replace(/[()]/g, ''));
+                        else resData = await this.getSpeciesData(leafName);
+                        d.push(resData.dnaSequences);
+                    }
+                });
+                return [c, n, d];
+            },
+
+            getEditIndexes: function(asteriskStringList) {
+                let edit_idxs = [];
+                /* For each asterisk string, get the indexes of spaces */
+                asteriskStringList.forEach(astString => {
+                    let indices = [];
+                    for (let i = 0; i < astString.length; i++) {
+                        if (astString[i] === " ") indices.push(i);
+                    }
+                    edit_idxs.push(indices);
+                });
+                return edit_idxs;
+            },
+
+            splitDNAForHTMLStrings: function (content, html_dna_strings, isSingleSeq) {
+                if (isSingleSeq) {
+                    html_dna_strings.forEach(seq => {
+                        content += seq;
+                        content += '<br />';
+                    });
+                } else {
+                    for (let s = 0; s < 4; s++) {
+                        let i = s;
+                        let idxs = [];
+                        while (i < html_dna_strings.length) {
+                            idxs.push(i);
+                            i += 4;
+                        }
+                        idxs.forEach(idx => {
+                            content += html_dna_strings[idx];
+                            content += '<br/>';
+                        });
+                        content += '<br />';
+                    }
+                }
+                content += '<br />';
+                return content;
+            },
+
+            getInitialDNAString: function (speciesIdx) {
+                if (speciesIdx > 999) return `${speciesIdx + 1}.`;
+                else if (speciesIdx > 8) return `${speciesIdx + 1}..`;
+                else return `${speciesIdx + 1}...`;
             },
 
             // FIXME: Sliver of display view showing at start of application on right side
