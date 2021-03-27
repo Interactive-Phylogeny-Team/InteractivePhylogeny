@@ -1793,8 +1793,8 @@ define([], function () {
                 let edit_idxs;
                 let nameArr;
                 if (nodeName === '') {
-                    content += '<div style="text-align: center; font-size: 24px; font-style: italic; font-family: Arial, Helvetica, sans-serif;"> <h1>DNA COMPARISON</h1><br>' +
-                        '<h4>(Mitochondrial DNA)</h4></div><hr style="width: 100%;"><br>' +
+                    content += '<div style="text-align: center; font-size: 24px; font-style: italic; font-family: Arial, Helvetica, sans-serif;"> <h1 style="margin: 0px;">DNA COMPARISON</h1><br>' +
+                        '<h4 style="margin: 0px;">(Mitochondrial DNA)</h4></div><hr style="width: 100%;"><br>' +
                         '<div style="margin-left: auto; margin-right: auto; display: table;"><ol style="text-align:left;">';
 
                     let leafNodes = this.traverseDFS(node)
@@ -1840,15 +1840,15 @@ define([], function () {
 
 
                     if (imageUrl !== '') {
-                        var image = '<a href="' + imageUrl + '" target="_blank"><img src="' + imageUrl + '"></a>';
+                        var image = '<a style="display: flex; justify-content: center;" href="' + imageUrl + '" target="_blank"><img src="' + imageUrl + '" style="width: 432px; height: 300px;"></a>';
                     } else {
                         var image = '<em>Image is not available</em>';
                     }
                     content += '<div style="text-align: center; font-size: 24px; font-style: italic; font-family: Arial, Helvetica, sans-serif;"><strong>' + commonName + '</strong></div>';
                     content += '<hr/>'
-                    content += '<div style="text-align: center; padding-bottom: 12px; font-family: Arial, Helvetica, sans-serif;">Scientific Name:<br><p style="font-size: 24px;">' + scientificName + '<p/></div>';
-                    content += '<div style="padding-left: 70px">' + image + '</div>';
-                    content += '<div style="padding-left: 70px"><br><iframe src="' + mapLink + '" width="325" height="300" style="border:0;" allowFullScreen="" aria-hidden="false" tabIndex="0"></iframe>\n</div>';
+                    content += '<div style="text-align: center; margin: 0 auto; padding-bottom: 12px; font-family: Arial, Helvetica, sans-serif;">Scientific Name:<br><p style="font-size: 24px;">' + scientificName + '<p/></div>';
+                    content += '<div style="align-content: center">' + image + '</div>';
+                    content += '<div style="display: flex; justify-content: center; padding-top: 15px;"><br><iframe src="' + mapLink + '" width="432" height="300" style="border:0;" allowFullScreen="" aria-hidden="false" tabIndex="0"></iframe>\n</div>';
                     // content += '<div><strong>DNA:</strong><br>' + dna + '</div>';
                 }
 
@@ -1883,7 +1883,7 @@ define([], function () {
                         dnaString = this.getInitialDNAString(speciesIdx);
                         for (let sequenceIdx = 0; sequenceIdx < dnaSequences[speciesIdx].length; sequenceIdx++) {
                             spaceIdxArr = edit_idxs[sequenceIdx];
-                            content += '<div style="text-align: center; letter-spacing: 2px; font-size: 26px; font-family: Courier New,serif;"><text>';
+                            content += '<div style="text-align: center; letter-spacing: 3px; font-size: 26px; font-family: Courier New,serif;"><text>';
                             for (let charIdx = 0; charIdx < dnaSequences[speciesIdx][sequenceIdx].length; charIdx++) {
                                 if (spaceIdxArr.includes(charIdx)) dnaString += '<text style="color: #ff5c91;"><strong>' + dnaSequences[speciesIdx][sequenceIdx][charIdx] + '</strong></text>';
                                 else dnaString += dnaSequences[speciesIdx][sequenceIdx][charIdx];
@@ -1898,7 +1898,7 @@ define([], function () {
                         for (let sequenceIdx = 0; sequenceIdx < dnaSequences[speciesIdx].length; sequenceIdx++) {
                             dnaString = this.getInitialDNAString(speciesIdx);
                             spaceIdxArr = edit_idxs[sequenceIdx];
-                            content += '<div style="text-align: center; letter-spacing: 1px; font-size: 18px; font-family: Courier New,serif;"><text>';
+                            content += '<div style="text-align: center; letter-spacing: 3px; font-size: 26px; font-family: Courier New,serif;"><text>';
                             for (let charIdx = 0; charIdx < dnaSequences[speciesIdx][sequenceIdx].length; charIdx++) {
                                 if (spaceIdxArr.includes(charIdx)) dnaString += '<text style="color: #ff5c91;"><strong>' + dnaSequences[speciesIdx][sequenceIdx][charIdx] + '</strong></text>';
                                 else dnaString += dnaSequences[speciesIdx][sequenceIdx][charIdx];
@@ -1924,7 +1924,7 @@ define([], function () {
                     if (leafName.includes('(')) n.push(leafName.split("\n")[1].replace(/[()]/g, '').toLowerCase());
                     else n.push(leafName.toLowerCase());
                     console.log(`LEAFNAME: ${leafName}`);
-                    c += '<div style="font-size: 18px;"><li>' + leafName + '</li></div>';
+                    c += '<div style="font-size: 20px;"><li>' + leafName + '</li></div>';
                     let names = null;
                     if (leafName.includes('\n')) names = leafName.split("\n");
                     else names = leafName;
@@ -1990,7 +1990,7 @@ define([], function () {
                     if (display === 'show') {
                         $nodeInfo.animate({'right': '0px'}, 400);
                     } else {
-                        $nodeInfo.animate({'right': '-500px'}, 400);
+                        $nodeInfo.animate({'right': '-700px'}, 400);
                     }
                 }
                 return;
