@@ -1847,19 +1847,19 @@ define([], function () {
                     html_dna_string = [];
                     /* Then for each species sequences, edit the char at each space idx */
                     for (let speciesIdx = 0; speciesIdx < dnaSequences.length; speciesIdx++) {
+                        // TODO: Here is where we can format the chars that are different
+                        if (speciesIdx > 999) dna_string = `${speciesIdx + 1}.`;
+                        else if (speciesIdx > 8) dna_string = `${speciesIdx + 1}..`;
+                        else dna_string = `${speciesIdx + 1}...`;
                         for (let sequenceIdx = 0; sequenceIdx < dnaSequences[speciesIdx].length; sequenceIdx++) {
                             let spaceIdxArr = edit_idxs[sequenceIdx];
-                            content += '<div style="text-align: center; letter-spacing: 1px; font-size: 18px; font-family: Courier New;"><text>';
-                            // TODO: Here is where we can format the chars that are different
-                            if (speciesIdx > 999) dna_string = `${speciesIdx + 1}.`;
-                            else if (speciesIdx > 8) dna_string = `${speciesIdx + 1}..`;
-                            else dna_string = `${speciesIdx + 1}...`;
+                            content += '<div style="text-align: center; letter-spacing: 1px; font-size: 18px; font-family: Courier New,serif;"><text>';
                             for (let charIdx = 0; charIdx < dnaSequences[speciesIdx][sequenceIdx].length; charIdx++) {
                                 if (spaceIdxArr.includes(charIdx)) dna_string += '<text style="color: red"><strong>' + dnaSequences[speciesIdx][sequenceIdx][charIdx] + '</strong></text>';
                                 else dna_string += dnaSequences[speciesIdx][sequenceIdx][charIdx];
                             }
-                            html_dna_string.push(dna_string);
                         }
+                        html_dna_string.push(dna_string);
                     }
                     for (let s = 0; s < 4; s++) {
                         let i = s;
