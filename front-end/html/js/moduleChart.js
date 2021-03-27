@@ -1858,7 +1858,7 @@ define([], function () {
 
             /* This is our HTTP request to the server to get data for the selected species */
             getSpeciesData: async function (speciesName) {
-                return await axios.post(`http://localhost:3000/species?speciesName=${speciesName}`)
+                return await axios.get(`http://localhost:4000/species?speciesName=${speciesName}`)
                     .then(response => {
                         return response.data;
                     });
@@ -1866,7 +1866,7 @@ define([], function () {
 
             /* The is our HTTP Request to the server to get the comparison asterisk strings */
             getSpeciesComparisons: async function (compKey) {
-                return await axios.post(`http://localhost:3000/dnacomparisons?comp=${compKey}`)
+                return await axios.get(`http://localhost:4000/comparison?comp=${compKey}`)
                     .then(response => {
                         return response.data;
                     });
