@@ -1792,7 +1792,8 @@ define([], function () {
                 // if (nodeName === '' || nodeName.split(" ").length < 2) {
                 if (nodeName === '') {
                     let nameArr = [];
-                    content += '<div style="text-align: center; font-size: 24px; font-style: italic; font-family: Arial, Helvetica, sans-serif;">DNA COMPARISON</div><hr>'
+                    content += '<div style="text-align: center; font-size: 24px; font-style: italic; font-family: Arial, Helvetica, sans-serif;"> <h1>DNA COMPARISON</h1><br>'
+                    content += '<h4>(Mitochondrial DNA)</h4></div><hr><br>'
                     let l = this.traverseDFS(node)
                     content += '<div style="margin-left: auto; margin-right: auto; display: table;"><ol style="text-align:left;">';
                     l.forEach(async leafName => {
@@ -1805,7 +1806,7 @@ define([], function () {
                         if (leafName.includes('(')) nameArr.push(leafName.split("\n")[1].replace(/[()]/g, '').toLowerCase());
                         else nameArr.push(leafName.toLowerCase());
                         console.log(`LEAFNAME: ${leafName}`);
-                        content += '<div><li>' + leafName + '</li></div>';
+                        content += '<div style="font-size: 18px;"><li>' + leafName + '</li></div>';
                         let names = null;
                         if (leafName.includes('\n')) names = leafName.split("\n");
                         else names = leafName;
@@ -1848,7 +1849,7 @@ define([], function () {
                     for (let speciesIdx = 0; speciesIdx < dnaSequences.length; speciesIdx++) {
                         for (let sequenceIdx = 0; sequenceIdx < dnaSequences[speciesIdx].length; sequenceIdx++) {
                             let spaceIdxArr = edit_idxs[sequenceIdx];
-                            content += '<div style="text-align: center; letter-spacing: 1px; font-size: 16px; font-family: Courier New;"><text>';
+                            content += '<div style="text-align: center; letter-spacing: 1px; font-size: 18px; font-family: Courier New;"><text>';
                             // TODO: Here is where we can format the chars that are different
                             if (speciesIdx > 999) dna_string = `${speciesIdx + 1}.`;
                             else if (speciesIdx > 8) dna_string = `${speciesIdx + 1}..`;
