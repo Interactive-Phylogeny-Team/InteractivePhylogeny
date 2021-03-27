@@ -6,10 +6,18 @@ const Comparison = require('../database/src/models/comparison')
 const router = Router()
 
 router.get('/species', async (req, res) => {
-	const speciesName = req.body.scientificName
-	const species = await Species.findByPk(speciesName)
-	const resBody = species.toJSON()
-	res.send(resBody)
+	let speciesName;
+	try {
+		speciesName = req.query.speciesName;
+		if (speciesName === undefined) return res.status(400).json({error: 'Blank request; please provide a species name'})
+		const species = await Species.findByPk(speciesName)
+		const resBody = species.toJSON()
+		res.send(resBody)
+	} catch (error) {
+		return res.status(400).json({
+			error: `Unable to process request for - ${speciesName}`
+		})
+	}
 })
 
 router.get('/tree', async (req, res) => {
@@ -20,10 +28,17 @@ router.get('/tree', async (req, res) => {
 })
 
 router.get('/comparison', async (req, res) => {
-	const compKey = req.body.compKey
-	const comparison = await Comparison.findByPk(compKey)
-	const resBody = comparison.toJSON()
-	res.send(resBody)
+	let compKey;
+	try {
+		compKey = req.query.comp
+		const comparison = await Comparison.findByPk(compKey)
+		const resBody = comparison.toJSON()
+		res.send(resBody)
+	} catch (error) {
+		return res.status(400).json({
+			error: `Unable to process request for - ${compKey}`
+		})
+	}
 })
 
 module.exports = router
