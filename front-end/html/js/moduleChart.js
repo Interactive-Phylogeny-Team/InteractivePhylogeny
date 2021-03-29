@@ -1986,13 +1986,13 @@ define([], function () {
             // FIXME: Sliver of display view showing at start of application on right side
             nodeInfoDisplay: function (display) {
                 // Display annotation only if checked
-                if (settings.menu['node-shapes'].annotation === 'show') {
-                    if (display === 'show') {
-                        $nodeInfo.animate({'right': '0px'}, 400);
-                    } else {
-                        $nodeInfo.animate({'right': '-700px'}, 400);
-                    }
+                //if (settings.menu['node-shapes'].annotation === 'show') {
+                if (display === 'show') {
+                    $nodeInfo.animate({'right': '0px'}, 400);
+                } else {
+                    $nodeInfo.animate({'right': '-700px'}, 400);
                 }
+                //}
                 return;
             },
 

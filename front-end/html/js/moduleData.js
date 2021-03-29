@@ -634,7 +634,8 @@ define(['moduleChart', 'nexus'], function (moduleChart, nexus) {
                 });
 
                 $nodeInfoClose.on('click', function(e) {
-                    $('#nodeInfo').animate({'right': '-500px'}, 400);
+                    $('#nodeInfo').animate({'right': '-700px'}, 400);
+                    $('#nodeInfo').find('.info-content').html(null);
                 })
 
                 /* Initialize range sliders */
