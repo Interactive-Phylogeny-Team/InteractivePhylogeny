@@ -1988,7 +1988,7 @@ define([], function () {
                 // Display annotation only if checked
                 //if (settings.menu['node-shapes'].annotation === 'show') {
                 if (display === 'show') {
-                    $nodeInfo.animate({'right': '0px'}, 400);
+                    $nodeInfo.animate({'right': '25px'}, 400);
                 } else {
                     $nodeInfo.animate({'right': '-700px'}, 400);
                 }
