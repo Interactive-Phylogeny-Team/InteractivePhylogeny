@@ -1,27 +1,31 @@
-#green0 {
-    color: #c2fcc2;
+#greenDark {
+    color: #679436;
 }
 
-#green1 {
-    color: #A4FBA6;
+#greenLight {
+    color: #9BC04F;
 }
 
-#green2 {
-    color: #4ae54a;
+#pinkDark {
+    color: #631E35;
 }
 
-#green3 {
-    color: #30cb00;
+#pinkMedium {
+    color: #A53157;
 }
 
-#green4 {
-    color: #0f9200;
+#pinkBright {
+    color: #FF5C91;
 }
 
-#green5 {
-    color: #006203;
+#pinkLight {
+    color: #FF90AD;
 }
 
-#green6 {
-    color: #004003;
+#blueDark {
+    color: #194e64;
+}
+
+#blueLight {
+    color: #478aa5;
 }

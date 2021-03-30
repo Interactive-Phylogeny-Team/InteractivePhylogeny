@@ -3,9 +3,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>How to Upload Your Own Data | QuickTree</title>
     <link href="../css/text_page.css" rel="stylesheet" type="text/css" />
     <script src="https://kit.fontawesome.com/9533923917.js" crossorigin="anonymous"></script>
+
+    <title>How to Upload Your Own Data | QuickTree</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../favicon/site.webmanifest">
+    <link rel="mask-icon" href="../favicon/safari-pinned-tab.svg" color="#679436">
+    <meta name="msapplication-TileColor" content="#9bc04f">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="shortcut icon" href="../favicon.ico">
 </head>
 
 <body>
@@ -93,15 +103,17 @@
                 Create the phylogenetic tree:
                 <ol type="a">
                     <li STYLE="font-weight: normal">
-                        In R, install the library "ape".
+                        In R, install the library <code>ape</code>.
                     </li>
                     <li STYLE="font-weight: normal">
-                        Download the executable for MUSCLE and/or CLUSTAL sequence alignment. Make sure the
-                        directory containing the executable is added to your PATH environmental variable.
+                        Download the executable for <a href="https://www.drive5.com/muscle/downloads.htm">MUSCLE</a>
+                        and/or <a href="http://www.clustal.org/download/current/">CLUSTAL</a> sequence alignment. Make
+                        sure the directory containing the executables is added to your PATH environmental variable.
                     </li>
                     <li STYLE="font-weight: normal">
                         In R, type the following lines of code (replacing "species" where appropriate):
-                        <pre><code>
+                        <pre>
+
 library(ape)
 speciesFASTA = "path/to/fasta/file/speciesFASTA.txt"
 species = read.dna(speciesFASTA, format = "fasta")
@@ -109,7 +121,7 @@ speciesMUSCLE = muscle(species)  # or speciesCLUSTAL = clustal(species)
 speciesTree = bionj(dist.dna(speciesMUSCLE))  # or speciesTree = bionj(dist.dna(speciesCLUSTAL))
 plot(speciesTree)  # Just to make sure it looks how you want
 write.nexus(speciesTree, file = "speciesNEXUS.txt", translate = FALSE)
-                        </code></pre>
+                        </pre>
                     </li>
                     <li STYLE="font-weight: normal">
                         If something doesn't look right, you can add or remove DNA sequences in
@@ -117,19 +129,20 @@ write.nexus(speciesTree, file = "speciesNEXUS.txt", translate = FALSE)
                     </li>
                     <li STYLE="font-weight: normal">
                         Open "speciesTree.json" and paste the following:
-                        <pre><code>
+                        <pre>
+
 [
   {
     "name": "species",
     "tree": ""
   }
 ]
-                        </code></pre>
+                        </pre>
                     </li>
                     <li STYLE="font-weight: normal">
-                        Open "speciesNEXUS.txt" and copy the long string after "TREE * UNTITLED = [&U]"
-                        beginning with "(" and ending with ");". Paste the string inside the quotes after
-                        "tree" in "speciesTree.json".
+                        Open "speciesNEXUS.txt" and copy the long string after <code>TREE * UNTITLED = [&U]</code>
+                        beginning with <code>(</code> and ending with <code>);</code>. Paste the string inside the
+                        quotes after <code>"tree":</code> in "speciesTree.json".
                     </li>
                 </ol>
             </li>
@@ -140,7 +153,8 @@ write.nexus(speciesTree, file = "speciesNEXUS.txt", translate = FALSE)
                     <li STYLE="font-weight: normal">
                         Open "speciesData.json" and paste the following (with one JSON object for each
                         species in your tree):
-                        <pre><code>
+                        <pre>
+
 [
   {
     "scientificName": "",
@@ -179,17 +193,33 @@ write.nexus(speciesTree, file = "speciesNEXUS.txt", translate = FALSE)
     ]
   }
 ]
-                    </code></pre>
+                    </pre>
                     </li>
                     <li STYLE="font-weight: normal">
                         You have already collected the scientific name and common name of each species,
                         so add that data to the file.
                     </li>
                     <li STYLE="font-weight: normal">
-                        MAP
+                        To get the map link...
+                        <ul>
+                            <li>Go to <a href="https://www.google.com/maps">Google Maps</a> and click on the species' country of origin.</li>
+                            <li>Click "Share", then "Embed a map", then "COPY HTML".</li>
+                            <li>Paste inside the quotes after <code>"mapLink":</code> in "speciesData.json".</li>
+                            <li>Delete the text surrounding the link (only the text inside the quotes after <code>src=</code> should remain).</li>
+                            <li>Do this for each species.</li>
+                        </ul>
                     </li>
                     <li STYLE="font-weight: normal">
-                        IMAGE
+                        To get the image URL...
+                        <ul>
+                            <li>Download JPEG photos of each species (keep track of image sources for copyright purposes).</li>
+                            <li>If you desire, crop the photos to all have the same proportions.</li>
+                            <li>Upload the photos to <a href="https://www.flickr.com/">Flickr</a> (or another image hosting website of your choice).</li>
+                            <li>When a photo is selected (in Flickr), click the download button, then select "View all sizes".</li>
+                            <li>Right click the image and select "Copy image address" to copy the static URL of the image.</li>
+                            <li>Paste inside the quotes after <code>"imageURL":</code> in "speciesData.json".</li>
+                            <li>Do this for each species.</li>
+                        </ul>
                     </li>
                 </ol>
             </li>
@@ -207,8 +237,8 @@ write.nexus(speciesTree, file = "speciesNEXUS.txt", translate = FALSE)
                 ALL DONE!
                 <ol type="a">
                     <li STYLE="font-weight: normal">
-                        Drag and drop "speciesTree.json", "speciesData.json", and "speciesComparisons.json"
-                        into the appropriate spots on the "Upload Your Own" page of the QuickTree website.
+                        Drag and drop "speciesTree.json", "speciesData.json", and "speciesComparisons.json" into the
+                        appropriate spots on the <a href="tree_drop.html">"Upload Your Own"</a> page of the QuickTree website.
                     </li>
                 </ol>
             </li>
