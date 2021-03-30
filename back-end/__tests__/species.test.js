@@ -17,13 +17,8 @@ test('Test Get Species Endpoint', async () => {
 		]
 	}
 
-	reqBody = {
-		scientificName: primaryKey
-	}
-
 	const res = await request(app)
-		.get('/species')
-		.send(reqBody)
+		.get(`/species?scientificName=${primaryKey}`)
 
 	const resBody = res.body
 	expect(resBody.scientificName).toBe(species.scientificName)

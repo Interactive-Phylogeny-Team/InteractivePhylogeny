@@ -14,13 +14,8 @@ test('Test Get Comparison Endpoint', async () => {
 		]
 	}
 
-	const reqBody = {
-		compKey: primaryKey
-	}
-
 	const res = await request(app)
-		.get('/comparison')
-		.send(reqBody)
+		.get(`/comparison?compKey=${primaryKey}`)
 
 	comparison = JSON.stringify(comparison)
 	const resBody = JSON.stringify(res.body)
