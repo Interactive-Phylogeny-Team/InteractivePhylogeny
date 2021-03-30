@@ -123,7 +123,7 @@ define([], function () {
         var nodeBorderColor = '#631e35';
         var nodeBorderWidth = 8;
         var nodeColorOpened = '#fff';
-        var nodeColorClosed = 'lightsteelblue';
+        var nodeColorClosed = '#ff90ad';
         var nodeLabelColor = '#000';
         var leafLabelColor = '#000';
         var branchLabelColor = '#000';
