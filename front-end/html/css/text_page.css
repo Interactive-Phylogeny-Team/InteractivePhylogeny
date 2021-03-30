@@ -29,11 +29,19 @@ a {
 a:hover {
     text-decoration: underline;
 }
-code, pre {
+code {
     font-family: monospace;
     background: #eee;
     color: #000;
-    font-size: 12px;
+    padding: 2px;
+    font-size: calc(80%);
+}
+
+pre {
+    font-family: monospace;
+    background: #eee;
+    color: #000;
+    font-size: calc(75%);
     display: block;
     width: calc(100%);
     padding-left: 10px;
