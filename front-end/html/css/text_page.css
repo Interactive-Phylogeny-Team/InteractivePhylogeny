@@ -27,7 +27,8 @@ a {
     text-decoration: none;
 }
 a:hover {
-    text-decoration: underline;
+    color: #9BC04F;
+    text-decoration: none;
 }
 code {
     font-family: monospace;
