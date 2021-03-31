@@ -227,7 +227,51 @@ write.tree(speciesTree, file = "speciesNEWICK.txt")
                 Get the DNA comparisons:
                 <ol type="a">
                     <li STYLE="font-weight: normal">
-                        MUSCLE
+                        Visit <a href="https://www.ebi.ac.uk/Tools/msa/muscle/">https://www.ebi.ac.uk/Tools/msa/muscle/</a>
+                        to use the MUSCLE sequence alignment tool.
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        In "STEP 1 - Enter your input sequences", upload the file "speciesFASTA.txt".
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        Leave the default settings in "STEP 2 - Set your Parameters", then in "STEP 3 - Submit your job"
+                        click "SUBMIT". (Depending on how many species are in your tree, this may take a while. You can
+                        choose to be notified by email is you wish.)
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        When the result are ready, scan the alignment to find a four consecutive segments with high
+                        variation but preferably no insertions or deletions. Copy and paste the four lines of DNA for
+                        each species in the array after <code>"dnaSequences":</code> in "speciesData.json".
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        Open "speciesComparisons.json" and paste the following (with one JSON object for each non-leaf
+                        node in your tree):
+                        <pre>
+
+[
+  {
+    "key": "",
+    "compStrings": [
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "key": "",
+    "compStrings": [
+      "",
+      "",
+      "",
+      ""
+    ]
+  }
+]
+                        </pre>
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        Next...
                     </li>
                 </ol>
             </li>
