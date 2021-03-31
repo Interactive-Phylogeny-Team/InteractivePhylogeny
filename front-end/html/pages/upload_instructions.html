@@ -120,7 +120,7 @@ species = read.dna(speciesFASTA, format = "fasta")
 speciesMUSCLE = muscle(species)  # or speciesCLUSTAL = clustal(species)
 speciesTree = bionj(dist.dna(speciesMUSCLE))  # or speciesTree = bionj(dist.dna(speciesCLUSTAL))
 plot(speciesTree)  # Just to make sure it looks how you want
-write.nexus(speciesTree, file = "speciesNEXUS.txt", translate = FALSE)
+write.tree(speciesTree, file = "speciesNEWICK.txt")
                         </pre>
                     </li>
                     <li STYLE="font-weight: normal">
@@ -140,8 +140,7 @@ write.nexus(speciesTree, file = "speciesNEXUS.txt", translate = FALSE)
                         </pre>
                     </li>
                     <li STYLE="font-weight: normal">
-                        Open "speciesNEXUS.txt" and copy the long string after <code>TREE * UNTITLED = [&U]</code>
-                        beginning with <code>(</code> and ending with <code>);</code>. Paste the string inside the
+                        Copy the contents of "speciesNEWICK.txt" and paste inside the
                         quotes after <code>"tree":</code> in "speciesTree.json".
                     </li>
                 </ol>
