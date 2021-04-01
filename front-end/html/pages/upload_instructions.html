@@ -120,7 +120,7 @@ species = read.dna(speciesFASTA, format = "fasta")
 speciesMUSCLE = muscle(species)  # or speciesCLUSTAL = clustal(species)
 speciesTree = bionj(dist.dna(speciesMUSCLE))  # or speciesTree = bionj(dist.dna(speciesCLUSTAL))
 plot(speciesTree)  # Just to make sure it looks how you want
-write.nexus(speciesTree, file = "speciesNEXUS.txt", translate = FALSE)
+write.tree(speciesTree, file = "speciesNEWICK.txt")
                         </pre>
                     </li>
                     <li STYLE="font-weight: normal">
@@ -140,8 +140,7 @@ write.nexus(speciesTree, file = "speciesNEXUS.txt", translate = FALSE)
                         </pre>
                     </li>
                     <li STYLE="font-weight: normal">
-                        Open "speciesNEXUS.txt" and copy the long string after <code>TREE * UNTITLED = [&U]</code>
-                        beginning with <code>(</code> and ending with <code>);</code>. Paste the string inside the
+                        Copy the contents of "speciesNEWICK.txt" and paste inside the
                         quotes after <code>"tree":</code> in "speciesTree.json".
                     </li>
                 </ol>
@@ -228,7 +227,51 @@ write.nexus(speciesTree, file = "speciesNEXUS.txt", translate = FALSE)
                 Get the DNA comparisons:
                 <ol type="a">
                     <li STYLE="font-weight: normal">
-                        MUSCLE
+                        Visit <a href="https://www.ebi.ac.uk/Tools/msa/muscle/">https://www.ebi.ac.uk/Tools/msa/muscle/</a>
+                        to use the MUSCLE sequence alignment tool.
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        In "STEP 1 - Enter your input sequences", upload the file "speciesFASTA.txt".
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        Leave the default settings in "STEP 2 - Set your Parameters", then in "STEP 3 - Submit your job"
+                        click "SUBMIT". (Depending on how many species are in your tree, this may take a while. You can
+                        choose to be notified by email is you wish.)
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        When the result are ready, scan the alignment to find a four consecutive segments with high
+                        variation but preferably no insertions or deletions. Copy and paste the four lines of DNA for
+                        each species in the array after <code>"dnaSequences":</code> in "speciesData.json".
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        Open "speciesComparisons.json" and paste the following (with one JSON object for each non-leaf
+                        node in your tree):
+                        <pre>
+
+[
+  {
+    "key": "",
+    "compStrings": [
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  {
+    "key": "",
+    "compStrings": [
+      "",
+      "",
+      "",
+      ""
+    ]
+  }
+]
+                        </pre>
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        Next...
                     </li>
                 </ol>
             </li>
