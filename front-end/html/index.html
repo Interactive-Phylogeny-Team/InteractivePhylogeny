@@ -68,24 +68,27 @@
 
 <script>
     document.addEventListener('input', async function (event) {
+        storage = window.sessionStorage
         if (event.target.id !== "tree_dropdown") return;
         if (event.target.value === "primates") {
             let resData = await getTree('primates');
-            alert(`Tree Name: ${resData.name}\nTree:${resData.tree}`);
-        }
-        if (event.target.value === "butterflies") {
+            storage.setItem('tree', resData.tree)
+        } else if (event.target.value === "butterflies") {
             let resData = await getTree('butterflies');
-            alert(`Tree Name: ${resData.name}\nTree:${resData.tree}`);
-        }
-        if (event.target.value === "birds") {
+            storage.setItem('tree', resData.tree)
+
+        } else if (event.target.value === "birds") {
             let resData = await getTree('birds');
-            alert(`Tree Name: ${resData.name}\nTree:${resData.tree}`);
-        }
-        if (event.target.value === "upload") {
+            storage.setItem('tree', resData.tree)
+
+        } else if (event.target.value === "upload") {
             window.location.replace("pages/new_feature_landingpage.html");
+            storage.setItem('tree', resData.tree)
+
         } else {
             alert("Tree doesn't exist!");
         }
+        window.location.replace("pages/phylotree.html");
 
     }, false)
 
