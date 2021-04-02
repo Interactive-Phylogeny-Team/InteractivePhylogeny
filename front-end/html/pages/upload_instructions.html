@@ -25,9 +25,9 @@
     <div>
 
         <h1><a href="../index.html">QuickTree</a></h1>
-        <hr />
+        <hr/>
         <h1>How to Upload Your Own Data</h1>
-        <hr />
+        <hr/>
         <p>
             These step-by-step instructions will make sure you know EXACTLY what to do if you want
             to use your own data. What are you waiting for? Let's make a tree!
@@ -72,6 +72,8 @@
                 </ol>
             </li>
 
+            <br/>
+
             <li STYLE="font-weight: bold">
                 Collect the DNA sequences:
                 <ol type="a">
@@ -91,13 +93,22 @@
                                 If there is a sequence for the complete mitochondrial genome of your species, select the "FASTA"
                                 button of that search result. (Some species have many options to choose from, while others have none.)
                             </li>
-                            <li>Copy and paste the the lines of text into "speciesFASTA.txt".</li>
-                            <li>Replace the text on the first line with ">Common Name of Species|(Scientific Name of Species)".</li>
-                            <li>Leave an empty line between each DNA sequence.</li>
+                            <li>
+                                Copy and paste the the lines of text into "speciesFASTA.txt".
+                            </li>
+                            <li>
+                                Take note of the accession number, then replace the text on the first
+                                line with ">Common Name of Species|(Scientific Name of Species)".
+                            </li>
+                            <li>
+                                Leave an empty line between each DNA sequence.
+                            </li>
                         </ul>
                     </li>
                 </ol>
             </li>
+
+            <br/>
 
             <li STYLE="font-weight: bold">
                 Create the phylogenetic tree:
@@ -146,6 +157,8 @@ write.tree(speciesTree, file = "speciesNEWICK.txt")
                 </ol>
             </li>
 
+            <br/>
+
             <li STYLE="font-weight: bold">
                 Collect the species data:
                 <ol type="a">
@@ -158,6 +171,7 @@ write.tree(speciesTree, file = "speciesNEWICK.txt")
   {
     "scientificName": "",
     "commonName": "",
+    "accessionNumber": "",
     "mapLink": "",
     "imageUrl": "",
     "dnaSequences": [
@@ -170,18 +184,7 @@ write.tree(speciesTree, file = "speciesNEWICK.txt")
   {
     "scientificName": "",
     "commonName": "",
-    "mapLink": "",
-    "imageUrl": "",
-    "dnaSequences": [
-      "",
-      "",
-      "",
-      ""
-    ]
-  },
-  {
-    "scientificName": "",
-    "commonName": "",
+    "accessionNumber": "",
     "mapLink": "",
     "imageUrl": "",
     "dnaSequences": [
@@ -195,8 +198,8 @@ write.tree(speciesTree, file = "speciesNEWICK.txt")
                     </pre>
                     </li>
                     <li STYLE="font-weight: normal">
-                        You have already collected the scientific name and common name of each species,
-                        so add that data to the file.
+                        You have already collected the scientific name, common name, and GenBank accession number
+                        for each species, so add that data to the file.
                     </li>
                     <li STYLE="font-weight: normal">
                         To get the map link...
@@ -223,6 +226,8 @@ write.tree(speciesTree, file = "speciesNEWICK.txt")
                 </ol>
             </li>
 
+            <br/>
+
             <li STYLE="font-weight: bold">
                 Get the DNA comparisons:
                 <ol type="a">
@@ -239,7 +244,7 @@ write.tree(speciesTree, file = "speciesNEWICK.txt")
                         choose to be notified by email is you wish.)
                     </li>
                     <li STYLE="font-weight: normal">
-                        When the result are ready, scan the alignment to find a four consecutive segments with high
+                        When the result are ready, visually scan the alignment to find four consecutive segments with high
                         variation but preferably no insertions or deletions. Copy and paste the four lines of DNA for
                         each species in the array after <code>"dnaSequences":</code> in "speciesData.json".
                     </li>
@@ -271,10 +276,59 @@ write.tree(speciesTree, file = "speciesNEWICK.txt")
                         </pre>
                     </li>
                     <li STYLE="font-weight: normal">
-                        Next...
+                        The <code>"key"</code> must have the scientific names of each species that shares the common ancestor
+                        represented by the non-leaf node. The scientific names need to be in alphabetical order, all lowercase,
+                        and separated only by underscores.
+                        <ul>
+                            <li>
+                                For example, imagine you have a tree containing three species of butterfly: Monarch Butterfly
+                                (Danaus Plexippus), Silver-Studded Blue (Plebejus Argus), and Common Yellow Swallowtail
+                                (Papilio Machaon). The root node represents the common ancestor of all three butterflies, so
+                                the DNA comparison from that node will show the DNA alignment for all three butterflies. The
+                                <code>"key"</code> for this comparison will be <code>"danaus_plexippus_papilio_machaon_plebejus_argus"</code>.
+                            </li>
+                        </ul>
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        Collect the comparison strings starting with the root node (the <code>"key"</code> should have the
+                        scientific name of every species in your tree). Using the same four consecutive segments in
+                        your MUSCLE alignment, copy and paste the four strings of asterisks and spaces in the array after
+                        <code>"compStrings":</code>.
+                    </li>
+                    <li STYLE="font-weight: normal">
+                        For each remaining <code>"key"</code>, you will need to get new comparison strings (of the same
+                        four segments) for only the species who share that common ancestor. To do this, create a mini
+                        FASTA file for each <code>"key"</code> using the DNA in "speciesData.json".
+                        <ul>
+                            <li>
+                                In our butterfly example, pretend that the Monarch Butterfly and Common Yellow Swallowtail
+                                are most closely related. For the node that joins these two species, the <code>"key"</code>
+                                would be <code>"danaus_plexippus_papilio_machaon"</code>, and the mini FASTA file would look like this:
+                                <pre>
+
+>Monarch Butterfly|(Danaus Plexippus)
+AATCCCTCAAGGAACTCCTTTTATTTTAATACCTTTTATAGTATTAATTGAAACAATTAG
+AAATATTATTCGACCAGGCACTTTAGCTATTCGTTTAACAGCTAATATAATTACTGGTCA
+TCTTTTAATCACTTTATTAAGAAGAATAGGAAACAGAATTAATTTTTATTTAATTTCACT
+TTTAATTTTTATACAAATTTTATTATTAATTTTAGAATCTATAGTAGCAATTATTCAATC
+
+>Common Yellow Swallowtail|(Papilio Machaon)
+AATCCCGCAAGGAACTCCTTCAATTTTAATGCCTTTTATAGTAATAATTGAAACAATTAG
+AAATATTATTCGTCCTGGAACATTAGCTGTTCGTCTATCTGCTAATATAATTGCCGGTCA
+TTTATTATTAACTCTTCTAAGAAGAACTAGTAATAGTTTATCATTTTATTTATTATTTAT
+TTTAATTTTTATACAAATTTTATTATTAATTTTAGAATCAGCAGTTGCAGTTATTCAAGC
+                                </pre>
+                            </li>
+                            <li>
+                                Running this alignment in MUSCLE will be very quick. Copy and paste the strings of asterisks and
+                                spaces in the array after <code>"compStrings":</code>, then repeat for each remaining <code>"key"</code>.
+                            </li>
+                        </ul>
                     </li>
                 </ol>
             </li>
+
+            <br/>
 
             <li STYLE="font-weight: bold">
                 ALL DONE!
@@ -287,6 +341,9 @@ write.tree(speciesTree, file = "speciesNEWICK.txt")
             </li>
 
         </ol>
+        <hr/>
+        <br/>
+        <br/>
     </div>
 </body>
 </html>
