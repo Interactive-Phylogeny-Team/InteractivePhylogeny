@@ -12,7 +12,7 @@
 ### 1. Clone the repo:
 ![img.png](html/img/img.png)
 
-### 2. Set up the server and database following [this README](back-end/README.md)
+### 2. Set up the server and database following [this README](https://github.com/Interactive-Phylogeny-Team/InteractivePhylogeny/blob/main/back-end/README.md)
 > **_NOTE:_** Once you've set up the server and have run `npm start` from the backend directory, you should see `Backend server listening at 4000` in the terminal
 
 ### 3. Serve the frontend
