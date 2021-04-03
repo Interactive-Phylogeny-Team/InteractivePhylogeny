@@ -20,9 +20,9 @@
 ### WebStorm IDE - Easiest
 1. Open the project in WebStorm IDE (or clone it directly with WebStorm)
 2. Go to Settings > Build, Execution, Deployment > Debugger and set the built-in server port to 62121
-![ide_settings_img.png](ide_settings_img.png)
+![ide_settings_img.png](html/img/ide_settings_img.png)
 3. Open up *index.html* in the IDE and then select your browser in the little browser menu at the upper right corner.
-![ide_browser_menu.png](ide_browser_menu.png)
+![ide_browser_menu.png](html/img/ide_browser_menu.png)
 
   
 ### HTTP-SERVER
@@ -32,7 +32,7 @@
 4. Once you've done that, serve the frontend by running `http-server html/ -p 62121`
 > **_NOTE:_** The port **MUST** be **62121** (http-server defaults to 8080). If you don't use 62121, you will have CORS errors.
 5. In the terminal you will have a list of URLs where the frontend is being served on, click one of them to get to the served site.
-![serve_ex.png](serve_ex.png)
+![serve_ex.png](html/img/serve_ex.png)
 ## Features
 
 ### SPECIES VIEW
@@ -41,13 +41,13 @@
 2. Scientific name
 3. Picture of species
 4. Interactive map of species origin
-![species_view.png](species_view.png)
+![species_view.png](html/img/species_view.png)
    
 ### DNA COMPARISON
 #### Click on an intermediate node to see DNA comparisons between all leaf node species connected to the node.
 > **_NOTE:_** The pinkish colored characters represent a change between at least one of the compared species.
 
-![dna_comp.png](dna_comp.png)
+![dna_comp.png](html/img/dna_comp.png)
 
 ## License
 **MIT - Open Source**
