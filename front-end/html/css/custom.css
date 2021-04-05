@@ -402,4 +402,16 @@ a > i.fa {
     margin-right: 10px;
 }
 
+.btn-primary{
+    margin-top: -80px;
+    margin-left: 15px;
+    background-color: transparent;
+    border-color: transparent;
+    color: #679436;
+}
+
+.btn-primary:hover, .btn-primary:active {
+    color: #9BC04F;
+}
+
 

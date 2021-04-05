@@ -42,98 +42,23 @@ define(['moduleChart', 'nexus'], function (moduleChart, nexus) {
         var parseError = '';
         var $nodeInfoClose = $('#nodeInfo button.close')
 
-        /* LOADING EXAMPLES */
-        function loadExamples() {
-            var $example = $('.example');
-            $example.on('click', function(e) {
-                e.preventDefault();
-                var that = this;
-                moduleData.loadingStart();
-                var exampleId = $(that).data('id');
-                var filename = $(that).data('file');
-                var extension = filename.split('.').pop();
-                var url = 'examples/' + filename;
-                var fileContent = $.ajax({type: "GET", url: url, async: false}).responseText;
-
-                switch(extension) {
-                    // File is newick format - test and load if valid
-                    case 'nwk':
-                    case 'txt':
-                    treeData = parseNewick(fileContent);
-                    if(treeData) {
-                        moduleChart.init(treeData);
-                        moduleData.showToolbar();
-                        var msg = ['Tree data successfully loaded.', 'success'];
-                    } else {
-                        var msg = ['Invalid file data.\nPlease load data in standard Newick notation.', 'danger'];
-                    }
-                    break;
-                    // File is nexus format - test and load if valid
-                    case 'nex':
-                    case 'nxs':
-                    case 'tree':
-                    case 'tre':
-                    var nexusNewick = parseNexus(fileContent);
-                    var nexusNewickRaw = parseNexusRaw(fileContent);
-                    if(nexusNewick) {
-                        // Try to parse nexus meta data
-                        treeData = nexusNewickRaw ? parseNewickRaw(nexusNewickRaw) : false;
-                        if(treeData) {
-                            moduleChart.init(treeData);
-                            moduleData.showToolbar();
-                            var msg = ['Tree data successfully loaded.', 'success'];
-                        } else {
-                            // Nexus parse of meta data failed, go for standard parsing
-                            treeData = parseNewick(nexusNewick);
-                            if(treeData) {
-                                moduleChart.init(treeData);
-                                moduleData.showToolbar();
-                                moduleData.loadingStop();
-                                var msg = ['There was an error in parsing additional tree data. Only basic tree data is displayed. ' + moduleData.parseError, 'warning'];
-                                console.log(moduleData.parseError);
-                            } else {
-                                var msg = ['Invalid file data.\nPlease load Nexus file containing tree structure in valid format.', 'danger'];
-                            }
-                        }
-                    } else {
-                        // Not a nexus file, but try to parse it as Newick file anyway
-                        treeData = parseNewick(fileContent);
-                        if(treeData) {
-                            moduleChart.init(treeData);
-                            moduleData.showToolbar();
-                            var msg = ['Tree data successfully loaded.', 'success'];
-                        } else {
-                            var msg = ['Invalid file data.\nPlease load Nexus file containing tree structure in valid format.', 'danger'];
-                        }
-                    }
-                    moduleData.updateMessage(msg[0], msg[1]);
-                    break;
-                    // File is json format - test and load if valid
-                    case 'json':
-                    case 'js':
-                    var fileData = parseJson(fileContent);
-                    if(fileData && fileData.tree !== undefined) {
-                        treeData = fileData.tree;
-                        var settings = fileData.settings;
-                        moduleChart.setup(settings);
-                        moduleChart.init(treeData);
-                        moduleData.showToolbar();
-                        var msg = ['Tree data successfully loaded.', 'success'];
-                    } else {
-                        var msg = ['Invalid file data.\nPlease load json file exported with Phylogenetic Web app.', 'danger'];
-                    }
-                    break;
-                    // Show general file-not-supported error
-                    default:
-                    var msg = ['File not supported.\nWe detected file extension that is not supported by this application. Please provide valid data in newick, nexus or json tree notation.', 'danger'];
-                    break;
-                }
-
-                moduleData.loadingStop();
-                moduleData.updateMessage(msg[0], msg[1]);
-                $('a.example').parent().removeClass('active');
-                $(that).parent().addClass('active');
-            })
+        /* LOADING TREES */
+        function loadTree() {
+            session = window.sessionStorage
+            var fileContent = session.getItem('tree')
+            console.log(`FILE CONTENT: ${fileContent}`)
+            treeData = parseNewick(fileContent);
+            if(treeData) {
+                moduleChart.init(treeData);
+                moduleData.showToolbar();
+                var msg = ['Tree data successfully loaded.', 'success'];
+            } else {
+                var msg = ['Invalid file data.\nPlease load data in standard Newick notation.', 'danger'];
+            }
+            var that = this;
+            moduleData.loadingStop();
+            moduleData.updateMessage(msg[0], msg[1]);
+            $(that).parent().addClass('active');
         }
 
         function fileDragHover(e)
@@ -889,7 +814,7 @@ define(['moduleChart', 'nexus'], function (moduleChart, nexus) {
 
                 moduleChart.setup(settings);
 
-                loadExamples();
+                loadTree();
 
             },
 

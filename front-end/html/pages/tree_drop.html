@@ -6,41 +6,29 @@
     <meta name="description" content="Phylogeny.IO">
     <meta name="keywords" content="phylogeny, phylogenic, tree, evolution, visualisation, phylogeny.io">
 
-    <title>Interactive Phylogeny App</title>
+    <title>Upload Your Own | QuickTree</title>
 
-    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="../favicon/apple-touch-icon-57x57.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../favicon/apple-touch-icon-114x114.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../favicon/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../favicon/apple-touch-icon-144x144.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="../favicon/apple-touch-icon-60x60.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="../favicon/apple-touch-icon-120x120.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="../favicon/apple-touch-icon-76x76.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../favicon/apple-touch-icon-152x152.png" />
-    <link rel="icon" type="image/png" href="../favicon/favicon-196x196.png" sizes="196x196" />
-    <link rel="icon" type="image/png" href="../favicon/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/png" href="../favicon/favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="../favicon/favicon-16x16.png" sizes="16x16" />
-    <link rel="icon" type="image/png" href="../favicon/favicon-128.png" sizes="128x128" />
-    <meta name="application-name" content="&nbsp;"/>
-    <meta name="msapplication-TileColor" content="#FFFFFF" />
-    <meta name="msapplication-TileImage" content="../favicon/mstile-144x144.png" />
-    <meta name="msapplication-square70x70logo" content="../favicon/mstile-70x70.png" />
-    <meta name="msapplication-square150x150logo" content="../favicon/mstile-150x150.png" />
-    <meta name="msapplication-wide310x150logo" content="../favicon/mstile-310x150.png" />
-    <meta name="msapplication-square310x310logo" content="../favicon/mstile-310x310.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../favicon/site.webmanifest">
+    <link rel="mask-icon" href="../favicon/safari-pinned-tab.svg" color="#679436">
+    <meta name="msapplication-TileColor" content="#9bc04f">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="shortcut icon" href="../favicon.ico">
 
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link href="../css/home-style.css" rel="stylesheet" type="text/css" />
-    <link href="../css/design.css" rel="stylesheet" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
 
-    <link rel="shortcut icon" href="../favicon.ico">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://kit.fontawesome.com/9533923917.js" crossorigin="anonymous"></script>
+
     <!-- Bootstrap 3.3.2 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <!-- Font Awesome Icons -->
@@ -71,6 +59,7 @@
     <link href="../css/custom.css" rel="stylesheet" type="text/css" />
     <link href="../css/design.css" rel="stylesheet" type="text/css" />
 
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -80,6 +69,9 @@
 </head>
 <body class="skin-black fixed">
 
+<a href="../index.html" class="">
+    <button type="button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back </button>
+</a>
 <!-- Site wrapper -->
 <!--<div class="wrapper">-->
 <!--    &lt;!&ndash; =============================================== &ndash;&gt;-->
@@ -149,24 +141,69 @@
         </svg>
     </div>
     <div class="text col-md col-lg">
-        <h2>Upload Your Own Tree</h2>
-        <div class="upload-file" style="color: black;">
-            <form id="upload" action="#" method="POST">
-                <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000" />
-                <div>
-                    <input type="file" id="fileSelect" name="fileSelect" style="display: inline-block; visibility: hidden;" />
-                    <div id="filedrag-black">
-                        <div id="filedrag-body" style="color: black;">
-                            <div>Use Your Own Data!</div>
-                            <div><small>Drag and drop tree file here,<br/>or <a id="fileSelectLink" href="#">manually upload.</a></small><br/><small>Accepted formats are newick, nexus and json</small></div>
+        <h2>Upload Your Own</h2>
+        <div>
+
+            <div class="upload-file" style="color: black; float: left; width: 33%">
+                <form id="uploadData" action="#" method="POST">
+                    <input type="hidden" id="MAX_FILE_SIZE1" name="MAX_FILE_SIZE" value="300000" />
+                    <div>
+                        <input type="file" id="fileSelect1" name="fileSelect" style="display: inline-block; visibility: hidden;" />
+                        <div id="filedrag-black1">
+                            <div id="filedrag-body1" style="color: black;">
+                                <div><small>Drag & drop<br/>DATA<br/>file here,<br/>or <a id="fileSelectLink1" href="#">manually upload.</a></small><br/></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div id="uploadButton">
-                    <button type="submit">Upload File</button>
-                </div>
-            </form>
-        </div><!-- /.upload-file -->
+                    <div id="uploadButton1">
+                        <button type="submit">Upload File</button>
+                    </div>
+                </form>
+            </div><!-- /.upload-file -->
+
+            <div class="upload-file" style="color: black; float: left; width: 33%">
+                <form id="uploadTree" action="#" method="POST">
+                    <input type="hidden" id="MAX_FILE_SIZE2" name="MAX_FILE_SIZE" value="300000" />
+                    <div>
+                        <input type="file" id="fileSelect2" name="fileSelect" style="display: inline-block; visibility: hidden;" />
+                        <div id="filedrag-black2">
+                            <div id="filedrag-body2" style="color: black;">
+                                <div><small>Drag & drop<br/>TREE<br/>file here,<br/>or <a id="fileSelectLink2" href="#">manually upload.</a></small><br/></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="uploadButton2">
+                        <button type="submit">Upload File</button>
+                    </div>
+                </form>
+            </div><!-- /.upload-file -->
+
+            <div class="upload-file" style="color: black; float: left; width: 33%">
+                <form id="uploadComparisons" action="#" method="POST">
+                    <input type="hidden" id="MAX_FILE_SIZE3" name="MAX_FILE_SIZE" value="300000" />
+                    <div>
+                        <input type="file" id="fileSelect3" name="fileSelect" style="display: inline-block; visibility: hidden;" />
+                        <div id="filedrag-black3">
+                            <div id="filedrag-body3" style="color: black;">
+                                <div><small>Drag & drop<br/>COMPARISONS<br/>file here,<br/>or <a id="fileSelectLink3" href="#">manually upload.</a></small><br/></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="uploadButton3">
+                        <button type="submit">Upload File</button>
+                    </div>
+                </form>
+            </div><!-- /.upload-file -->
+
+        </div>
+
+
+
+
+        <p STYLE="color: #000000">For instructions, <a href="upload_instructions.html">click here</a>.</p>
+
+
+
         <div id="jsonSaveDiv" class="hidden text-center">
             <button id="jsonSaveBtn" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i>Save JSON</button>
         </div>

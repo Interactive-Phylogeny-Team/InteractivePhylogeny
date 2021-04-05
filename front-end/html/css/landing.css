@@ -45,10 +45,16 @@ h2{
     margin-top:5%;
     font-size:30px;
 }
-.btn-primary, .btn-primary:hover, .btn-primary:active {
+
+.btn-primary{
     margin-top: -80px;
     margin-left: 15px;
     background-color: transparent;
     border-color: transparent;
-    color: #fff;
+    color: #679436;
 }
+
+.btn-primary:hover, .btn-primary:active {
+    color: #9BC04F;
+}
+
