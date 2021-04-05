@@ -8,6 +8,10 @@ module.exports = {
         unique: true,
         allowNull: false
       },
+      accessionNumber: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       imageUrl : {
         type: Sequelize.STRING,
         allowNull: false,
