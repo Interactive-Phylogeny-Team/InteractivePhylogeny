@@ -48,11 +48,12 @@ pre {
     padding-left: 10px;
 }
 .btn-primary{
-    margin-top: -80px;
+    /*margin-top: -80px;*/
+    transform: translateY(-40px);
     margin-left: 15px;
     background-color: transparent;
     border-color: transparent;
-    color: #679436;
+    color: #fff;
 }
 
 .btn-primary:hover, .btn-primary:active {
