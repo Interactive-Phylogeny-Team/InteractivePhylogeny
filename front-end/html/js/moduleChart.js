@@ -129,8 +129,8 @@ define([], function () {
         var branchLabelColor = '#000';
         var zoomExtentMin = 0.02;
         var zoomExtentMax = 7;
-        var linkLengthXBase = 25000;
-        var linkLengthYBase = 25000;
+        var linkLengthXBase = 22000;
+        var linkLengthYBase = 6000;
         var scaleValue = 0;
         var scaleWidth = 0;
         /* Chart size Vars */
