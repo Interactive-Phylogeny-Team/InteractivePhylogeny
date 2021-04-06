@@ -1,0 +1,135 @@
+@import "design.css";
+
+/*html{
+    width: 100vw;
+    overflow-x: hidden;
+}*/
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    border-top: solid 50px #333;
+}
+
+.eol{
+    padding: 1px 8px;
+    display: block;
+}
+.objs{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.text{
+    text-align: center;
+    vertical-align: middle;
+    width: 800px;
+    margin: 20px auto auto 100px;
+}
+.text h2{
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.text p{
+    margin-top: 20px;
+    margin-bottom: 40px;
+    font-size: 20px;
+    color: #777777;
+
+}
+
+.tree{
+    width: 1000px;
+}
+
+
+
+
+/*.dropdown-menu{
+    margin-left: 7.5%;
+    width: 45%
+}
+
+
+
+.dropdown{
+    align-content: center;
+    align-items: center;
+}
+
+.dropdown-item:active{
+    background-color:  #9bc04f;
+}*/
+
+.custom{
+    color: #679436;
+}
+
+/*select{
+    background-color: #679436;
+    color: #fff;
+    border-radius: 35px;
+    width: 175px;
+    height: 55px;
+    outline: none !important;
+    border: none;
+    box-shadow: none;
+    padding: 5px;
+}
+
+select:hover, select.active{
+    background-color:  #9bc04f;
+}
+
+option{
+    background-color: #fff;
+    color: #000;
+}*/
+.btn, .btn:hover, .btn:active, .btn:visited, .btn-outline, .btn:focus{
+    background-color: transparent;
+    color: #fff;
+    border-radius: 35px;
+    border: none;
+    /*width: 250px;*/
+    /*height: 55px;*/
+    outline: none !important;
+    box-shadow: none;
+    transform: translateY(0.5px);
+}
+
+.btn:hover, .btn:active{
+    color: #9bc04f;
+    border: none;
+}
+
+/*.btn-primary{
+    margin-top: -80px;
+    margin-left: 15px;
+    background-color: transparent;
+    border-color: transparent;
+    color: #ffff;
+}*/
+@media only screen and (min-width: 601px) and (max-width: 960px) {
+
+}
+
+@media only screen and (max-width: 767px) {
+    .tree{
+        width: 0;
+    }
+    .dropdown-menu{
+        margin-left: 5.9%;
+        width: auto;
+    }
+}
+
+
+@media (min-width: 48em) {
+    .eol{
+        padding: 0;
+    }
+}
