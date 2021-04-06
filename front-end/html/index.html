@@ -74,24 +74,22 @@
             let resData = await getTree('primates');
             storage.setItem('tree', resData.tree)
             storage.setItem('treeName', 'Primates')
+            window.location.replace("pages/phylotree.html");
         } else if (event.target.value === "butterflies") {
             let resData = await getTree('butterflies');
             storage.setItem('tree', resData.tree)
             storage.setItem('treeName', 'Butterflies')
-
-
+            window.location.replace("pages/phylotree.html");
         } else if (event.target.value === "birds") {
             let resData = await getTree('birds');
             storage.setItem('tree', resData.tree)
             storage.setItem('treeName', 'Birds')
-
-
+            window.location.replace("pages/phylotree.html");
         } else if (event.target.value === "upload") {
             window.location.replace("pages/tree_drop.html");
         } else {
             alert("Tree doesn't exist!");
         }
-        window.location.replace("pages/phylotree.html");
 
     }, false)
 
