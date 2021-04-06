@@ -114,7 +114,7 @@
                 Create the phylogenetic tree:
                 <ol type="a">
                     <li STYLE="font-weight: normal">
-                        In R, install the library <code>ape</code>.
+                        In R, install the package <code>ape</code>.
                     </li>
                     <li STYLE="font-weight: normal">
                         Download the executable for <a href="https://www.drive5.com/muscle/downloads.htm">MUSCLE</a>
@@ -131,12 +131,13 @@ species = read.dna(speciesFASTA, format = "fasta")
 speciesMUSCLE = muscle(species)  # or speciesCLUSTAL = clustal(species)
 speciesTree = bionj(dist.dna(speciesMUSCLE))  # or speciesTree = bionj(dist.dna(speciesCLUSTAL))
 plot(speciesTree)  # Just to make sure it looks how you want
-write.tree(speciesTree, file = "speciesNEWICK.txt")
+write.tree(speciesTree, file = "speciesNewick.txt")
                         </pre>
                     </li>
                     <li STYLE="font-weight: normal">
-                        If something doesn't look right, you can add or remove DNA sequences in
-                        "speciesFASTA.txt" and run the lines of code again.
+                        The above lines of code will create a file called "speciesNewick.txt" that contains your
+                        phylogenetic tree in the Newick tree format. If something doesn't look right, you can add or
+                        remove DNA sequences in "speciesFASTA.txt" and run the lines of code again.
                     </li>
                     <li STYLE="font-weight: normal">
                         Open "speciesTree.json" and paste the following:
@@ -151,7 +152,7 @@ write.tree(speciesTree, file = "speciesNEWICK.txt")
                         </pre>
                     </li>
                     <li STYLE="font-weight: normal">
-                        Copy the contents of "speciesNEWICK.txt" and paste inside the
+                        Copy the contents of "speciesNewick.txt" and paste inside the
                         quotes after <code>"tree":</code> in "speciesTree.json".
                     </li>
                 </ol>
