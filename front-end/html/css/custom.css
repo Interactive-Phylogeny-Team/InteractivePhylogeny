@@ -390,7 +390,7 @@ a > i.fa {
     margin: 0;
     padding: 0;
     height: 49px;
-    width: 200px;
+    width: calc(100%);
 }
 
 .head-box{
