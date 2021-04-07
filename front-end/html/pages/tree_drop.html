@@ -74,68 +74,6 @@
 <a href="../index.html" class="">
     <button type="button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back </button>
 </a>
-<!-- Site wrapper -->
-<!--<div class="wrapper">-->
-<!--    &lt;!&ndash; =============================================== &ndash;&gt;-->
-<!--    &lt;!&ndash; Left side column. contains the sidebar &ndash;&gt;-->
-<!--    <aside class="main-sidebar">-->
-<!--        &lt;!&ndash; sidebar: style can be found in sidebar.less &ndash;&gt;-->
-<!--        <section class="sidebar">-->
-<!--            &lt;!&ndash; sidebar menu: : style can be found in sidebar.less &ndash;&gt;-->
-<!--            <ul class="sidebar-menu">-->
-<!--                &lt;!&ndash; DATA LOADER &ndash;&gt;-->
-<!--                <li class="header">LOAD THE DATA</li>-->
-<!--                <div class="upload-file">-->
-<!--                    <form id="upload" action="#" method="POST">-->
-<!--                        <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000" />-->
-<!--                        <div>-->
-<!--                            <input type="file" id="fileSelect" name="fileSelect" style="display: inline-block; visibility: hidden;" />-->
-<!--                            <div id="filedrag">-->
-<!--                                <div id="filedrag-body">-->
-<!--                                    <div>FOR TESTING</div>-->
-<!--                                    <div><small>Drag and drop tree file here,<br/>or <a id="fileSelectLink" href="#">manually upload.</a></small></div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div id="uploadButton">-->
-<!--                            <button type="submit">Upload File</button>-->
-<!--                        </div>-->
-<!--                    </form>-->
-<!--                </div>&lt;!&ndash; /.upload-file &ndash;&gt;-->
-<!--                <div id="jsonSaveDiv" class="hidden text-center">-->
-<!--                    <button id="jsonSaveBtn" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i>Save JSON</button>-->
-<!--                </div>-->
-<!--                &lt;!&ndash; END of DATA LOADER &ndash;&gt;-->
-<!--            </ul>-->
-<!--        </section>-->
-<!--        &lt;!&ndash; /.sidebar &ndash;&gt;-->
-<!--    </aside>-->
-
-
-
-<!--    &lt;!&ndash; =============================================== &ndash;&gt;-->
-<!--    &lt;!&ndash; MODALS &ndash;&gt;-->
-<!--    &lt;!&ndash; Json Save Modal &ndash;&gt;-->
-<!--&lt;!&ndash;    <div class="modal fade" id="jsonSaveModal" tabindex="-1" role="dialog" aria-labelledby="jsonSaveModalLabel" aria-hidden="true">&ndash;&gt;-->
-<!--&lt;!&ndash;        <div class="modal-dialog">&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="modal-content">&ndash;&gt;-->
-<!--&lt;!&ndash;                <div class="modal-header bg-light-blue">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <h4 class="modal-title" id="jsonSaveModalLabel"><i class="fa fa-floppy-o"></i>Save a file to your computer</h4>&ndash;&gt;-->
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                <div class="modal-body">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <div id="jsonUrl"></div>&ndash;&gt;-->
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                <div class="modal-footer">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <input id="jsonFile" type="hidden" value="">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <button id="jsonDownloadBtn" type="button" class="btn btn-primary">Download</button>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <button id="jsonDelete" type="button" class="btn btn-default" data-dismiss="modal" data-file="">Close</button>&ndash;&gt;-->
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-<!--&lt;!&ndash;    </div>&ndash;&gt;-->
-
-<!--</div>&lt;!&ndash; ./wrapper &ndash;&gt;-->
 <div class="objs row">
     <div class="tree col-md col-lg">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 291.294 198.933">
@@ -144,62 +82,29 @@
     </div>
     <div class="text col-md col-lg">
         <h2>Upload Your Own</h2>
-        <div>
-
-            <div class="upload-file" style="color: black; float: left; width: 33%">
-                <form id="uploadData" action="#" method="POST">
-                    <input type="hidden" id="MAX_FILE_SIZE1" name="MAX_FILE_SIZE" value="300000" />
-                    <div>
-                        <input type="file" id="fileSelect1" name="fileSelect" style="display: inline-block; visibility: hidden;" />
-                        <div id="filedrag-black1">
-                            <div id="filedrag-body1" style="color: black;">
-                                <div><small>Drag & drop<br/>DATA<br/>file here,<br/>or <a id="fileSelectLink1" href="#">manually upload.</a></small><br/></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="uploadButton1">
-                        <button type="submit">Upload File</button>
-                    </div>
-                </form>
-            </div><!-- /.upload-file -->
-
-            <div class="upload-file" style="color: black; float: left; width: 33%">
-                <form id="uploadTree" action="#" method="POST">
-                    <input type="hidden" id="MAX_FILE_SIZE2" name="MAX_FILE_SIZE" value="300000" />
-                    <div>
-                        <input type="file" id="fileSelect2" name="fileSelect" style="display: inline-block; visibility: hidden;" />
-                        <div id="filedrag-black2">
-                            <div id="filedrag-body2" style="color: black;">
-                                <div><small>Drag & drop<br/>TREE<br/>file here,<br/>or <a id="fileSelectLink2" href="#">manually upload.</a></small><br/></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="uploadButton2">
-                        <button type="submit">Upload File</button>
-                    </div>
-                </form>
-            </div><!-- /.upload-file -->
-
-            <div class="upload-file" style="color: black; float: left; width: 33%">
-                <form id="uploadComparisons" action="#" method="POST">
-                    <input type="hidden" id="MAX_FILE_SIZE3" name="MAX_FILE_SIZE" value="300000" />
-                    <div>
-                        <input type="file" id="fileSelect3" name="fileSelect" style="display: inline-block; visibility: hidden;" />
-                        <div id="filedrag-black3">
-                            <div id="filedrag-body3" style="color: black;">
-                                <div><small>Drag & drop<br/>COMPARISONS<br/>file here,<br/>or <a id="fileSelectLink3" href="#">manually upload.</a></small><br/></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="uploadButton3">
-                        <button type="submit">Upload File</button>
-                    </div>
-                </form>
-            </div><!-- /.upload-file -->
-
+<!--            <div id="drop-area">-->
+<!--                <form class="my-form">-->
+<!--                    <div>-->
+<!--                        <input type="file" id="files" multiple>-->
+<!--                        <div><small>Drag & drop<br/>DATA<br/>&<br/>TREE<br/>&<br/>COMPARISONS<br/>files here, <br/>or</small><br/></div>-->
+<!--                        <label class="button" for="files">Manually select files</label>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+        <div id="drop-area">
+            <p>Please select the following files:</p>
+            <hr/>
+            <ol>
+                <li>A file containing the nexus or newick format of your tree.</li>
+                <li>A file containing your species data in JSON format.</li>
+                <li>A file containing your species DNA comparisons in JSON format.</li>
+            </ol>
+            <h4><strong>NOTE:</strong> Name files with 'tree', 'data', and 'comp'</h4>
+            <hr/>
+            <div>
+                <input type="file" id="files" multiple>
+            </div>
         </div>
-
-
 
 
         <p STYLE="color: #000000">For instructions, <a href="upload_instructions.html">click here</a>.</p>
@@ -212,6 +117,55 @@
 
     </div>
 </div>
+
+<script>
+    let dataDropArea = document.getElementById('drop-area');
+    let fileCount = 0;
+    let json;
+
+    function handleFileSelect(evt) {
+        let files = evt.target.files;
+        storage = window.sessionStorage
+        if (files.length === 3) {
+            for (let i = 0, f; f = files[i]; i++) {
+                let reader = new FileReader();
+                let fileName = f.name;
+                reader.onload = ( theFile => {
+                    return function (e) {
+                        console.log('e readAsText = ', e);
+                        console.log('e readAsText target = ', e.target);
+                        try {
+                            console.log(fileName)
+                            if (fileName.toLowerCase().includes("tree")) {
+                                console.log('TREE')
+                                console.log(e.target.result)
+                                storage.setItem('tree', e.target.result)
+                            } else if (fileName.toLowerCase().includes("comp")) {
+                                console.log('comparison')
+                                json = JSON.parse(e.target.result);
+                                console.log(json)
+                                storage.setItem('comparisons', e.target.result)
+                            } else {
+                                console.log('data')
+                                json = JSON.parse(e.target.result);
+                                console.log(json)
+                                storage.setItem('data', e.target.result)
+                            }
+                        } catch (ex) {
+                            alert('ex when trying to parse json = ' + ex);
+                        }
+                    }
+                })(f);
+                reader.readAsText(f);
+            }
+            window.location.replace("phylotree.html");
+        } else {
+            alert("Please provide 3 files");
+        }
+    }
+    document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
+</script>
 
 <!-- jQuery 2.1.3 -->
 <script src="../plugins/jQuery/jQuery-2.1.3.min.js"></script>
