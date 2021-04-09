@@ -1793,8 +1793,8 @@ define([], function () {
                 let edit_idxs;
                 let nameArr;
                 if (nodeName === '') {
-                    content += '<div style="text-align: center; font-size: 24px; font-style: italic; font-family: Arial, Helvetica, sans-serif;"> <h1 style="margin: 0px;">DNA COMPARISON</h1><br>' +
-                        '<h4 style="margin: 0px;">(Mitochondrial DNA)</h4></div><hr style="width: 100%;"><br>' +
+                    content += '<div style="text-align: center; font-size: 24px; font-style: italic; font-family: Arial, Helvetica, sans-serif;"> <h1 style="margin: 0px;">DNA COMPARISON</h1>' +
+                        '<h4 style="margin: 0px; padding-top: 10px">(Mitochondrial DNA)</h4></div><hr style="width: 100%;"><br>' +
                         '<div style="margin-left: auto; margin-right: auto; display: table;"><ol style="text-align:left;">';
 
                     let leafNodes = this.traverseDFS(node)
@@ -1840,7 +1840,7 @@ define([], function () {
 
 
                     if (imageUrl !== '') {
-                        var image = '<a style="display: flex; justify-content: center;" href="' + imageUrl + '" target="_blank"><img src="' + imageUrl + '" style="width: 432px; height: 300px;"></a>';
+                        var image = '<a style="display: flex; justify-content: center;" href="' + imageUrl + '" target="_blank"><img src="' + imageUrl + '" style="width: 250px;"></a>';
                     } else {
                         var image = '<em>Image is not available</em>';
                     }
@@ -1848,7 +1848,7 @@ define([], function () {
                     content += '<hr/>'
                     content += '<div style="text-align: center; margin: 0 auto; padding-bottom: 12px; font-family: Arial, Helvetica, sans-serif;">Scientific Name:<br><p style="font-size: 24px;">' + scientificName + '<p/></div>';
                     content += '<div style="align-content: center">' + image + '</div>';
-                    content += '<div style="display: flex; justify-content: center; padding-top: 15px;"><br><iframe src="' + mapLink + '" width="432" height="300" style="border:0;" allowFullScreen="" aria-hidden="false" tabIndex="0"></iframe>\n</div>';
+                    content += '<div style="display: flex; justify-content: center; padding-top: 15px;"><br><iframe src="' + mapLink + '" width="250" height="160" style="border:0;" allowFullScreen="" aria-hidden="false" tabIndex="0"></iframe>\n</div>';
                     // content += '<div><strong>DNA:</strong><br>' + dna + '</div>';
                 }
 
