@@ -1781,7 +1781,9 @@ define([], function () {
                 let dnaSequences = [];
                 let imageUrl = '';
                 scientificName = nodeName;
-                var content = '';
+                let content = '';
+
+                // TODO: If 'useDB' is 'false' parse the JSON stored in session storage
 
                 console.log(nodeName);
                 if (nodeName.includes('(')) {
@@ -1817,7 +1819,13 @@ define([], function () {
                     let compKey = nameArr.join('_').replaceAll(' ', '_')
                     console.log(nameArr);
                     console.log(compKey);
-                    let resData = await this.getSpeciesComparisons(compKey);
+                    let resData;
+                    if (sessionStorage.getItem('useDB') === 'true') {
+                        resData = await this.getSpeciesComparisons(compKey);
+                    } else {
+                        resData = this.getSpeciesComparisonsFromSessionStorage(compKey);
+                    }
+                    console.log(resData);
                     let asteriskString = resData.compStrings;
 
                     edit_idxs = this.getEditIndexes(asteriskString);
@@ -1829,14 +1837,19 @@ define([], function () {
 
                     content += '</text></div>';
                 } else {
-                    // Query the backend for the species data
-                    let resData = await this.getSpeciesData(scientificName)
+                    let resData;
+                    if (sessionStorage.getItem('useDB') === 'true') {
+                        // Query the backend for the species data
+                        resData = await this.getSpeciesData(scientificName);
+                    } else {
+                        resData = this.getSpeciesDataFromSessionStorage(scientificName);
+                    }
                     console.log(resData)
                     scientificName = resData.scientificName;
                     commonName = resData.commonName;
                     mapLink = resData.mapLink;
                     imageUrl = resData.imageUrl;
-                    dnaSequence = resData.dnaSequence;
+                    dnaSequence = resData.dnaSequences;
 
 
                     if (imageUrl !== '') {
@@ -1864,12 +1877,63 @@ define([], function () {
                     });
             },
 
+            getSpeciesDataFromSessionStorage: function (speciesName) {
+                let scientificName;
+                let commonName;
+                let mapLink;
+                let imageUrl;
+                let dnaSequences;
+                let speciesData;
+                // Parse the session storage json string into actual json object
+                // FIXME: Add better error handling here
+                // if (sessionStorage.getItem('useDB') === 'false') {
+                //
+                // } else {
+                //
+                // }
+                let speciesDataListObj = JSON.parse(sessionStorage.getItem('data'));
+                // Iterate through to get the correct species data
+                for (let i = 0; i < speciesDataListObj.length; i++) {
+                   if(speciesDataListObj[i]['scientificName'] === speciesName) {
+                       speciesData = speciesDataListObj[i];
+                       break;
+                   }
+                }
+
+                console.log(speciesData);
+
+                return {
+                    scientificName: speciesData.scientificName,
+                    commonName: speciesData.commonName,
+                    mapLink: speciesData.mapLink,
+                    imageUrl: speciesData.imageUrl,
+                    accessionNumber: speciesData.accessionNumber,
+                    dnaSequences: speciesData.dnaSequences
+                }
+            },
+
             /* The is our HTTP Request to the server to get the comparison asterisk strings */
             getSpeciesComparisons: async function (compKey) {
                 return await axios.get(`http://localhost:4000/comparison?compKey=${compKey}`)
                     .then(response => {
                         return response.data;
                     });
+            },
+
+            getSpeciesComparisonsFromSessionStorage: function (compKey) {
+                let compData;
+                let comparisonDataListObj = JSON.parse(sessionStorage.getItem('comparisons'));
+                for (let i = 0; i < comparisonDataListObj.length; i++) {
+                    if (comparisonDataListObj[i]['key'] === compKey) {
+                        compData = comparisonDataListObj[i];
+                        break;
+                    }
+                }
+                console.log(compData);
+
+                return {
+                    compStrings: compData.compStrings
+                }
             },
 
             getMarkedDNAList: function (content, isSingleSeq, edit_idxs, dnaSequences) {
@@ -1930,9 +1994,14 @@ define([], function () {
                     else names = leafName;
 
                     if (names.length > 0) {
-                        let resData = null;
-                        if (leafName.includes('(')) resData = await this.getSpeciesData(leafName.split("\n")[1].replace(/[()]/g, ''));
-                        else resData = await this.getSpeciesData(leafName);
+                        let resData;
+                        if (sessionStorage.getItem('userDB') === 'true') {
+                            if (leafName.includes('(')) resData = await this.getSpeciesData(leafName.split("\n")[1].replace(/[()]/g, ''));
+                            else resData = await this.getSpeciesData(leafName);
+                        } else {
+                            if (leafName.includes('(')) resData = this.getSpeciesDataFromSessionStorage(leafName.split("\n")[1].replace(/[()]/g, ''));
+                            else resData = await this.getSpeciesDataFromSessionStorage(leafName);
+                        }
                         d.push(resData.dnaSequences);
                     }
                 });
