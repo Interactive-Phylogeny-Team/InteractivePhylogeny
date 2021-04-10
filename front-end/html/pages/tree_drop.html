@@ -140,6 +140,7 @@
                                 console.log('TREE')
                                 console.log(e.target.result)
                                 storage.setItem('tree', e.target.result)
+                                storage.setItem('treeName', fileName.split('.')[0])
                             } else if (fileName.toLowerCase().includes("comp")) {
                                 console.log('comparison')
                                 json = JSON.parse(e.target.result);
