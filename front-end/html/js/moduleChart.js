@@ -23,7 +23,7 @@ define([], function () {
             activeLinkSelect: 'branch',
             activeLinkType: 'elbow',
             activeTransform: 'linear',
-            chartTitle: 'Phylogram',
+            chartTitle: (sessionStorage.getItem('treeName') == null ? 'Phylo Canvas' : sessionStorage.getItem('treeName')),
             zoomScale: 0.3,
             nodeRadius: 25,
             nodeRadiusFactor: 3,
