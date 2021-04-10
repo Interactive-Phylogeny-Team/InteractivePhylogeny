@@ -11,10 +11,6 @@ const Species = sequelize.define(modelName='Species', attributes={
 	commonName: {
 		type: DataTypes.STRING
 	},
-	accessionNumber: {
-		type: DataTypes.STRING,
-		allowNull: false
-	},
 	imageUrl: {
 		type: DataTypes.STRING,
 		allowNull: false,
