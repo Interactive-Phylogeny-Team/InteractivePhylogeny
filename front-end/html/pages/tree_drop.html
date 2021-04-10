@@ -145,12 +145,14 @@
                                 console.log('comparison')
                                 json = JSON.parse(e.target.result);
                                 console.log(json)
-                                storage.setItem('comparisons', e.target.result)
+                                // storage.setItem('comparisons', e.target.result)
+                                storage.setItem('comparisons', JSON.stringify(json))
                             } else {
                                 console.log('data')
                                 json = JSON.parse(e.target.result);
                                 console.log(json)
-                                storage.setItem('data', e.target.result)
+                                // storage.setItem('data', e.target.result)
+                                storage.setItem('data', JSON.stringify(json))
                             }
                         } catch (ex) {
                             alert('ex when trying to parse json = ' + ex);
