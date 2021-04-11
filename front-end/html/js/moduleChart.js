@@ -23,7 +23,7 @@ define([], function () {
             activeLinkSelect: 'branch',
             activeLinkType: 'elbow',
             activeTransform: 'linear',
-            chartTitle: (sessionStorage.getItem('treeName') == null ? 'Phylo Canvas' : sessionStorage.getItem('treeName')),
+            chartTitle: (sessionStorage.getItem('treeName') == null ? 'Phylo Canvas' : toProperCase(sessionStorage.getItem('treeName'))),
             zoomScale: 0.3,
             nodeRadius: 25,
             nodeRadiusFactor: 3,
@@ -2080,6 +2080,11 @@ define([], function () {
                 }
                 return true;
             }
+        }
+        function toProperCase(s)
+        {
+            return s.toLowerCase().replace(/^(.)|\s(.)/g,
+                function($1) { return $1.toUpperCase(); });
         }
 
     })();
