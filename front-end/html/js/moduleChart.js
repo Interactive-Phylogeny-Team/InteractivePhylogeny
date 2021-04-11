@@ -1841,8 +1841,10 @@ define([], function () {
                     if (sessionStorage.getItem('useDB') === 'true') {
                         // Query the backend for the species data
                         resData = await this.getSpeciesData(scientificName);
-                    } else {
+                    } else if (sessionStorage.getItem('useDB') === 'false') {
                         resData = this.getSpeciesDataFromSessionStorage(scientificName);
+                    } else {
+                        resData = {scientificName: 'Not Available', commonName: 'Not Available', mapLink: 'Not Available', imageUrl: 'Not Available', accessionNumber: 'Not Available', dnaSequences: 'Not Available'}
                     }
                     console.log(resData)
                     scientificName = resData.scientificName;
@@ -1990,7 +1992,7 @@ define([], function () {
 
                     if (names.length > 0) {
                         let resData;
-                        if (sessionStorage.getItem('userDB') === 'true') {
+                        if (sessionStorage.getItem('useDB') === 'true') {
                             if (leafName.includes('(')) resData = await this.getSpeciesData(leafName.split("\n")[1].replace(/[()]/g, ''));
                             else resData = await this.getSpeciesData(leafName);
                         } else {
