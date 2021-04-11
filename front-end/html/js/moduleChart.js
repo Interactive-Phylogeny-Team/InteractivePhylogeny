@@ -1878,11 +1878,6 @@ define([], function () {
             },
 
             getSpeciesDataFromSessionStorage: function (speciesName) {
-                let scientificName;
-                let commonName;
-                let mapLink;
-                let imageUrl;
-                let dnaSequences;
                 let speciesData;
                 // Parse the session storage json string into actual json object
                 // FIXME: Add better error handling here
