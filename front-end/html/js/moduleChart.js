@@ -1975,7 +1975,7 @@ define([], function () {
             getHTMLListOfComparedSpeciesForView: async function (c, leafNodes) {
                 let n = [];
                 let d = [];
-                leafNodes.forEach(async leafName => {
+                for (const leafName of leafNodes) {
                     /*
                     * Since we are expecting the leaf name to be common name\n(species name)
                     * we'll need to split on the newline and then get rid of the parens so
@@ -1984,8 +1984,8 @@ define([], function () {
                     * */
                     if (leafName.includes('(')) n.push(leafName.split("\n")[1].replace(/[()]/g, '').toLowerCase());
                     else n.push(leafName.toLowerCase());
-                    console.log(`LEAFNAME: ${leafName}`);
-                    c += '<div style="font-size: 20px;"><li>' + leafName + '</li></div>';
+                    // console.log(`LEAFNAME: ${leafName}`);
+                    c += '<div style="font-size: 20px;"><li>' + leafName;
                     let names = null;
                     if (leafName.includes('\n')) names = leafName.split("\n");
                     else names = leafName;
@@ -1999,9 +1999,11 @@ define([], function () {
                             if (leafName.includes('(')) resData = this.getSpeciesDataFromSessionStorage(leafName.split("\n")[1].replace(/[()]/g, ''));
                             else resData = await this.getSpeciesDataFromSessionStorage(leafName);
                         }
+                        console.log(resData.accessionNumber);
+                        c += '  (' + resData.accessionNumber + ')</li></div>';
                         d.push(resData.dnaSequences);
                     }
-                });
+                }
                 return [c, n, d];
             },
 
