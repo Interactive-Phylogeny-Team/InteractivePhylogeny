@@ -74,42 +74,44 @@
 <a href="../index.html" class="">
     <button type="button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back </button>
 </a>
+
 <div class="objs row">
-    <div class="tree col-md col-lg">
+
+    <div class="tree col-md col-lg" style="padding-top: 150px;">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 291.294 198.933">
             <path id="Icon_metro-tree" data-name="Icon metro-tree" d="M192.179,217.471H189.07V154.358c0-18.739-9.761-33.984-21.758-33.984H114.47V81.534h3.108c5.129,0,9.325-6.554,9.325-14.565V18.421c0-8.011-4.2-14.565-9.325-14.565H86.5c-5.129,0-9.325,6.554-9.325,14.565V66.97c0,8.011,4.2,14.565,9.325,14.565H89.6v38.839H36.762c-12,0-21.758,15.246-21.758,33.984v63.114H11.9c-5.129,0-9.325,6.554-9.325,14.565v48.549c0,8.011,4.2,14.565,9.325,14.565H42.979c5.129,0,9.325-6.554,9.325-14.565V232.036c0-8.011-4.2-14.565-9.325-14.565H39.871V159.213H89.6v58.259H86.5c-5.129,0-9.325,6.554-9.325,14.565v48.549c0,8.011,4.2,14.565,9.325,14.565h31.083c5.129,0,9.325-6.554,9.325-14.565V232.036c0-8.011-4.2-14.565-9.325-14.565H114.47V159.213H164.2v58.259H161.1c-5.129,0-9.325,6.554-9.325,14.565v48.549c0,8.011,4.2,14.565,9.325,14.565h31.083c5.129,0,9.325-6.554,9.325-14.565V232.036c0-8.011-4.2-14.565-9.325-14.565ZM39.871,275.73H15V236.891H39.871Zm74.6,0H89.6V236.891H114.47ZM89.6,62.115V23.276H114.47V62.115H89.6ZM189.07,275.73H164.2V236.891H189.07Z" transform="translate(-3.856 201.504) rotate(-90)" fill="#679436"/>
         </svg>
     </div>
+
     <div class="text col-md col-lg">
+
         <h2>Upload Your Own</h2>
-<!--            <div id="drop-area">-->
-<!--                <form class="my-form">-->
-<!--                    <div>-->
-<!--                        <input type="file" id="files" multiple>-->
-<!--                        <div><small>Drag & drop<br/>DATA<br/>&<br/>TREE<br/>&<br/>COMPARISONS<br/>files here, <br/>or</small><br/></div>-->
-<!--                        <label class="button" for="files">Manually select files</label>-->
-<!--                    </div>-->
-<!--                </form>-->
-<!--            </div>-->
-        <div id="drop-area">
-            <p>Please select the following files:</p>
-            <hr/>
-            <ol>
-                <li>A file containing the nexus or newick format of your tree.</li>
-                <li>A file containing your species data in JSON format.</li>
-                <li>A file containing your species DNA comparisons in JSON format.</li>
-            </ol>
-            <h4><strong>NOTE:</strong> Name files with 'tree', 'data', and 'comp'</h4>
-            <hr/>
+
+        <div>
             <div>
-                <input type="file" id="files" multiple>
+                <input type="file" id="fileSelect" name="fileSelect" style="display: inline-block; visibility: hidden;" />
+                <div id="filedrag-black" style="width: 430px">
+                    <div id="filedrag-body" style="color: black;">
+                        <div style="padding: 10px">
+                            <p>Please upload the following JSON files:</p>
+                            <hr/>
+                            <ol style="text-align: left; font-size: 20px; font-weight: normal">
+                                <li>The <strong>TREE</strong> file</li>
+                                <li>The <strong>DATA</strong> file</li>
+                                <li>The <strong>COMPARISONS</strong> file</li>
+                            </ol>
+                            <h4 style="font-size: 14px"><strong>NOTE:</strong> Make sure to follow the naming conventions mentioned in the instructions (the file names must include 'tree', 'data', and 'comp').</h4>
+                            <hr/>
+                            <div>
+                                <input type="file" id="files" multiple>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-
         <p STYLE="color: #000000">For instructions, <a href="upload_instructions.html">click here</a>.</p>
-
-
 
         <div id="jsonSaveDiv" class="hidden text-center">
             <button id="jsonSaveBtn" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i>Save JSON</button>

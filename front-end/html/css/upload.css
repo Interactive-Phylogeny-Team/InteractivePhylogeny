@@ -35,17 +35,10 @@ body {
 }
 
 .text p{
-    margin-top: 20px;
-    margin-bottom: 40px;
     font-size: 20px;
-    color: #777777;
-
+    font-weight: normal;
+    color: #000000;
 }
-
-.tree{
-    width: 1300px;
-}
-
 
 
 

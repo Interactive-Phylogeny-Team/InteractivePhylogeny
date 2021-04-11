@@ -189,7 +189,7 @@ ul[data-menu=layout] hr {
     margin-top: -5px;
 }
 
-#filedrag-black, #filedrag-black1, #filedrag-black2, #filedrag-black3 {
+#filedrag-black {
     display: block;
     font-weight: bold;
     text-align: center;
