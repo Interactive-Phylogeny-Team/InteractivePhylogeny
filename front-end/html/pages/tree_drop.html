@@ -132,26 +132,19 @@
                 let fileName = f.name;
                 reader.onload = ( theFile => {
                     return function (e) {
-                        console.log('e readAsText = ', e);
-                        console.log('e readAsText target = ', e.target);
+                        // console.log('e readAsText = ', e);
+                        // console.log('e readAsText target = ', e.target);
                         try {
                             console.log(fileName)
                             if (fileName.toLowerCase().includes("tree")) {
-                                console.log('TREE')
-                                console.log(e.target.result)
-                                storage.setItem('tree', e.target.result)
-                                storage.setItem('treeName', fileName.split('.')[0])
-                            } else if (fileName.toLowerCase().includes("comp")) {
-                                console.log('comparison')
                                 json = JSON.parse(e.target.result);
-                                console.log(json)
-                                // storage.setItem('comparisons', e.target.result)
+                                storage.setItem('treeName', json[0]['name'])
+                                storage.setItem('tree', json[0]['tree'])
+                            } else if (fileName.toLowerCase().includes("comp")) {
+                                json = JSON.parse(e.target.result);
                                 storage.setItem('comparisons', JSON.stringify(json))
                             } else {
-                                console.log('data')
                                 json = JSON.parse(e.target.result);
-                                console.log(json)
-                                // storage.setItem('data', e.target.result)
                                 storage.setItem('data', JSON.stringify(json))
                             }
                         } catch (ex) {
