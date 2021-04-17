@@ -1855,15 +1855,15 @@ define([], function () {
 
 
                     if (imageUrl !== '') {
-                        var image = '<a style="display: flex; justify-content: center;" href="' + imageUrl + '" target="_blank"><img src="' + imageUrl + '" style="width: 250px;"></a>';
+                        var image = '<a style="display: flex; justify-content: center;" href="' + imageUrl + '" target="_blank"><img src="' + imageUrl + '" style="width: 350px;"></a>';
                     } else {
                         var image = '<em>Image is not available</em>';
                     }
                     content += '<div style="text-align: center; font-size: 24px; font-style: italic; font-family: Arial, Helvetica, sans-serif;"><strong>' + commonName + '</strong></div>';
                     content += '<hr/>'
                     content += '<div style="text-align: center; margin: 0 auto; padding-bottom: 12px; font-family: Arial, Helvetica, sans-serif;">Scientific Name:<br><p style="font-size: 24px;">' + scientificName + '<p/></div>';
-                    content += '<div style="align-content: center">' + image + '</div>';
-                    content += '<div style="display: flex; justify-content: center; padding-top: 15px;"><br><iframe src="' + mapLink + '" width="250" height="160" style="border:0;" allowFullScreen="" aria-hidden="false" tabIndex="0"></iframe>\n</div>';
+                    content += '<div style="align-content: center; padding-bottom: 10px;">' + image + '</div>';
+                    content += '<div style="display: flex; justify-content: center; padding-top: 15px;"><br><iframe src="' + mapLink + '" width="350" height="290" style="border:0;" allowFullScreen="" aria-hidden="false" tabIndex="0"></iframe>\n</div>';
                     // content += '<div><strong>DNA:</strong><br>' + dna + '</div>';
                 }
 
